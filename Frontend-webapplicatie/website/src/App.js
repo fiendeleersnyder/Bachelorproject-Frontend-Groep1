@@ -13,8 +13,8 @@ function App() {
   return (
         <div>
           <Menubalk />
-//          <Onderwerp text='Learn React' />
-//          <Onderwerp text='Learn React' />
+            <Onderwerp text='Learn React' />
+            <Onderwerp text='Learn React' />
             <Routes>
                 <Route path='/' element={<home />}/>
                 <Route path='/onderwerpen' element={<onderwerpen />}/>
