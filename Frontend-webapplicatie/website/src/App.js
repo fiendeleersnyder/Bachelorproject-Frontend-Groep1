@@ -1,28 +1,20 @@
 import './App.css';
-
+import Onderwerp from './Componenten/Onderwerp';
+import Menubalk from './Componenten/Menubalk';
 function App() {
   return (
-  //<head>
-     //<title>Masterproeftool</title>
-     //<meta charset="UTF-8">
-     //<meta name="viewport" content="width=device-width, initial-scale=1">
-//     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    //</head>
-    //<body>
-        <div className="App">
-          <header className="App-header">
-            <div class="w3-top">
-                <div class="w3-bar w3-kulblauw w3-card w3-left-align w3-large">
-                  <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
-                  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Onderwerpen</a>
-                  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Onderwerp toevoegen</a>
-                  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Indienen</a>
-                  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Chat</a>
-                  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Mijn account</a>
-                </div>
-            </div>
-          </header>
+        <div>
+          <Menubalk />
+          <h1>My Todos</h1>
+          <Onderwerp text='Learn React' />
+          <Onderwerp text='Learn React' />
         </div>
+
+
+
+
+
+
     //</body>
 
 //
