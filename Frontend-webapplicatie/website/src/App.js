@@ -1,12 +1,28 @@
 import './App.css';
 import Onderwerp from './Componenten/Onderwerp';
 import Menubalk from './Componenten/Menubalk';
+import Account from './Pages/account';
+import AddOnderwerp from './Pages/addonderwerp';
+import Chat from './Pages/chat';
+import HomePagina from './Pages/home';
+import Indienen from './Pages/indienen';
+import OnderwerpenLijst from './Pages/onderwerpen';
+import {Routes, Route} from 'react-router-dom';
+
 function App() {
   return (
         <div>
           <Menubalk />
-          <Onderwerp text='Learn React' />
-          <Onderwerp text='Learn React' />
+//          <Onderwerp text='Learn React' />
+//          <Onderwerp text='Learn React' />
+            <Routes>
+                <Route path='/' element={<home />}/>
+                <Route path='/onderwerpen' element={<onderwerpen />}/>
+                <Route path='/addonderwerp' element={<addonderwerp />}/>
+                <Route path='/indienen' element={<indienen />}/>
+                <Route path='/chat' element={<chat />}/>
+                <Route path='/mijnaccount' element={<account />}/>
+            </Routes>
         </div>
 
 
