@@ -5,7 +5,6 @@ function App() {
   return (
         <div>
           <Menubalk />
-          <h1>My Todos</h1>
           <Onderwerp text='Learn React' />
           <Onderwerp text='Learn React' />
         </div>
