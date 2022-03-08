@@ -13,15 +13,14 @@ function App() {
   return (
         <div>
           <Menubalk />
-            <Onderwerp text='Learn React' />
-            <Onderwerp text='Learn React' />
+
             <Routes>
                 <Route path='/' element={<home />}/>
-                <Route path='/onderwerpen' element={<onderwerpen />}/>
-                <Route path='/addonderwerp' element={<addonderwerp />}/>
-                <Route path='/indienen' element={<indienen />}/>
-                <Route path='/chat' element={<chat />}/>
-                <Route path='/mijnaccount' element={<account />}/>
+                <Route path='/onderwerpen' element={<OnderwerpenLijst />}/>
+                <Route path='/addonderwerp' element={<AddOnderwerp />}/>
+                <Route path='/indienen' element={<Indienen />}/>
+                <Route path='/chat' element={<Chat />}/>
+                <Route path='/mijnaccount' element={<Account />}/>
             </Routes>
         </div>
 
@@ -32,13 +31,6 @@ function App() {
 
     //</body>
 
-//
-//                <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
-//                    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
-//                    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
-//                    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
-//                    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 4</a>
-//                </div>
 //    <!-- Header -->
 //    <header class="w3-container w3-red w3-center" style="padding:128px 16px">
 //      <h1 class="w3-margin w3-jumbo">START PAGE</h1>
