@@ -1,5 +1,9 @@
+// import NieuwOnderwerpFrom from '../Componenten/NieuwOnderwerpForm';
+
 function AddOnderwerp() {
-  return <div>onderwrpen toevoegen</div>;
+  return <section>
+    {/*<NieuwOnderwerpForm />*/}
+  </section>;
 }
 
 export default AddOnderwerp;

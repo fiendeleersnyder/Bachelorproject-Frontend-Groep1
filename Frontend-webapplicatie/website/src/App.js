@@ -1,5 +1,4 @@
 import './App.css';
-import Onderwerp from './Componenten/Onderwerp';
 import Menubalk from './Componenten/Menubalk';
 import Account from './Pages/account';
 import AddOnderwerp from './Pages/addonderwerp';
@@ -15,7 +14,7 @@ function App() {
           <Menubalk />
 
             <Routes>
-                <Route path='/' element={<home />}/>
+                <Route path='/' element={<HomePagina />}/>
                 <Route path='/onderwerpen' element={<OnderwerpenLijst />}/>
                 <Route path='/addonderwerp' element={<AddOnderwerp />}/>
                 <Route path='/indienen' element={<Indienen />}/>
