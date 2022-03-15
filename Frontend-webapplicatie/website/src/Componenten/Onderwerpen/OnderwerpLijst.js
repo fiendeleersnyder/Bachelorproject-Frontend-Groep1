@@ -4,13 +4,13 @@ import Onderwerp from './Onderwerp'
 function OnderwerpLijst(props){
     return (
         <ul className={classes.list}>
-        {props.meetups.map((meetup) =>(
+        {props.items.map((item) =>(
             <Onderwerp
-                key={meetup.id}
-                id={meetup.id}
-                title={meetup.title}
-                address={meetup.address}
-                description={meetup.description}
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                address={item.address}
+                description={item.description}
             />
         ))}
     </ul>

@@ -19,7 +19,7 @@ const DUMMY_DATA = [
 function OnderwerpenLijst() {
   return(
     <section>
-      <OnderwerpLijst meetups={DUMMY_DATA}/>
+      <OnderwerpLijst items={DUMMY_DATA}/>
     </section>
 );
 }
