@@ -1,8 +1,8 @@
-// import NieuwOnderwerpFrom from '../Componenten/NieuwOnderwerpForm';
+import NieuwOnderwerpForm from '../Componenten/Onderwerpen/NieuwOnderwerpForm';
 
 function AddOnderwerp() {
   return <section>
-    {/*<NieuwOnderwerpForm />*/}
+    <NieuwOnderwerpForm />
   </section>;
 }
 
