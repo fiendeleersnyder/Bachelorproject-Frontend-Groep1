@@ -1,17 +1,16 @@
 import './App.css';
-import Menubalk from './Componenten/Menubalk';
 import Account from './Pages/account';
 import AddOnderwerp from './Pages/addonderwerp';
 import Chat from './Pages/chat';
 import HomePagina from './Pages/home';
 import Indienen from './Pages/indienen';
 import OnderwerpenLijst from './Pages/onderwerpen';
+import Layout from './Componenten/Layout/Layout';
 import {Routes, Route} from 'react-router-dom';
 
 function App() {
   return (
-        <div>
-          <Menubalk />
+        <Layout>
             <Routes>
                 <Route path='/' element={<HomePagina />}/>
                 <Route path='/onderwerpen' element={<OnderwerpenLijst />}/>
@@ -20,7 +19,7 @@ function App() {
                 <Route path='/chat' element={<Chat />}/>
                 <Route path='/account' element={<Account />}/>
             </Routes>
-        </div>
+        </Layout>
 
 
 
