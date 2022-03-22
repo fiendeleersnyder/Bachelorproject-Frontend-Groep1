@@ -1,11 +1,13 @@
 .form {
     padding: 1rem;
+    width:200%
 }
 .card {
-    background-color: white;
+    background-color: #00407a;
     border-radius: 6px;
+    color: white;
+    width:200%;
 }
-
 .control {
     margin-bottom: 0.5rem;
 }
@@ -14,21 +16,18 @@
     display: block;
     font-weight: bold;
     margin-bottom: 0.5rem;
-    color: #00407A;
 }
 .control label1 {
     display: block;
     font-weight: bold;
     font-size: 12.5px;
     margin-bottom: 0.5rem;
-    color: #00407A;
 }
 .control label2 {
     display: block;
     font-weight: bold;
     font-size: 10px;
     margin-bottom: 0.5rem;
-    color: #00407A;
 }
 .control input,
 .control textarea {

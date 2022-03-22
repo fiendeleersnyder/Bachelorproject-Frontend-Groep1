@@ -1,5 +1,6 @@
+import Homescherm from "../Componenten/Home/Homescherm";
 function HomePagina() {
-  return <div>Home</div>;
+  return <div><Homescherm/></div>;
 }
 
 export default HomePagina;

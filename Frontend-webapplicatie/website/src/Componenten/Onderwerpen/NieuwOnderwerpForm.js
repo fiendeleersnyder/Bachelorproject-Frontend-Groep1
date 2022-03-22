@@ -1,5 +1,4 @@
 import {useRef} from 'react';
-import Card from '../ui/Card';
 import classes from './NieuwOnderwerpForm.module.css';
 
 function NieuwOnderwerpForm() {
@@ -14,7 +13,8 @@ function NieuwOnderwerpForm() {
     const kenmerkwoord1InputRef = useRef();
     const kenmerkwoord2InputRef = useRef();
     const kenmerkwoord3InputRef = useRef();
-
+    const trefwoordInputRef= useRef();
+    const richtingInputRef=useRef();
 
     function submitHandler(event){
         event.preventDefault();
@@ -30,11 +30,22 @@ function NieuwOnderwerpForm() {
         const enteredKern2 = kenmerkwoord2InputRef.current.value;
         const enteredKern3 = kenmerkwoord3InputRef.current.value;
         const enteredDescription = descriptionInputRef.current.value;
-
+        const enteredTrefwoord = trefwoordInputRef.current.value;
+        const enteredRichting= richtingInputRef.current.value;
 
         const onderwerpData = {
             title: enteredTitle,
             campus: enteredCampus,
+            richting: enteredRichting,
+            begeleiding: enteredBegeleiding,
+            contactpersoon: enteredContactpersoon,
+            email:enteredEmail,
+            telefoon: enteredTelefoon,
+            aantalpersonen:enteredAantal,
+            kermerkwoord1:enteredKern1,
+            kermerkwoord2:enteredKern2,
+            kermerkwoord3:enteredKern3,
+            trefwoorden:enteredTrefwoord,
             description: enteredDescription
         };
 
@@ -42,7 +53,7 @@ function NieuwOnderwerpForm() {
     }
 
     return (
-        <Card>
+        <div className={classes.card}>
             <form className={classes.form} onSubmit={submitHandler}>
                 <div className={classes.control}>
                     <label htmlFor='title'>Onderwerptitel</label>
@@ -65,6 +76,25 @@ function NieuwOnderwerpForm() {
                         <option>Kulak Kortrijk</option>
                         <option>Brugge</option>
                         <option>Diepenbeek</option>
+                    </select>
+                </div>
+                <div className={classes.control}>
+                    <label htmlFor='richting'>Richting</label>
+                    <select required id='richting' ref={richtingInputRef} >
+                        <option>---</option>
+                        <option>Richting</option>
+                        <option>Richting</option>
+                        <option>Richting</option>
+                        <option>Richting</option>
+                        <option>Richting</option>
+                        <option>Richting</option>
+                        <option>Richting</option>
+                        <option>Richting</option>
+                        <option>Richting</option>
+                        <option>Richting</option>
+                        <option>Richting</option>
+                        <option>Richting</option>
+                        <option>Richting</option>
                     </select>
                 </div>
                 <div className={classes.control}>
@@ -92,25 +122,25 @@ function NieuwOnderwerpForm() {
                 </div>
                 <div className={classes.control}>
                     <label htmlFor='description'>Omschrijving</label>
-                    <textarea required id='description' rows='5' ref={descriptionInputRef}></textarea>
+                    <textarea required id='description' rows='10' ref={descriptionInputRef}></textarea>
                 </div>
                 <div className={classes.control}>
-                    <label>Kernwoorden</label>
-                    <label1 htmlFor='kenmerkwoord1'>Kernwoord 1</label1>
+                    <label>Disciplines</label>
+                    <label1 htmlFor={'kermerkwoord1'}>Discipline 1</label1>
                     <select required id='kenmerkwoord1' ref={kenmerkwoord1InputRef}>
                         <option>---</option>
                         <option>NOG TOEVOEGEN</option>
                         <option>NOG TOEVOEGEN</option>
                         <option>NOG TOEVOEGEN</option>
                     </select>
-                    <label1 htmlFor='kenmerkwoord2'>Kernwoord 2</label1>
+                    <label1 htmlFor='kenmerkwoord2'>Discipline 2</label1>
                     <select  id='kenmerkwoord2' ref={kenmerkwoord2InputRef}>
                         <option>---</option>
                         <option>NOG TOEVOEGEN</option>
                         <option>NOG TOEVOEGEN</option>
                         <option>NOG TOEVOEGEN</option>
                     </select>
-                    <label1 htmlFor='kenmerkwoord3'>Kernwoord 3</label1>
+                    <label1 htmlFor='kenmerkwoord3'>Discipline 3</label1>
                     <select  id='kenmerkwoord3' ref={kenmerkwoord3InputRef}>
                         <option>---</option>
                         <option>NOG TOEVOEGEN</option>
@@ -118,11 +148,15 @@ function NieuwOnderwerpForm() {
                         <option>NOG TOEVOEGEN</option>
                     </select>
                 </div>
+                <div className={classes.control}>
+                    <label htmlFor={'trefwoorden'}>Trefwoorden</label>
+                    <textarea required id='trefwoorden' rows='5' ref={trefwoordInputRef}></textarea>
+                </div>
                 <div className={classes.actions}>
                     <button>Voeg onderwerp toe</button>
                 </div>
             </form>
-        </Card>
+        </div>
     );
 }
 export default NieuwOnderwerpForm;

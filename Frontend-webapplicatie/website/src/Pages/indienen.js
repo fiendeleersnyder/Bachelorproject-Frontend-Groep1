@@ -1,5 +1,12 @@
+import IndienenForm from "../Componenten/Indienen/IndienenForm";
+
 function Indienen() {
-  return <div>Indienen</div>;
+  return(
+    <div>
+      <IndienenForm />
+    </div>
+
+  );
 }
 
 export default Indienen;
