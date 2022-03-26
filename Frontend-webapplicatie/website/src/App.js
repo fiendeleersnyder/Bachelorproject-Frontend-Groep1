@@ -6,10 +6,20 @@ import HomePagina from './Pages/home';
 import Indienen from './Pages/indienen';
 import OnderwerpenLijst from './Pages/onderwerpen';
 import Layout from './Componenten/Layout/Layout';
+import Login from './Componenten/Login/Login';
 import {Routes, Route} from 'react-router-dom';
+import React, {useState} from 'react';
+
 
 function App() {
-  return (
+
+    const [token, setToken] = useState();
+
+    if(!token) {
+        return <Login setToken={setToken} />
+    }
+
+    return (
         <Layout>
             <Routes>
                 <Route path='/' element={<HomePagina />}/>
