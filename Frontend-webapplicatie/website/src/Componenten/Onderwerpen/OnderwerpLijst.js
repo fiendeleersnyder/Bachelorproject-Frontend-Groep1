@@ -9,8 +9,11 @@ function OnderwerpLijst(props){
                 key={item.id}
                 id={item.id}
                 title={item.title}
-                address={item.address}
+                contactpersoon={item.contactpersoon}
                 description={item.description}
+                discipline1={item.discipline1}
+                discipline2={item.discipline2}
+                discipline3={item.discipline3}
             />
         ))}
     </ul>

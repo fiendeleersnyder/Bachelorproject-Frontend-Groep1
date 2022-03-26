@@ -3,9 +3,12 @@ const DUMMY_DATA = [
   {
     id: 'm1',
     title: 'This is a first meetup',
-    address: 'Meetupstreet 5, 12345 Meetup City',
+    contactpersoon: 'HEY HOI IK BEN DE CONTACTPERSOON',
     description:
         'This is a first, amazing meetup which you definitely should not miss. It will be a lot of fun!',
+    discipline1: 'd1',
+    discipline2: 'd2',
+    discipline3: 'd3',
   },
   {
     id: 'm2',
@@ -13,6 +16,9 @@ const DUMMY_DATA = [
     address: 'Meetupstreet 5, 12345 Meetup City',
     description:
         'This is a first, amazing meetup which you definitely should not miss. It will be a lot of fun!',
+    discipline1: 'd1',
+    discipline2: 'd2',
+    discipline3: 'd3',
   }
 ];
 

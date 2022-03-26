@@ -3,7 +3,7 @@ import classes from './NieuwOnderwerpForm.module.css';
 
 function NieuwOnderwerpForm() {
     const titleInputRef = useRef();
-    const campusInputRef = useRef();
+    const doelgroepInputRef = useRef();
     const begeleidingInputRef = useRef();
     const contactpersoonInputRef = useRef();
     const emailInputRef = useRef();
@@ -14,16 +14,15 @@ function NieuwOnderwerpForm() {
     const kenmerkwoord2InputRef = useRef();
     const kenmerkwoord3InputRef = useRef();
     const trefwoordInputRef= useRef();
-    const richtingInputRef=useRef();
 
     function submitHandler(event){
         event.preventDefault();
 
         const enteredTitle = titleInputRef.current.value;
-        const enteredCampus = campusInputRef.current.value;
+        const enteredDoelgroep = doelgroepInputRef.current.value;
         const enteredBegeleiding = begeleidingInputRef.current.value;
         const enteredContactpersoon = contactpersoonInputRef.current.value;
-        const enteredEmail = emailInputRef.curent.value;
+        const enteredEmail = emailInputRef.current.value;
         const enteredTelefoon = telefoonInputRef.current.value;
         const enteredAantal = aantalpersonenInputRef.current.value;
         const enteredKern1 = kenmerkwoord1InputRef.current.value;
@@ -31,12 +30,11 @@ function NieuwOnderwerpForm() {
         const enteredKern3 = kenmerkwoord3InputRef.current.value;
         const enteredDescription = descriptionInputRef.current.value;
         const enteredTrefwoord = trefwoordInputRef.current.value;
-        const enteredRichting= richtingInputRef.current.value;
+
 
         const onderwerpData = {
             title: enteredTitle,
-            campus: enteredCampus,
-            richting: enteredRichting,
+            doelgroep: enteredDoelgroep,
             begeleiding: enteredBegeleiding,
             contactpersoon: enteredContactpersoon,
             email:enteredEmail,
@@ -60,41 +58,35 @@ function NieuwOnderwerpForm() {
                     <input type='text' required id='title' ref={titleInputRef}/>
                 </div>
                 <div className={classes.control}>
-                    <label htmlFor='campus'>Campus</label>
-                    <select required id='campus' ref={campusInputRef} >
+                    <label htmlFor='doelgroep'>Doelgroep</label>
+                    <select required id='doelgroep' ref={doelgroepInputRef} >
                         <option>---</option>
-                        <option>Leuven</option>
-                        <option>Groep T Leuven</option>
-                        <option>Brussel</option>
-                        <option>Sint-Lucas Brussel</option>
-                        <option>Antwerpen</option>
-                        <option>Geel</option>
-                        <option>De Nayer Sint-Katelijne-Waver</option>
-                        <option>Sint-Lucas Gent</option>
-                        <option>Technologiecampus Gent</option>
-                        <option>Aalst</option>
-                        <option>Kulak Kortrijk</option>
-                        <option>Brugge</option>
-                        <option>Diepenbeek</option>
-                    </select>
-                </div>
-                <div className={classes.control}>
-                    <label htmlFor='richting'>Richting</label>
-                    <select required id='richting' ref={richtingInputRef} >
-                        <option>---</option>
-                        <option>Richting</option>
-                        <option>Richting</option>
-                        <option>Richting</option>
-                        <option>Richting</option>
-                        <option>Richting</option>
-                        <option>Richting</option>
-                        <option>Richting</option>
-                        <option>Richting</option>
-                        <option>Richting</option>
-                        <option>Richting</option>
-                        <option>Richting</option>
-                        <option>Richting</option>
-                        <option>Richting</option>
+                        <option>IW E-ICT GroepT</option>
+                        <option>IW EM GroepT</option>
+                        <option>IW CH GroepT</option>
+                        <option>IW BC GroepT</option>
+                        <option>IW CH DeNayer</option>
+                        <option>BW LT Geel</option>
+                        <option>BW VI Geel</option>
+                        <option>IW BC Gent</option>
+                        <option>IW BK Brugge</option>
+                        <option>IW BK Gent</option>
+                        <option>IW BK DeNayer</option>
+                        <option>IW CH Gent</option>
+                        <option>IW EM Brugge</option>
+                        <option>IW EM Geel</option>
+                        <option>IW EM Gent</option>
+                        <option>IW EM DeNayer</option>
+                        <option>IW E-ICT Brugge</option>
+                        <option>IW E-ICT Geel</option>
+                        <option>IW E-ICT Gent</option>
+                        <option>IW E-ICT DeNayer</option>
+                        <option>IW EN Brugge</option>
+                        <option>IW EN Geel</option>
+                        <option>IW EN Gent</option>
+                        <option>IW WE DeNayer</option>
+                        <option>IW KV Brugge</option>
+                        <option>IW CH Diepenbeek</option>
                     </select>
                 </div>
                 <div className={classes.control}>
