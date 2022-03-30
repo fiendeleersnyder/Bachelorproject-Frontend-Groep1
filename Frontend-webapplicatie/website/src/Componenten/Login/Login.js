@@ -19,17 +19,21 @@ async function loginUser(username, password) {
 
     return fetch('http://localhost:8080/login', {
         method: 'POST',
+        withCredentials: 'true',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: formBody
     })
         .then(data => data.json())
+
+
 }
 
 export default function Login({setToken}) {
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
+    const [data, setData] = useState();
 
     const handleSubmit = async e => {
         e.preventDefault();
@@ -37,6 +41,12 @@ export default function Login({setToken}) {
             username,
             password
         );
+        sessionStorage.setItem('token', JSON.stringify(token));
+        var splittoken = sessionStorage.getItem('token').split(/[{,}:]/)
+        const accesToken = splittoken[4].slice(1,-1);
+        const refreshToken = splittoken[2].slice(1,-1);
+        sessionStorage.setItem('accessToken', accesToken);
+        sessionStorage.setItem('refreshToken', refreshToken);
         setToken(token);
     }
 

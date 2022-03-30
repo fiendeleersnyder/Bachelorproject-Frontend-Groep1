@@ -27,7 +27,7 @@ function App() {
                 <Route path='/addonderwerp' element={<AddOnderwerp />}/>
                 <Route path='/indienen' element={<Indienen />}/>
                 <Route path='/chat' element={<Chat />}/>
-                {/*<Route path='/account' element={<Account />}/>*/}
+                <Route path='/account' element={<Account />}/>
             </Routes>
         </Layout>
   );
