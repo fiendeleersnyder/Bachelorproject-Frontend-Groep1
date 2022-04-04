@@ -33,7 +33,6 @@ async function loginUser(username, password) {
 export default function Login({setToken}) {
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
-    const [data, setData] = useState();
 
     const handleSubmit = async e => {
         e.preventDefault();

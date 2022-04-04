@@ -23,7 +23,7 @@ function NieuwOnderwerpForm() {
         const enteredCampus = campusInputRef.current.value;
         const enteredBegeleiding = begeleidingInputRef.current.value;
         const enteredContactpersoon = contactpersoonInputRef.current.value;
-        const enteredEmail = emailInputRef.curent.value;
+        const enteredEmail = emailInputRef.current.value;
         const enteredTelefoon = telefoonInputRef.current.value;
         const enteredAantal = aantalpersonenInputRef.current.value;
         const enteredKern1 = kenmerkwoord1InputRef.current.value;
