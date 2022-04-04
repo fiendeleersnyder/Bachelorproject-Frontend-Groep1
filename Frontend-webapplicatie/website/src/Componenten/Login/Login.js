@@ -1,78 +1,107 @@
-import React, {useState} from 'react';
+import { useRef, useState, useEffect, useContext } from 'react';
+import AuthContext from "../../Services/AuthProvider"
+
+import axios from 'axios'
+import qs from 'qs'
 import classes from './Login.module.css';
-import PropTypes from 'prop-types';
 import Logo from './Logo'
 
-async function loginUser(username, password) {
-    var details = {
-        'username' : username,
-        'password' :password
-    }
+const Login = () => {
+    const { setAuth } = useContext(AuthContext);
+    const userRef = useRef();
+    const errRef = useRef();
 
-    var formBody = [];
-    for (var property in details) {
-        var encodedKey = encodeURIComponent(property);
-        var encodedValue = encodeURIComponent(details[property]);
-        formBody.push(encodedKey + '=' + encodedValue);
-    }
-    formBody = formBody.join("&");
+    const [user, setUser] = useState('');
+    const [pwd, setPwd] = useState('');
+    const [errMsg, setErrMsg] = useState('');
+    const [success, setSuccess] = useState(false);
 
-    return fetch('http://localhost:8080/login', {
-        method: 'POST',
-        withCredentials: 'true',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: formBody
-    })
-        .then(data => data.json())
+    useEffect(() => {
+        userRef.current.focus();
+    }, [])
 
+    useEffect(() => {
+        setErrMsg('');
+    }, [user, pwd])
 
-}
-
-export default function Login({setToken}) {
-    const [username, setUserName] = useState();
-    const [password, setPassword] = useState();
-
-    const handleSubmit = async e => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const token = await loginUser(
-            username,
-            password
-        );
-        sessionStorage.setItem('token', JSON.stringify(token));
-        var splittoken = sessionStorage.getItem('token').split(/[{,}:]/)
-        const accesToken = splittoken[4].slice(1,-1);
-        const refreshToken = splittoken[2].slice(1,-1);
-        sessionStorage.setItem('accessToken', accesToken);
-        sessionStorage.setItem('refreshToken', refreshToken);
-        setToken(token);
+
+        try {
+            const response = await axios.post("http://localhost:8080/login",
+                qs.stringify({ username:user, password:pwd }),
+                {
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    withCredentials: true,
+
+                }
+            );
+            console.log(JSON.stringify(response?.data));
+            //console.log(JSON.stringify(response));
+            const accessToken = response?.data?.acces_token;
+            const refreshToken = response?.data?.refresh_token;
+            setAuth({ user, pwd, refreshToken, accessToken });
+            setUser('');
+            setPwd('');
+            setSuccess(true);
+        } catch (err) {
+            if (!err?.response) {
+                setErrMsg('No Server Response');
+            } else if (err.response?.status === 400) {
+                setErrMsg('Missing Username or Password');
+            } else if (err.response?.status === 401) {
+                setErrMsg('Unauthorized');
+            } else {
+                setErrMsg('Login Failed');
+            }
+            errRef.current.focus();
+        }
     }
 
-    return(
-        <div className={classes.loginwrapper}>
-            <Logo />
-            <h1>Please Log In</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>
-                        <p>Username</p>
-                        <input type="text" onChange={e => setUserName(e.target.value)}/>
-                    </label>
-                    <label>
-                        <p>Password</p>
-                        <input type="password" onChange={e => setPassword(e.target.value)}/>
-                    </label>
-                    <p> </p>
-                </div>
-                <div>
-                    <button type="submit">Log in</button>
-                </div>
-            </form>
-        </div>
+    return (
+        <>
+            {success ? (
+                <section>
+                    <h1>You are logged in!</h1>
+                    <br />
+                    <p>
+                        <a href="home">Go to Home</a>
+                    </p>
+                </section>
+            ) : (
+                <section className={classes.loginwrapper}>
+                    <Logo />
+                    <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                    <h1>Sign In</h1>
+                    <form onSubmit={handleSubmit}>
+                        <label></label>
+                        <p htmlFor="username">Username:</p>
+                        <input
+                            type="text"
+                            id="username"
+                            ref={userRef}
+                            autoComplete="off"
+                            onChange={(e) => setUser(e.target.value)}
+                            value={user}
+                            required
+                        />
+
+                        <label></label>
+                        <p htmlFor="password">Password:</p>
+                        <input
+                            type="password"
+                            id="password"
+                            onChange={(e) => setPwd(e.target.value)}
+                            value={pwd}
+                            required
+                        />
+                        <p></p>
+                        <button>Sign In</button>
+                    </form>
+                </section>
+            )}
+        </>
     )
 }
 
-Login.propTypes = {
-    setToken: PropTypes.func.isRequired
-}
+export default Login
