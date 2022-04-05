@@ -1,5 +1,6 @@
-import { useRef, useState, useEffect, useContext } from 'react';
-import AuthContext from "../../Services/AuthProvider"
+import { useRef, useState, useEffect } from 'react';
+import useAuth from '../../Hooks/useAuth';
+import { Link, useNavigate, useLocation} from "react-router-dom";
 
 import axios from 'axios'
 import qs from 'qs'
@@ -7,14 +8,19 @@ import classes from './Login.module.css';
 import Logo from './Logo'
 
 const Login = () => {
-    const { setAuth } = useContext(AuthContext);
+
+    const { setAuth } = useAuth();
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
     const userRef = useRef();
     const errRef = useRef();
 
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false);
 
     useEffect(() => {
         userRef.current.focus();
@@ -38,12 +44,13 @@ const Login = () => {
             );
             console.log(JSON.stringify(response?.data));
             //console.log(JSON.stringify(response));
+            const roles = response?.data?.roles;
             const accessToken = response?.data?.acces_token;
             const refreshToken = response?.data?.refresh_token;
-            setAuth({ user, pwd, refreshToken, accessToken });
+            setAuth({ user, pwd, roles, refreshToken, accessToken });
             setUser('');
             setPwd('');
-            setSuccess(true);
+            navigate(from, { replace: true})
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
@@ -59,16 +66,6 @@ const Login = () => {
     }
 
     return (
-        <>
-            {success ? (
-                <section>
-                    <h1>You are logged in!</h1>
-                    <br />
-                    <p>
-                        <a href="home">Go to Home</a>
-                    </p>
-                </section>
-            ) : (
                 <section className={classes.loginwrapper}>
                     <Logo />
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
@@ -99,8 +96,6 @@ const Login = () => {
                         <button>Sign In</button>
                     </form>
                 </section>
-            )}
-        </>
     )
 }
 
