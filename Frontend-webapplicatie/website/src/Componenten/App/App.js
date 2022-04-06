@@ -1,17 +1,17 @@
 import './App.css';
+import StartPage from '../../Pages/startpage'
 import Account from '../../Pages/account';
 import AddOnderwerp from '../../Pages/addonderwerp';
 import Chat from '../../Pages/chat';
 import HomePagina from '../../Pages/home';
 import Indienen from '../../Pages/indienen';
 import OnderwerpenLijst from '../../Pages/onderwerpen';
-import Layout from '../Layout/Layout';
 import Login from '../Login/Login';
 import Missing from '../Missing/Missing'
 import RequireAuth from '../Authorization/RequireAuth'
 import UnAuthorized from '../Authorization/Unauthorized'
 import {Routes, Route} from 'react-router-dom';
-import React, {useState} from 'react';
+import React from 'react';
 import LayoutStudent from '../Layout/LayoutStudent';
 import LayoutAdmin from '../Layout/LayoutAdmin';
 
@@ -19,8 +19,8 @@ import LayoutAdmin from '../Layout/LayoutAdmin';
 function App() {
 
     const ROLES = {
-        'Admin': 1,
-        'Student': 2
+        1: 'Admin',
+        2: 'Student'
     }
 
     /*function requireAuth(nextState, replaceState) {
@@ -32,25 +32,26 @@ function App() {
             <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/unauthorized" element={<UnAuthorized />} />
+                <Route path="/" element={<StartPage />} />
                 <Route path="/" element={<LayoutAdmin />}>
                     {/* protected routes */}
-                    <Route path="/" element={<RequireAuth />} >
-                        <Route path='/' element={<HomePagina/>}/>
-                        <Route path='/onderwerpen' element={<OnderwerpenLijst/>}/>
-                        <Route path='/addonderwerp' element={<AddOnderwerp/>}/>
-                        <Route path='/indienen' element={<Indienen/>}/>
-                        <Route path='/account' element={<Account/>}/>
+                    <Route path="/admin/" element={<RequireAuth AllowedRoles={[ROLES["1"]]}/>} >
+                        <Route path='/admin/' element={<HomePagina/>}/>
+                        <Route path='/admin/onderwerpen' element={<OnderwerpenLijst/>}/>
+                        <Route path='/admin/addonderwerp' element={<AddOnderwerp/>}/>
+                        <Route path='/admin/indienen' element={<Indienen/>}/>
+                        <Route path='/admin/account' element={<Account/>}/>
                     </Route>
                 </Route>
                 <Route path="/" element={<LayoutStudent />}>
                     {/* protected routes */}
-                    <Route path="/" element={<RequireAuth />} >
-                        <Route path='/' element={<HomePagina/>}/>
-                        <Route path='/onderwerpen' element={<OnderwerpenLijst/>}/>
-                        <Route path='/addonderwerp' element={<AddOnderwerp/>}/>
-                        <Route path='/indienen' element={<Indienen/>}/>
-                        <Route path='/chat' element={<Chat/>}/>
-                        <Route path='/account' element={<Account/>}/>
+                    <Route path="/" element={<RequireAuth AllowedRoles={[ROLES["2"]]}/>} >
+                        <Route path='/student/' element={<HomePagina/>}/>
+                        <Route path='/student/onderwerpen' element={<OnderwerpenLijst/>}/>
+                        <Route path='/student/addonderwerp' element={<AddOnderwerp/>}/>
+                        <Route path='/student/indienen' element={<Indienen/>}/>
+                        <Route path='/student/chat' element={<Chat/>}/>
+                        <Route path='/student/account' element={<Account/>}/>
                     </Route>
                 </Route>
                 {/* catch all */}

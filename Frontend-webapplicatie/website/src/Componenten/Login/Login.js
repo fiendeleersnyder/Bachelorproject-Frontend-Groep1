@@ -9,7 +9,7 @@ import Logo from './Logo'
 
 const Login = () => {
 
-    const { setAuth } = useAuth();
+    const { auth, setAuth } = useAuth();
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -45,6 +45,7 @@ const Login = () => {
             console.log(JSON.stringify(response?.data));
             //console.log(JSON.stringify(response));
             const roles = response?.data?.roles;
+            console.log(roles);
             const accessToken = response?.data?.acces_token;
             const refreshToken = response?.data?.refresh_token;
             setAuth({ user, pwd, roles, refreshToken, accessToken });
@@ -65,11 +66,21 @@ const Login = () => {
         }
     }
 
+    const admin = async () => {
+        navigate('/admin');
+    }
+
+    const student = async () => {
+        navigate('/student');
+    }
+
     return (
                 <section className={classes.loginwrapper}>
                     <Logo />
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     <h1>Sign In</h1>
+                    {/*<button onClick={admin}>Admin</button>
+                    <button onClick={student}>Student</button>*/}
                     <form onSubmit={handleSubmit}>
                         <label></label>
                         <p htmlFor="username">Username:</p>
