@@ -1,8 +1,12 @@
 .loginwrapper {
     display: flex;
     flex-direction: column;
-    align-items: center;
     background-color: #1fabd5;
-    height: 150px;
+    height: 50px;
     width: auto;
+
+}
+
+.text {
+    transform: translate(50%);
 }

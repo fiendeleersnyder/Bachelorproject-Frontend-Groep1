@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './Componenten/App/App';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import {AuthProvider} from './Services/AuthProvider'
+import {AuthProvider} from './Componenten/Authorization/AuthProvider'
 
 
 ReactDOM.render(

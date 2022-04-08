@@ -1,15 +1,15 @@
 import { useRef, useState, useEffect } from 'react';
 import useAuth from '../../Hooks/useAuth';
-import { Link, useNavigate, useLocation} from "react-router-dom";
+import { useNavigate, useLocation} from "react-router-dom";
 
-import axios from 'axios'
+import axios from '../../API/axios'
 import qs from 'qs'
 import classes from './Login.module.css';
 import Logo from './Logo'
 
 const Login = () => {
 
-    const { auth, setAuth } = useAuth();
+    const { setAuth, persist, setPersist } = useAuth();
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -38,17 +38,15 @@ const Login = () => {
                 qs.stringify({ username:user, password:pwd }),
                 {
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    withCredentials: true,
+                    withCredentials: true
 
                 }
             );
             console.log(JSON.stringify(response?.data));
             //console.log(JSON.stringify(response));
             const roles = response?.data?.roles;
-            console.log(roles);
             const accessToken = response?.data?.acces_token;
-            const refreshToken = response?.data?.refresh_token;
-            setAuth({ user, pwd, roles, refreshToken, accessToken });
+            setAuth({ user, pwd, roles, accessToken });
             setUser('');
             setPwd('');
             navigate(from, { replace: true})
@@ -66,17 +64,18 @@ const Login = () => {
         }
     }
 
-    const admin = async () => {
-        navigate('/admin');
+    const togglePersist = () => {
+        setPersist(prev => !prev);
     }
 
-    const student = async () => {
-        navigate('/student');
-    }
+    useEffect(() => {
+        localStorage.setItem("persist", persist)
+    }, [persist])
 
     return (
                 <section className={classes.loginwrapper}>
                     <Logo />
+                    <div className={classes.text}>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     <h1>Sign In</h1>
                     {/*<button onClick={admin}>Admin</button>
@@ -105,7 +104,18 @@ const Login = () => {
                         />
                         <p></p>
                         <button>Sign In</button>
+                        <br/>
+                        <div>
+                            <input
+                                type="checkbox"
+                                id="persist"
+                                onChange={togglePersist}
+                                checked={persist}
+                            />
+                            <label htmlFor="persist">Trust this device</label>
+                        </div>
                     </form>
+                    </div>
                 </section>
     )
 }

@@ -1,6 +1,6 @@
 import {useNavigate, Link} from 'react-router-dom';
 import {useContext} from "react";
-import AuthContext from "../Services/AuthProvider"
+import AuthContext from "./Authorization/AuthProvider"
 
 function MenubalkStudent(){
     const { setAuth } = useContext(AuthContext);

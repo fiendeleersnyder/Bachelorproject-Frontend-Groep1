@@ -1,7 +1,8 @@
 import classes from "./Homescherm.module.css";
 import {useNavigate} from 'react-router-dom';
-function StartPage(){
+import Logo from '../Login/Logo'
 
+function StartPage(){
     const navigate = useNavigate();
 
     const admin = async () => {
@@ -13,8 +14,10 @@ function StartPage(){
     }
 
     return (
-        <div>
-            <p className={classes.card}>
+        <div className={classes.start}>
+            <Logo /> {/*Logo moet nog in de midden gekregen worden*/}
+            <h1> Sign in as </h1>
+            <p className={classes.center}>
                 <button onClick={admin}>Admin</button>
                 <button onClick={student}>Student</button>
             </p>

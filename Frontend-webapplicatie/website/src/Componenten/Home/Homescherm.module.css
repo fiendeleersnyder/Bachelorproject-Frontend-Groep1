@@ -4,3 +4,17 @@
     color: white;
     width:200%;
 }
+
+.start {
+    background-color: #1fabd5;
+    height: 50px;
+    position: relative;
+    text-align: center;
+
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
