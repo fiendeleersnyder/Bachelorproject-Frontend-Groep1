@@ -15,7 +15,7 @@ function StartPage(){
 
     return (
         <div className={classes.start}>
-            <Logo /> {/*Logo moet nog in de midden gekregen worden*/}
+            <Logo />
             <h1> Sign in as </h1>
             <p className={classes.center}>
                 <button onClick={admin}>Admin</button>

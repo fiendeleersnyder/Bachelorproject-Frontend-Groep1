@@ -34,7 +34,7 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post("http://localhost:8080/login",
+            const response = await axios.post("/login",
                 qs.stringify({ username:user, password:pwd }),
                 {
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },

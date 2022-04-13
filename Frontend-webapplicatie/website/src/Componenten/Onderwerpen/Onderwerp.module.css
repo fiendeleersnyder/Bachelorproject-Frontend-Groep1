@@ -1,5 +1,9 @@
 .item {
     margin: 1rem 0;
+    border-style: groove;
+    border-width: 1px;
+    border-color: #00407a;
+    border-radius: 4px;
 }
 
 .image {

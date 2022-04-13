@@ -1,7 +1,6 @@
 import {useNavigate, Link} from 'react-router-dom';
 import useLogout from '../Hooks/useLogout'
 
-
 function MenubalkAdmin(){
     const logout = useLogout();
     const navigate = useNavigate();
@@ -10,6 +9,7 @@ function MenubalkAdmin(){
         await(logout());
         navigate("/");
     }
+
     return(
         <header>
             <div className="w3-top">
