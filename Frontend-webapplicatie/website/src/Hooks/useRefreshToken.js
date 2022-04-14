@@ -6,7 +6,6 @@ const useRefreshToken = () => {
 
     const refresh = async () => {
         const response = await axios.get('http://localhost:8080/auth/refreshtoken', {
-            headers: { Authorization: 'Bearer ' + auth?.refreshToken },
             withCredentials: true
         });
         setAuth(prev => {

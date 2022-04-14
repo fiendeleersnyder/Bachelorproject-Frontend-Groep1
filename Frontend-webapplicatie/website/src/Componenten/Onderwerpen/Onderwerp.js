@@ -1,21 +1,26 @@
 import Card from '../ui/Card';
 import classes from './Onderwerp.module.css';
-import axios from "../../API/axios";
-import qs from "qs";
+import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Onderwerp(props) {
 
+    const axiosPrivate = useAxiosPrivate();
+    const navigate = useNavigate();
+    const location = useLocation();
+
     const favorieten = async () => {
         try {
-            axios.post("/favorieten",
+            axiosPrivate.post("/favorieten",
                     JSON.stringify(props.id),
                 {
-                    headers: {'Content-Type': 'application/json'}
+                    headers: {'Content-Type': 'application/json'},
                 }
             );
 
         } catch (err) {
             console.error(err);
+            navigate('/login', { state: {from: location}, replace: true})
         }
     }
 

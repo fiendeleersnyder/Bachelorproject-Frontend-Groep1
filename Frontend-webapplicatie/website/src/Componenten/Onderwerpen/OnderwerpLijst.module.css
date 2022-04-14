@@ -2,7 +2,6 @@
     list-style: none;
     margin: 0;
     padding: 0;
-
 }
 
 .item {
@@ -39,7 +38,7 @@
     color: #00407A;
     border: 1px solid #00407A;
     background-color: transparent;
-    padding: 0.5rem 1.5rem;
+    padding: 0.5rem 0.5rem;
     border-radius: 4px;
 }
 

@@ -2,4 +2,8 @@
     background-color: white;
     border-radius: 6px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border-style: groove;
+    border-width: 1px;
+    border-color: #00407a;
+    margin: 1rem 0;
 }
