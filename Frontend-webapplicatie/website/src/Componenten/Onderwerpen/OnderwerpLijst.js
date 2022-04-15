@@ -1,5 +1,4 @@
 import classes from './OnderwerpLijst.module.css';
-import Onderwerp from './Onderwerp'
 import { useState, useEffect } from "react";
 import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
 import useAuth from "../../Hooks/useAuth"
@@ -92,14 +91,14 @@ const OnderwerpLijst = () => {
                 ? (
                     <ul>
                         {onderwerpen.map((onderwerp, i) =>
-                            <Card>
+                            <Card key={i}>
                                 <div className={classes.content}>
-                                    <h3>{onderwerp.name}</h3>
+                                    <h3 >{onderwerp.name}</h3>
                                     {/*<address>{props.address}</address>
                                        <p>{props.description}</p>**/}
                                 </div>
                                 <div className={classes.actions}>
-                                    <button key={i} onClick={()=>favoriet(onderwerp.id)}>Voeg toe aan favorieten</button>
+                                    <button onClick={()=>favoriet(onderwerp.id)}>Voeg toe aan favorieten</button>
                                 </div>
                             </Card>
                         )}

@@ -1,10 +1,42 @@
-import {useRef} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import classes from './IndienenForm.module.css';
+import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
+import {useLocation, useNavigate} from "react-router-dom";
 
 function IndienenForm() {
     const voorkeur1InputRef = useRef();
-    const voorkeur2InputRef=useRef();
+    const voorkeur2InputRef = useRef();
     const voorkeur3InputRef = useRef();
+
+    const [onderwerpen, setOnderwerpen] = useState();
+    const axiosPrivate = useAxiosPrivate();
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        let isMounted = true;
+        const controller = new AbortController();
+
+        const getOnderwerpen = async () => {
+            try {
+                const response = await axiosPrivate.get('/onderwerpen', {
+                    signal: controller.signal
+                });
+                console.log(response.data);
+                isMounted && setOnderwerpen(response.data);
+            } catch (err) {
+                console.error(err);
+                navigate('/login', { state: {from: location}, replace: true})
+            }
+        }
+
+        getOnderwerpen();
+
+        return () => {
+            isMounted = false;
+            controller.abort();
+        }
+    }, [])
 
     function submitHandler(event){
         event.preventDefault();
@@ -33,58 +65,28 @@ function IndienenForm() {
                 <div className={classes.control}>
                     <label htmlFor='voorkeur1'>Voorkeur 1</label>
                      <select required id='voorkeur1' ref={voorkeur1InputRef}>
-                        <option>---</option>
-                        <option>Leuven</option>
-                        <option>Groep T Leuven</option>
-                        <option>Brussel</option>
-                        <option>Sint-Lucas Brussel</option>
-                        <option>Antwerpen</option>
-                        <option>Geel</option>
-                        <option>De Nayer Sint-Katelijne-Waver</option>
-                        <option>Sint-Lucas Gent</option>
-                        <option>Technologiecampus Gent</option>
-                        <option>Aalst</option>
-                        <option>Kulak Kortrijk</option>
-                        <option>Brugge</option>
-                        <option>Diepenbeek</option>
+                         <option>---</option>
+                         {onderwerpen?.map((onderwerp, i) =>
+                             <option key={i}>{onderwerp.name}</option>
+                         )}
                     </select>
                 </div>
                 <div className={classes.control}>
                     <label htmlFor='voorkeur2'>Voorkeur 2</label>
                     <select required id='voorkeur2' ref={voorkeur2InputRef} >
                         <option>---</option>
-                        <option>Leuven</option>
-                        <option>Groep T Leuven</option>
-                        <option>Brussel</option>
-                        <option>Sint-Lucas Brussel</option>
-                        <option>Antwerpen</option>
-                        <option>Geel</option>
-                        <option>De Nayer Sint-Katelijne-Waver</option>
-                        <option>Sint-Lucas Gent</option>
-                        <option>Technologiecampus Gent</option>
-                        <option>Aalst</option>
-                        <option>Kulak Kortrijk</option>
-                        <option>Brugge</option>
-                        <option>Diepenbeek</option>
+                        {onderwerpen?.map((onderwerp, i) =>
+                            <option key={i}>{onderwerp.name}</option>
+                        )}
                     </select>
                 </div>
                 <div className={classes.control}>
                     <label htmlFor='voorkeur3'>Voorkeur 3</label>
                     <select required id='voorkeur3' ref={voorkeur3InputRef} >
                         <option>---</option>
-                        <option>Leuven</option>
-                        <option>Groep T Leuven</option>
-                        <option>Brussel</option>
-                        <option>Sint-Lucas Brussel</option>
-                        <option>Antwerpen</option>
-                        <option>Geel</option>
-                        <option>De Nayer Sint-Katelijne-Waver</option>
-                        <option>Sint-Lucas Gent</option>
-                        <option>Technologiecampus Gent</option>
-                        <option>Aalst</option>
-                        <option>Kulak Kortrijk</option>
-                        <option>Brugge</option>
-                        <option>Diepenbeek</option>
+                        {onderwerpen?.map((onderwerp, i) =>
+                            <option key={i}>{onderwerp.name}</option>
+                        )}
                     </select>
                 </div>
                 <div className={classes.actions}>

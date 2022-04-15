@@ -1,5 +1,5 @@
 import OnderwerpLijst from '../Componenten/Onderwerpen/OnderwerpLijst'
-const DUMMY_DATA = [
+/*const DUMMY_DATA = [
   {
     id: 'm1',
     title: 'This is a first meetup',
@@ -14,12 +14,12 @@ const DUMMY_DATA = [
     description:
         'This is a first, amazing meetup which you definitely should not miss. It will be a lot of fun!',
   }
-];
+];*/
 
 function OnderwerpenLijst() {
   return(
     <section>
-      <OnderwerpLijst items={DUMMY_DATA}/>
+      <OnderwerpLijst/>
     </section>
 );
 }

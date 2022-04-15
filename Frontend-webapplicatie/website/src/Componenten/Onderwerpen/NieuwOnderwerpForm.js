@@ -1,5 +1,7 @@
 import {useRef} from 'react';
 import classes from './NieuwOnderwerpForm.module.css';
+import { useNavigate, useLocation} from "react-router-dom";
+import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
 
 function NieuwOnderwerpForm() {
     const titleInputRef = useRef();
@@ -15,6 +17,10 @@ function NieuwOnderwerpForm() {
     const kenmerkwoord3InputRef = useRef();
     const trefwoordInputRef= useRef();
     const richtingInputRef=useRef();
+
+    const axiosPrivate = useAxiosPrivate();
+    const navigate = useNavigate();
+    const location = useLocation();
 
     function submitHandler(event){
         event.preventDefault();
@@ -34,7 +40,7 @@ function NieuwOnderwerpForm() {
         const enteredRichting= richtingInputRef.current.value;
 
         const onderwerpData = {
-            title: enteredTitle,
+            name: enteredTitle,
             campus: enteredCampus,
             richting: enteredRichting,
             begeleiding: enteredBegeleiding,
@@ -50,6 +56,18 @@ function NieuwOnderwerpForm() {
         };
 
         console.log(onderwerpData);
+
+        try {
+            axiosPrivate.post("/addonderwerp",
+                JSON.stringify(onderwerpData),
+                {
+                    headers: {'Content-Type': 'application/json'},
+                }
+            );
+        } catch (err) {
+            console.error(err);
+            navigate('/login', { state: {from: location}, replace: true})
+        }
     }
 
     return (
@@ -57,7 +75,7 @@ function NieuwOnderwerpForm() {
             <form className={classes.form} onSubmit={submitHandler}>
                 <div className={classes.control}>
                     <label htmlFor='title'>Onderwerptitel</label>
-                    <input type='text' required id='title' ref={titleInputRef}/>
+                    <input type='text' required id='name' ref={titleInputRef}/>
                 </div>
                 <div className={classes.control}>
                     <label htmlFor='campus'>Campus</label>
