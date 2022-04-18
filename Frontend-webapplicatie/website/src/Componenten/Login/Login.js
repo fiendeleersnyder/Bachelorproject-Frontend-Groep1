@@ -22,6 +22,8 @@ const Login = () => {
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
 
+    const goBack = () => navigate("/");
+
     useEffect(() => {
         userRef.current.focus();
     }, [])
@@ -103,7 +105,9 @@ const Login = () => {
                             required
                         />
                         <p></p>
-                        <button>Sign In</button>
+                        <button className="w3-bar-item w3-button w3-hide-small w3-hover-white floatleft">Sign In</button>
+                        <button className="w3-bar-item w3-button w3-hide-small w3-hover-white floatleft" onClick={goBack}>Go Back</button>
+                        <br/>
                         <br/>
                         <div>
                             <input

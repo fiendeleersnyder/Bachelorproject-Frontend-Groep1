@@ -18,8 +18,8 @@ function StartPage(){
             <Logo />
             <h1> Sign in as </h1>
             <p className={classes.center}>
-                <button onClick={admin}>Admin</button>
-                <button onClick={student}>Student</button>
+                <button className="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white floatleft" onClick={admin}>Admin</button>
+                <button className="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white floatleft" onClick={student}>Student</button>
             </p>
         </div>
     );

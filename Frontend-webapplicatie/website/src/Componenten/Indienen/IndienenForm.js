@@ -19,7 +19,7 @@ function IndienenForm() {
 
         const getOnderwerpen = async () => {
             try {
-                const response = await axiosPrivate.get('/onderwerpen', {
+                const response = await axiosPrivate.get('/onderwerpen', { //zou eigenlijk de favorieten van die student moeten oproepen
                     signal: controller.signal
                 });
                 console.log(response.data);
@@ -90,7 +90,7 @@ function IndienenForm() {
                     </select>
                 </div>
                 <div className={classes.actions}>
-                    <button>Indienen</button>
+                    <button>Indienen</button> {/*na voorkeur in te dienen mss naar ergens sturen of pagina tonen dat ze ingediend hebben en dat niet nog een keer kunnen*/}
                 </div>
             </form>
         </div>
