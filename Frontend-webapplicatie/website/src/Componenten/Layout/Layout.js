@@ -1,14 +1,14 @@
 import classes from './Layout.module.css';
-import Menubalk from "../Menubalk";
+import {Outlet} from "react-router-dom"
+import MenubalkStudent from '../MenubalkStudent'
 
-function Layout(props){
+const Layout = () => {
     return(
-        <div>
-            <Menubalk />
             <main className={classes.main}>
-                {props.children}
+                <MenubalkStudent />
+                <Outlet />
             </main>
-        </div>
-    );
+    )
 }
 export default Layout;
+

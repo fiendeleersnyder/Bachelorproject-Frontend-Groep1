@@ -2,12 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './Componenten/App/App';
-import {BrowserRouter} from 'react-router-dom';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {AuthProvider} from './Componenten/Authorization/AuthProvider'
 
 
 ReactDOM.render(
-  <BrowserRouter> <App />
-  </BrowserRouter>,
+  <React.StrictMode>
+      <BrowserRouter>
+      <AuthProvider>
+          <Routes>
+          <Route path="/*" element={<App />} />
+          </Routes>
+      </AuthProvider>
+      </BrowserRouter>
+  </React.StrictMode>,
   document.getElementById('root')
 );
 
