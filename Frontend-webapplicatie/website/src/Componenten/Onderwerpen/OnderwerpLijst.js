@@ -7,6 +7,7 @@ import Card from "../ui/Card";
 
 const OnderwerpLijst = () => {
     const [onderwerpen, setOnderwerpen] = useState();
+    const [onderwerp, setOnderwerp] = useState();
     const { auth } = useAuth();
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
@@ -40,31 +41,28 @@ const OnderwerpLijst = () => {
     const favoriet = async (id) => {
         let array = [];
         try{
-            const response = await axiosPrivate.get("/favorieten",
-                    JSON.stringify(auth?.user),
-                {
-                    headers: {'Content-Type': 'application/json'},
-                }
-                );
+            const response = await axiosPrivate.get("/auth/favorieten");
                 array = response?.data;
                 console.log(array);
         } catch (err) {
             console.error(err);
             navigate('/login', { state: {from: location}, replace: true})
         }
+        let idarray = [];
+        array.map((onderwerp, i) =>
+                    idarray.push(onderwerp.id))
+        console.log("id array" + idarray);
         let found = false;
-        if (array !== []) {
-            found = array.includes(id);
+        if (idarray !== []) {
+            found = idarray.includes(id);
         }
         console.log(found);
         if (found) {
             try {
-                axiosPrivate.delete("/deletefavoriet/" + id,
-                    JSON.stringify(id),
-                    {
-                        headers: {'Content-Type': 'application/json'},
-                    }
-                );
+                axiosPrivate.delete("/auth/deletefavoriet/" + id,
+                {
+                    headers: { 'Content-Type': 'application/json'}
+                });
             } catch (err) {
                 console.error(err);
                 navigate('/login', { state: {from: location}, replace: true})
@@ -72,12 +70,10 @@ const OnderwerpLijst = () => {
         }
         else{
             try {
-                axiosPrivate.post("/addfavoriet/" + id,
-                    JSON.stringify(id),
+                axiosPrivate.post("/auth/addfavoriet/" + id,
                     {
-                        headers: {'Content-Type': 'application/json'},
-                    }
-                );
+                        headers: { 'Content-Type': 'application/json'}
+                    });
             } catch (err) {
                 console.error(err);
                 navigate('/login', { state: {from: location}, replace: true})
