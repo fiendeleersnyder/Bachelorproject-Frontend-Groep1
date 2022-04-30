@@ -19,7 +19,7 @@ function IndienenForm() {
 
         const getOnderwerpen = async () => {
             try {
-                const response = await axiosPrivate.get('/onderwerpen', { //zou eigenlijk de favorieten van die student moeten oproepen
+                const response = await axiosPrivate.get("/auth/favorieten", { //zou eigenlijk de favorieten van die student moeten oproepen
                     signal: controller.signal
                 });
                 console.log(response.data);

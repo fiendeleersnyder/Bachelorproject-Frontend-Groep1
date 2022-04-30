@@ -4,8 +4,24 @@
     padding: 0;
 }
 
+ul {
+    width: 200%;
+}
+
+.knopje {
+    float: right;
+    border: none;
+    background-color: transparent;
+}
+
+.margin {
+    margin-left: 5px;
+}
+
 .item {
     margin: 1rem 0;
+    padding: 20px;
+    width: 200%;
 }
 
 .image {
