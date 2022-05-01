@@ -38,20 +38,42 @@ function IndienenForm() {
         }
     }, [])
 
-    function submitHandler(event){
-        event.preventDefault();
+    const submitHandler = () => {
 
         const enteredVoorkeur1 = voorkeur1InputRef.current.value;
         const enteredVoorkeur2 = voorkeur2InputRef.current.value;
         const enteredVoorkeur3 = voorkeur3InputRef.current.value;
 
-        const onderwerpData = {
-            voorkeur1: enteredVoorkeur1,
-            voorkeur2: enteredVoorkeur2,
-            voorkeur3: enteredVoorkeur3
-        };
+        var id1;
+        var id2;
+        var id3;
 
-        console.log(onderwerpData);
+        onderwerpen.map((onderwerp, i) =>{
+            if (onderwerp.name === enteredVoorkeur1) {
+                return id1 = onderwerp.id
+            }
+        })
+        onderwerpen.map((onderwerp, i) =>{
+            if (onderwerp.name === enteredVoorkeur2) {
+                return id2 = onderwerp.id
+            }
+        })
+        onderwerpen.map((onderwerp, i) =>{
+            if (onderwerp.name === enteredVoorkeur3) {
+                return id3 = onderwerp.id
+            }
+        })
+
+
+        try {
+            axiosPrivate.post("/auth/addselection/" + id1 + "/" + id2 + "/" + id3,
+                {
+                    headers: { 'Content-Type': 'application/json'}
+                });
+        } catch (err) {
+            console.error(err);
+            navigate('/login', { state: {from: location}, replace: true})
+        }
     }
 
     return (
@@ -90,7 +112,7 @@ function IndienenForm() {
                     </select>
                 </div>
                 <div className={classes.actions}>
-                    <button>Submit</button> {/*na voorkeur in te dienen mss naar ergens sturen of pagina tonen dat ze ingediend hebben en dat niet nog een keer kunnen*/}
+                    <button onClick={submitHandler}>Submit</button> {/*na voorkeur in te dienen mss naar ergens sturen of pagina tonen dat ze ingediend hebben en dat niet nog een keer kunnen*/}
                 </div>
             </form>
         </div>

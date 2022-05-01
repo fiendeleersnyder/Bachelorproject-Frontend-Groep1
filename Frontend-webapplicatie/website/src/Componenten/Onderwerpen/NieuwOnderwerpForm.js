@@ -121,23 +121,143 @@ function NieuwOnderwerpForm() {
                     <label1 htmlFor={'kermerkwoord1'}>Discipline 1</label1>
                     <select required id='kenmerkwoord1' ref={kenmerkwoord1InputRef}>
                         <option>---</option>
-                        <option>NOG TOEVOEGEN</option>
-                        <option>NOG TOEVOEGEN</option>
-                        <option>NOG TOEVOEGEN</option>
+                        <option>Analog Electronics and Design</option>
+                        <option>Digital Electronics and Design</option>
+                        <option>Software Development</option>
+                        <option>Data Science and Engineering</option>
+                        <option>Tele and Data communication</option>
+                        <option>Computer Technique, Microcontrollers and Operating Systems</option>
+                        <option>Systems Theory and Signal Processing</option>
+                        <option>Electronic Design and Interfacing</option>
+                        <option>Structural analysis and design of structures</option>
+                        <option>Materials and building technology</option>
+                        <option>Civil engineering</option>
+                        <option>Construction management and BIM</option>
+                        <option>Geomatics</option>
+                        <option>Advanced conversion and valorisation processes for waste streams</option>
+                        <option>Sustainable processing engineering</option>
+                        <option>Acoustic processing</option>
+                        <option>Electrochemical technology</option>
+                        <option>Membrane technology</option>
+                        <option>Polymer technology</option>
+                        <option>Advanced materials technology</option>
+                        <option>Malting and brewing technology</option>
+                        <option>Meat technology</option>
+                        <option>Enzyme technology</option>
+                        <option>Fermentation technology</option>
+                        <option>Medical bioengineering</option>
+                        <option>Molecular biology and ecology</option>
+                        <option>Molecular diagnostics</option>
+                        <option>Drive systems</option>
+                        <option>Automation</option>
+                        <option>Energy conversion</option>
+                        <option>Production techniques and management</option>
+                        <option>Mechanical design including the material selection</option>
+                        <option>Automotive applications</option>
+                        <option>Aeronautical engineering technology</option>
+                        <option>Raw material</option>
+                        <option>Product design</option>
+                        <option>Processing</option>
+                        <option>Post treatment</option>
+                        <option>Application testing</option>
+                        <option>Recycling</option>
+                        <option>Power engineering</option>
+                        <option>Energy engineering</option>
+                        <option>Automation</option>
                     </select>
                     <label1 htmlFor='kenmerkwoord2'>Discipline 2</label1>
                     <select  id='kenmerkwoord2' ref={kenmerkwoord2InputRef}>
                         <option>---</option>
-                        <option>NOG TOEVOEGEN</option>
-                        <option>NOG TOEVOEGEN</option>
-                        <option>NOG TOEVOEGEN</option>
+                        <option>Analog Electronics and Design</option>
+                        <option>Digital Electronics and Design</option>
+                        <option>Software Development</option>
+                        <option>Data Science and Engineering</option>
+                        <option>Tele and Data communication</option>
+                        <option>Computer Technique, Microcontrollers and Operating Systems</option>
+                        <option>Systems Theory and Signal Processing</option>
+                        <option>Electronic Design and Interfacing</option>
+                        <option>Structural analysis and design of structures</option>
+                        <option>Materials and building technology</option>
+                        <option>Civil engineering</option>
+                        <option>Construction management and BIM</option>
+                        <option>Geomatics</option>
+                        <option>Advanced conversion and valorisation processes for waste streams</option>
+                        <option>Sustainable processing engineering</option>
+                        <option>Acoustic processing</option>
+                        <option>Electrochemical technology</option>
+                        <option>Membrane technology</option>
+                        <option>Polymer technology</option>
+                        <option>Advanced materials technology</option>
+                        <option>Malting and brewing technology</option>
+                        <option>Meat technology</option>
+                        <option>Enzyme technology</option>
+                        <option>Fermentation technology</option>
+                        <option>Medical bioengineering</option>
+                        <option>Molecular biology and ecology</option>
+                        <option>Molecular diagnostics</option>
+                        <option>Drive systems</option>
+                        <option>Automation</option>
+                        <option>Energy conversion</option>
+                        <option>Production techniques and management</option>
+                        <option>Mechanical design including the material selection</option>
+                        <option>Automotive applications</option>
+                        <option>Aeronautical engineering technology</option>
+                        <option>Raw material</option>
+                        <option>Product design</option>
+                        <option>Processing</option>
+                        <option>Post treatment</option>
+                        <option>Application testing</option>
+                        <option>Recycling</option>
+                        <option>Power engineering</option>
+                        <option>Energy engineering</option>
+                        <option>Automation</option>
                     </select>
                     <label1 htmlFor='kenmerkwoord3'>Discipline 3</label1>
                     <select  id='kenmerkwoord3' ref={kenmerkwoord3InputRef}>
                         <option>---</option>
-                        <option>NOG TOEVOEGEN</option>
-                        <option>NOG TOEVOEGEN</option>
-                        <option>NOG TOEVOEGEN</option>
+                        <option>Analog Electronics and Design</option>
+                        <option>Digital Electronics and Design</option>
+                        <option>Software Development</option>
+                        <option>Data Science and Engineering</option>
+                        <option>Tele and Data communication</option>
+                        <option>Computer Technique, Microcontrollers and Operating Systems</option>
+                        <option>Systems Theory and Signal Processing</option>
+                        <option>Electronic Design and Interfacing</option>
+                        <option>Structural analysis and design of structures</option>
+                        <option>Materials and building technology</option>
+                        <option>Civil engineering</option>
+                        <option>Construction management and BIM</option>
+                        <option>Geomatics</option>
+                        <option>Advanced conversion and valorisation processes for waste streams</option>
+                        <option>Sustainable processing engineering</option>
+                        <option>Acoustic processing</option>
+                        <option>Electrochemical technology</option>
+                        <option>Membrane technology</option>
+                        <option>Polymer technology</option>
+                        <option>Advanced materials technology</option>
+                        <option>Malting and brewing technology</option>
+                        <option>Meat technology</option>
+                        <option>Enzyme technology</option>
+                        <option>Fermentation technology</option>
+                        <option>Medical bioengineering</option>
+                        <option>Molecular biology and ecology</option>
+                        <option>Molecular diagnostics</option>
+                        <option>Drive systems</option>
+                        <option>Automation</option>
+                        <option>Energy conversion</option>
+                        <option>Production techniques and management</option>
+                        <option>Mechanical design including the material selection</option>
+                        <option>Automotive applications</option>
+                        <option>Aeronautical engineering technology</option>
+                        <option>Raw material</option>
+                        <option>Product design</option>
+                        <option>Processing</option>
+                        <option>Post treatment</option>
+                        <option>Application testing</option>
+                        <option>Recycling</option>
+                        <option>Power engineering</option>
+                        <option>Energy engineering</option>
+                        <option>Automation</option>
                     </select>
                 </div>
                 <div className={classes.control}>
