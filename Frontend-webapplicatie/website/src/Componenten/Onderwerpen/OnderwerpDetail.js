@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
 import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
-import props from 'prop-types';
 
 const OnderwerpDetail = () => {
     const {id} = useParams();
@@ -12,7 +11,6 @@ const OnderwerpDetail = () => {
 
     useEffect(() => {
         console.log(id);
-        let isMounted = true;
         const controller = new AbortController();
 
         const getInfo = async () => {
@@ -31,7 +29,6 @@ const OnderwerpDetail = () => {
         getInfo();
 
         return () => {
-            isMounted = false;
             controller.abort();
         }
     }, [])

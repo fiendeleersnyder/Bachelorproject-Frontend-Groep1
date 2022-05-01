@@ -5,7 +5,7 @@
 }
 
 ul {
-    width: 200%;
+    width: 250%;
 }
 
 .knopje {
@@ -14,7 +14,7 @@ ul {
     background-color: transparent;
 }
 
-.margin {
+.margin-left {
     margin-left: 5px;
 }
 

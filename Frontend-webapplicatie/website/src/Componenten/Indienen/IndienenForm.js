@@ -63,7 +63,7 @@ function IndienenForm() {
             kun je nog altijd wijzigen tot uiterlijk deze datum.</p>
             <form className={classes.form}  onSubmit={submitHandler}>
                 <div className={classes.control}>
-                    <label htmlFor='voorkeur1'>Voorkeur 1</label>
+                    <label htmlFor='voorkeur1'>Preference 1</label>
                      <select required id='voorkeur1' ref={voorkeur1InputRef}>
                          <option>---</option>
                          {onderwerpen?.map((onderwerp, i) =>
@@ -72,7 +72,7 @@ function IndienenForm() {
                     </select>
                 </div>
                 <div className={classes.control}>
-                    <label htmlFor='voorkeur2'>Voorkeur 2</label>
+                    <label htmlFor='voorkeur2'>Preference 2</label>
                     <select required id='voorkeur2' ref={voorkeur2InputRef} >
                         <option>---</option>
                         {onderwerpen?.map((onderwerp, i) =>
@@ -81,7 +81,7 @@ function IndienenForm() {
                     </select>
                 </div>
                 <div className={classes.control}>
-                    <label htmlFor='voorkeur3'>Voorkeur 3</label>
+                    <label htmlFor='voorkeur3'>Preference 3</label>
                     <select required id='voorkeur3' ref={voorkeur3InputRef} >
                         <option>---</option>
                         {onderwerpen?.map((onderwerp, i) =>
@@ -90,7 +90,7 @@ function IndienenForm() {
                     </select>
                 </div>
                 <div className={classes.actions}>
-                    <button>Indienen</button> {/*na voorkeur in te dienen mss naar ergens sturen of pagina tonen dat ze ingediend hebben en dat niet nog een keer kunnen*/}
+                    <button>Submit</button> {/*na voorkeur in te dienen mss naar ergens sturen of pagina tonen dat ze ingediend hebben en dat niet nog een keer kunnen*/}
                 </div>
             </form>
         </div>
