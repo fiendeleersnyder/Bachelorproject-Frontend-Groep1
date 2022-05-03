@@ -120,8 +120,12 @@ const OnderwerpLijst = () => {
                                         <Card key={i}>
                                             <div className={classes.content}>
                                                 <h3 >{onderwerp.name}</h3>
-                                                {/*<address>{props.address}</address>
-                                                 <p>{props.description}</p>*/}
+                                                <p>Target group: {onderwerp.doelgroep}</p>
+                                                <p> Promoter: {onderwerp.promotor}</p>
+                                                <p> Capacity: {onderwerp.capacity}</p>
+                                                {onderwerp.disciplines.isEmpty ? (
+                                                    <p> Disciplines: {onderwerp.disciplines}</p>) : <p></p>
+                                                }
                                             </div>
                                             <div className={classes.actions}>
                                                 <IconButton onClick={()=>favoriet(onderwerp.id)}>{favorieten_id.includes(onderwerp.id) ? <FavoriteIcon /> : <FavoriteBorderIcon />}</IconButton>

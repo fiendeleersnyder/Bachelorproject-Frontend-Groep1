@@ -18,13 +18,17 @@ import {Routes, Route} from 'react-router-dom';
 import React from 'react';
 import LayoutStudent from '../Layout/LayoutStudent';
 import LayoutAdmin from '../Layout/LayoutAdmin';
+import LayoutCoordinator from '../Layout/LayoutCoodinator'
+import LayoutBedrijf from '../Layout/LayoutBedrijf'
 
 
 function App() {
 
     const ROLES = {
         1: 'Admin',
-        2: 'Student'
+        2: 'Student',
+        3: 'Coordinator',
+        4: 'Bedrijf'
     }
 
     var thedate   = new Date();
@@ -70,6 +74,32 @@ function App() {
                             <Route path='/student/indienen' element={<Indienen/>}/>
                             <Route path='/student/chat' element={<Chat/>}/>
                             <Route path='/student/account' element={<Account/>}/>
+                        </Route>
+                    </Route>
+                </Route>
+                <Route path="/" element={<LayoutCoordinator/>}>
+                    <Route element={<PersistLogin/>}>
+                        {/* protected routes */}
+                        <Route path="/coordinator/" element={<RequireAuth AllowedRoles={[ROLES["3"]]}/>}>
+                            <Route path='/coordinator/' element={<HomePagina/>}/>
+                            <Route path='/coordinator/onderwerpen' element={<OnderwerpenLijstMetVerwijderen />}/>
+                            <Route path='/coordinator/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
+                            <Route path='/coordinator/addonderwerp' element={<AddOnderwerp/>}/>
+                            <Route path='/coordinator/chat' element={<Chat/>}/>
+                            <Route path='/coordinator/account' element={<Account/>}/>
+                        </Route>
+                    </Route>
+                </Route>
+                <Route path="/" element={<LayoutBedrijf/>}>
+                    <Route element={<PersistLogin/>}>
+                        {/* protected routes */}
+                        <Route path="/bedrijf/" element={<RequireAuth AllowedRoles={[ROLES["4"]]}/>}>
+                            <Route path='/bedrijf/' element={<HomePagina/>}/>
+                            <Route path='/bedrijf/onderwerpen' element={<OnderwerpenLijst />}/>
+                            <Route path='/bedrijf/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
+                            <Route path='/bedrijf/addonderwerp' element={<AddOnderwerp/>}/>
+                            <Route path='/bedrijf/chat' element={<Chat/>}/>
+                            <Route path='/bedrijf/account' element={<Account/>}/>
                         </Route>
                     </Route>
                 </Route>
