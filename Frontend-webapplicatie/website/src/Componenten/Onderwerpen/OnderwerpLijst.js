@@ -1,20 +1,18 @@
 import classes from './OnderwerpLijst.module.css';
 import { useState, useEffect } from "react";
 import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
-import useAuth from "../../Hooks/useAuth"
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import Card from "../ui/Card";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import InfoIcon from '@mui/icons-material/Info';
+import { SimpleGrid } from '@chakra-ui/react'
 
 const OnderwerpLijst = () => {
     const [onderwerpen, setOnderwerpen] = useState();
-    const [onderwerp, setOnderwerp] = useState();
     const [favorieten_id, setFavorieten_id] = useState([]);
     const [veranderd, setVeranderd] = useState();
-    const { auth } = useAuth();
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
     const location = useLocation();
@@ -69,15 +67,14 @@ const OnderwerpLijst = () => {
             navigate('/login', { state: {from: location}, replace: true})
         }
         setFavorieten_id([])
-        console.log(`favorieten:  ${favorieten_id}`)
         let idarray = [];
         array.map((onderwerp, i) =>
                     idarray.push(onderwerp.id))
         setFavorieten_id(idarray);
         console.log("id array" + idarray);
         let found = false;
-        if (idarray !== []) {
-            found = idarray.includes(id);
+        if (favorieten_id !== []) {
+            found = favorieten_id.includes(id);
         }
         console.log(favorieten_id);
         console.log(found);
@@ -107,7 +104,7 @@ const OnderwerpLijst = () => {
             }
     }
     const iconButtonStyles = {
-        height: "39px",
+        height: "40px",
     };
 
 
@@ -115,7 +112,7 @@ const OnderwerpLijst = () => {
         <ul>
             {onderwerpen?.length
                 ? (
-                    <ul>
+                    <SimpleGrid minChildWidth='250px' spacing='50px'>
                         {onderwerpen.map((onderwerp, i) =>
                             {
                                 if(!onderwerp.hideObject)
@@ -134,7 +131,7 @@ const OnderwerpLijst = () => {
                                     )
                             }
                         )}
-                    </ul>
+                    </SimpleGrid>
                 ) : <p>No subjects to show</p>
             }
         </ul>

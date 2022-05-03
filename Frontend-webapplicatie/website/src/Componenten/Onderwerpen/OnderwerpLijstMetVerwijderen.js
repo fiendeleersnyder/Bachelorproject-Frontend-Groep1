@@ -9,6 +9,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import InfoIcon from "@mui/icons-material/Info";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { SimpleGrid } from '@chakra-ui/react'
 
 const OnderwerpLijstMetVerwijderen = () => {
     const [onderwerpen, setOnderwerpen] = useState();
@@ -35,6 +36,20 @@ const OnderwerpLijstMetVerwijderen = () => {
                 console.error(err);
                 navigate('/login', { state: {from: location}, replace: true})
             }
+            let array = [];
+            try{
+                const response = await axiosPrivate.get("/auth/favorieten");
+                array = response?.data;
+                console.log(array);
+                setVeranderd(false)
+            } catch (err) {
+                console.error(err);
+                navigate('/login', { state: {from: location}, replace: true})
+            }
+            let idarray = [];
+            array.map((onderwerp, i) =>
+                idarray.push(onderwerp.id))
+            setFavorieten_id(idarray);
         }
 
         getOnderwerpen();
@@ -72,6 +87,7 @@ const OnderwerpLijstMetVerwijderen = () => {
                     {
                         headers: { 'Content-Type': 'application/json'}
                     });
+                setVeranderd(true)
             } catch (err) {
                 console.error(err);
                 navigate('/login', { state: {from: location}, replace: true})
@@ -83,6 +99,7 @@ const OnderwerpLijstMetVerwijderen = () => {
                     {
                         headers: { 'Content-Type': 'application/json'}
                     });
+                setVeranderd(true)
             } catch (err) {
                 console.error(err);
                 navigate('/login', { state: {from: location}, replace: true})
@@ -125,7 +142,7 @@ const OnderwerpLijstMetVerwijderen = () => {
             <h1>Approved subjects</h1>
             {onderwerpen?.length
                 ? (
-                    <ul>
+                    <SimpleGrid minChildWidth='250px' spacing='50px'>
                         {onderwerpen.map((onderwerp, i) =>
                         {
                             if(!onderwerp.hideObject)
@@ -145,13 +162,13 @@ const OnderwerpLijstMetVerwijderen = () => {
                             )
                         }
                         )}
-                    </ul>
+                    </SimpleGrid>
                 ) : <p>No approved subjects</p>
             }
             <h1>Subjects under reservation/refused</h1>
             {onderwerpen?.length
                 ? (
-                    <ul>
+                    <SimpleGrid minChildWidth='250px' spacing='50px'>
                         {onderwerpen.map((onderwerp, i) =>
                             {
                                 if (onderwerp.hideObject)
@@ -170,7 +187,7 @@ const OnderwerpLijstMetVerwijderen = () => {
                                 )
                             }
                         )}
-                    </ul>
+                    </SimpleGrid>
                 ) : <p>No subjects to show</p>
             }
         </ul>

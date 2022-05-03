@@ -38,20 +38,42 @@ function IndienenForm() {
         }
     }, [])
 
-    function submitHandler(event){
-        event.preventDefault();
+    const submitHandler = () => {
 
         const enteredVoorkeur1 = voorkeur1InputRef.current.value;
         const enteredVoorkeur2 = voorkeur2InputRef.current.value;
         const enteredVoorkeur3 = voorkeur3InputRef.current.value;
 
-        const onderwerpData = {
-            voorkeur1: enteredVoorkeur1,
-            voorkeur2: enteredVoorkeur2,
-            voorkeur3: enteredVoorkeur3
-        };
+        var id1;
+        var id2;
+        var id3;
 
-        console.log(onderwerpData);
+        onderwerpen.map((onderwerp, i) =>{
+            if (onderwerp.name === enteredVoorkeur1) {
+                return id1 = onderwerp.id
+            }
+        })
+        onderwerpen.map((onderwerp, i) =>{
+            if (onderwerp.name === enteredVoorkeur2) {
+                return id2 = onderwerp.id
+            }
+        })
+        onderwerpen.map((onderwerp, i) =>{
+            if (onderwerp.name === enteredVoorkeur3) {
+                return id3 = onderwerp.id
+            }
+        })
+
+
+        try {
+            axiosPrivate.post("/auth/addselection/" + id1 + "/" + id2 + "/" + id3,
+                {
+                    headers: { 'Content-Type': 'application/json'}
+                });
+        } catch (err) {
+            console.error(err);
+            navigate('/login', { state: {from: location}, replace: true})
+        }
     }
 
     return (
@@ -63,7 +85,7 @@ function IndienenForm() {
             kun je nog altijd wijzigen tot uiterlijk deze datum.</p>
             <form className={classes.form}  onSubmit={submitHandler}>
                 <div className={classes.control}>
-                    <label htmlFor='voorkeur1'>Voorkeur 1</label>
+                    <label htmlFor='voorkeur1'>Preference 1</label>
                      <select required id='voorkeur1' ref={voorkeur1InputRef}>
                          <option>---</option>
                          {onderwerpen?.map((onderwerp, i) =>
@@ -72,7 +94,7 @@ function IndienenForm() {
                     </select>
                 </div>
                 <div className={classes.control}>
-                    <label htmlFor='voorkeur2'>Voorkeur 2</label>
+                    <label htmlFor='voorkeur2'>Preference 2</label>
                     <select required id='voorkeur2' ref={voorkeur2InputRef} >
                         <option>---</option>
                         {onderwerpen?.map((onderwerp, i) =>
@@ -81,7 +103,7 @@ function IndienenForm() {
                     </select>
                 </div>
                 <div className={classes.control}>
-                    <label htmlFor='voorkeur3'>Voorkeur 3</label>
+                    <label htmlFor='voorkeur3'>Preference 3</label>
                     <select required id='voorkeur3' ref={voorkeur3InputRef} >
                         <option>---</option>
                         {onderwerpen?.map((onderwerp, i) =>
@@ -90,7 +112,7 @@ function IndienenForm() {
                     </select>
                 </div>
                 <div className={classes.actions}>
-                    <button>Indienen</button> {/*na voorkeur in te dienen mss naar ergens sturen of pagina tonen dat ze ingediend hebben en dat niet nog een keer kunnen*/}
+                    <button onClick={submitHandler}>Submit</button> {/*na voorkeur in te dienen mss naar ergens sturen of pagina tonen dat ze ingediend hebben en dat niet nog een keer kunnen*/}
                 </div>
             </form>
         </div>
