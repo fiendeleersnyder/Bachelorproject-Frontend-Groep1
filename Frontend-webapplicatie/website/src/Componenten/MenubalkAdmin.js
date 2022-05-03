@@ -18,6 +18,7 @@ function MenubalkAdmin(){
                     <a className="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white floatleft"><Link to="/admin/onderwerpen">Subjects</Link></a>
                     <a className="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white floatleft"><Link to="/admin/addonderwerp">Add subject</Link></a>
                     <a className="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white floatleft"><Link to="/admin/users">Users</Link></a>
+                    <a className="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white floatleft"><Link to="/admin/phases">Phases</Link></a>
                     <button className="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white floatright" onClick={signOut}>Log out</button>
                     <a className="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white floatright"><Link to="/admin/account">My account</Link></a>
                 </div>
