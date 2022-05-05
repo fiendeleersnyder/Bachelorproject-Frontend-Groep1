@@ -1,36 +1,38 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity, } from "react-native";
+import {Login} from "../components/Login/Login"
 
 function Inlogscreen(props) {
     return (
-        <View style={styles.container}>
-            <Image source = {require("../assets/logo_kuleuven.png")}/>
+        // <View style={styles.container}>
+        //     <Image source = {require("../assets/logo_kuleuven.png")}/>
       
-            <View style={styles.inputView}>
-                <TextInput
-                style={styles.TextInput}
-                placeholder="E-mail"
-                placeholderTextColor="#003f5c"
-                //onChangeText={(email) => setEmail(email)}
-                />
-            </View>
+        //     <View style={styles.inputView}>
+        //         <TextInput
+        //         style={styles.TextInput}
+        //         placeholder="E-mail"
+        //         placeholderTextColor="#003f5c"
+        //         //onChangeText={(email) => setEmail(email)}
+        //         />
+        //     </View>
         
-            <View style={styles.inputView}>
-                <TextInput
-                    style={styles.TextInput}
-                    placeholder="Password"
-                    placeholderTextColor="#003f5c"
-                    secureTextEntry={true}
-                    // onChangeText={(password) => setPassword(password)}
-                />
-            </View>
+        //     <View style={styles.inputView}>
+        //         <TextInput
+        //             style={styles.TextInput}
+        //             placeholder="Password"
+        //             placeholderTextColor="#003f5c"
+        //             secureTextEntry={true}
+        //             // onChangeText={(password) => setPassword(password)}
+        //         />
+        //     </View>
 
-            <TouchableOpacity style={styles.loginBtn}>
-                <Text style={styles.loginText}>LOGIN</Text>
-                {/* hier: onPress={{}} instoppen om logingegevens door te geven */}
-            </TouchableOpacity>
-        </View>
+        //     <TouchableOpacity style={styles.loginBtn}>
+        //         <Text style={styles.loginText}>LOGIN</Text>
+        //         {/* hier: onPress={{}} instoppen om logingegevens door te geven */}
+        //     </TouchableOpacity>
+        // </View>
+            <Login />
     );
 }
 
