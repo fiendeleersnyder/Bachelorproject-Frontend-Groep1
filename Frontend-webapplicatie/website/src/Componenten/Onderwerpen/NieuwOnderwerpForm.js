@@ -265,7 +265,7 @@ function NieuwOnderwerpForm() {
                     <textarea required id='trefwoorden' rows='5' ref={trefwoordInputRef}></textarea>
                 </div>
                 <div className={classes.actions}>
-                    <button>Voeg onderwerp toe</button>
+                    <button>Add subject</button>
                 </div>
             </form>
         </div>

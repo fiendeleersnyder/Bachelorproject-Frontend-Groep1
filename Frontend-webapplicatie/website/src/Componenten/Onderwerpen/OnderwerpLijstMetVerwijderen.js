@@ -40,8 +40,6 @@ const OnderwerpLijstMetVerwijderen = () => {
             try{
                 const response = await axiosPrivate.get("/auth/favorieten");
                 array = response?.data;
-                console.log(array);
-                setVeranderd(false)
             } catch (err) {
                 console.error(err);
                 navigate('/login', { state: {from: location}, replace: true})
@@ -151,8 +149,12 @@ const OnderwerpLijstMetVerwijderen = () => {
                                         <IconButton onClick={()=>verwijder(onderwerp.id)} className={classes.knopje}><DeleteIcon></DeleteIcon></IconButton>
                                         <div className={classes.content}>
                                             <h3 >{onderwerp.name}</h3>
-                                            {/*<address>{props.address}</address>
-                                             <p>{props.description}</p>*/}
+                                            <p>Target group: {onderwerp.doelgroep}</p>
+                                            <p> Promoter: {onderwerp.promotor}</p>
+                                            <p> Capacity: {onderwerp.capacity}</p>
+                                            {onderwerp.disciplines.isEmpty ? (
+                                                <p> Disciplines: {onderwerp.disciplines}</p>) : <p></p>
+                                            }
                                         </div>
                                         <div className={classes.actions}>
                                             <IconButton onClick={()=>favoriet(onderwerp.id)}>{favorieten_id.includes(onderwerp.id) ? <FavoriteIcon /> : <FavoriteBorderIcon />}</IconButton>
@@ -177,8 +179,12 @@ const OnderwerpLijstMetVerwijderen = () => {
                                         <IconButton onClick={() => voegToe(onderwerp.id)} className={classes.knopje}><CheckIcon /></IconButton>
                                         <div className={classes.content}>
                                             <h3>{onderwerp.name}</h3>
-                                            {/*<address>{props.address}</address>
-                                             <p>{props.description}</p>*/}
+                                            <p>Target group: {onderwerp.doelgroep}</p>
+                                            <p> Promoter: {onderwerp.promotor}</p>
+                                            <p> Capacity: {onderwerp.capacity}</p>
+                                            {onderwerp.disciplines.isEmpty ? (
+                                                <p> Disciplines: {onderwerp.disciplines}</p>) : <p></p>
+                                            }
                                         </div>
                                         <div className={classes.actions}>
                                             <IconButton sx={iconButtonStyles}><Link to={window.location.pathname + `/${onderwerp.id}`}><InfoIcon/></Link></IconButton>
