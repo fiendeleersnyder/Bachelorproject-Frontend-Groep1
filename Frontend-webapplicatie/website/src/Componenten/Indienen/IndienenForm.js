@@ -9,11 +9,16 @@ function IndienenForm() {
     const voorkeur3InputRef = useRef();
 
     const [onderwerpen, setOnderwerpen] = useState();
+    var array = [];
+    var array2 = [];
+    const [ingediend, setIngediend] = useState([]);
+    const [veranderd, setVeranderd] = useState();
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
     const location = useLocation();
 
     useEffect(() => {
+        setVeranderd(false);
         let isMounted = true;
         const controller = new AbortController();
 
@@ -25,6 +30,16 @@ function IndienenForm() {
                 console.log(response.data);
                 isMounted && setOnderwerpen(response.data);
             } catch (err) {
+                console.error(err);
+                navigate('/login', { state: {from: location}, replace: true})
+            }
+
+            try {
+                const response  = await axiosPrivate.get("/auth/selection")
+                console.log(response.data);
+                array = response.data;
+                setIngediend(array);
+            }catch (err) {
                 console.error(err);
                 navigate('/login', { state: {from: location}, replace: true})
             }
@@ -70,6 +85,7 @@ function IndienenForm() {
                 {
                     headers: { 'Content-Type': 'application/json'}
                 });
+            setVeranderd(true);
         } catch (err) {
             console.error(err);
             navigate('/login', { state: {from: location}, replace: true})
@@ -77,44 +93,68 @@ function IndienenForm() {
     }
 
     return (
-        <div><p className={classes.card}>Beste student <br/>
-            Selecteer 3 onderwerpen. Je moet minstens 1 onderwerp selecteren om te kunnen indienen.
-            Plaats het onderwerp met je grootste voorkeur op plaats 1. Je tweede en derde voorkeur plaats je respectievelijk op plaats
-            2 en 3. Je kan hier een selectie maken uit de onderwerpen die je bij je favorieten plaatste, zet dus zeker de onderwerpen die je wenst
-            te selecteren bij je favorieten. Dien jouw selecte in uiterlijk op 30 april 2022 23:55. Een selectie die voor deze datum werd ingediend
-            kun je nog altijd wijzigen tot uiterlijk deze datum.</p>
-            <form className={classes.form}  onSubmit={submitHandler}>
-                <div className={classes.control}>
-                    <label htmlFor='voorkeur1'>Preference 1</label>
-                     <select required id='voorkeur1' ref={voorkeur1InputRef}>
-                         <option>---</option>
-                         {onderwerpen?.map((onderwerp, i) =>
-                             <option key={i}>{onderwerp.name}</option>
-                         )}
-                    </select>
+        <div>
+            <div><p className={classes.card}>Beste student <br/>
+                Selecteer 3 onderwerpen. Je moet minstens 1 onderwerp selecteren om te kunnen indienen.
+                Plaats het onderwerp met je grootste voorkeur op plaats 1. Je tweede en derde voorkeur plaats je respectievelijk op plaats
+                2 en 3. Je kan hier een selectie maken uit de onderwerpen die je bij je favorieten plaatste, zet dus zeker de onderwerpen die je wenst
+                te selecteren bij je favorieten. Dien jouw selecte in uiterlijk op 30 april 2022 23:55. Een selectie die voor deze datum werd ingediend
+                kun je nog altijd wijzigen tot uiterlijk deze datum.</p>
+            </div>
+            <div>
+                <div>
+                    <form className={classes.form}  onSubmit={submitHandler}>
+                        <div className={classes.control}>
+                            <label htmlFor='voorkeur1'>Preference 1</label>
+                             <select required id='voorkeur1' ref={voorkeur1InputRef}>
+                                 <option>---</option>
+                                 {onderwerpen?.map((onderwerp, i) =>
+                                     <option key={i}>{onderwerp.name}</option>
+                                 )}
+                            </select>
+                        </div>
+                        <div className={classes.control}>
+                            <label htmlFor='voorkeur2'>Preference 2</label>
+                            <select required id='voorkeur2' ref={voorkeur2InputRef} >
+                                <option>---</option>
+                                {onderwerpen?.map((onderwerp, i) =>
+                                    <option key={i}>{onderwerp.name}</option>
+                                )}
+                            </select>
+                        </div>
+                        <div className={classes.control}>
+                            <label htmlFor='voorkeur3'>Preference 3</label>
+                            <select required id='voorkeur3' ref={voorkeur3InputRef} >
+                                <option>---</option>
+                                {onderwerpen?.map((onderwerp, i) =>
+                                    <option key={i}>{onderwerp.name}</option>
+                                )}
+                            </select>
+                        </div>
+                        <div className={classes.actions}>
+                            <button onClick={submitHandler}>Submit</button> {/*na voorkeur in te dienen mss naar ergens sturen of pagina tonen dat ze ingediend hebben en dat niet nog een keer kunnen*/}
+                        </div>
+                    </form>
                 </div>
-                <div className={classes.control}>
-                    <label htmlFor='voorkeur2'>Preference 2</label>
-                    <select required id='voorkeur2' ref={voorkeur2InputRef} >
-                        <option>---</option>
-                        {onderwerpen?.map((onderwerp, i) =>
-                            <option key={i}>{onderwerp.name}</option>
-                        )}
-                    </select>
+                <div>
+                    <h4>Your selection</h4>
+                    {ingediend.forEach((onderwerp, i) => {
+                        if(onderwerp !== null)
+                            return(
+                                array2.push(onderwerp.name)
+                            )
+                    })}
+                    {array2.isEmpty ?
+                        <p>No selection made yet</p>
+                        :<p>1 : {array2[0]}
+                        <br />
+                            2 : {array2[1]}
+                            <br />
+                            3 : {array2[2]}
+                        </p>
+                    }
                 </div>
-                <div className={classes.control}>
-                    <label htmlFor='voorkeur3'>Preference 3</label>
-                    <select required id='voorkeur3' ref={voorkeur3InputRef} >
-                        <option>---</option>
-                        {onderwerpen?.map((onderwerp, i) =>
-                            <option key={i}>{onderwerp.name}</option>
-                        )}
-                    </select>
-                </div>
-                <div className={classes.actions}>
-                    <button onClick={submitHandler}>Submit</button> {/*na voorkeur in te dienen mss naar ergens sturen of pagina tonen dat ze ingediend hebben en dat niet nog een keer kunnen*/}
-                </div>
-            </form>
+            </div>
         </div>
     );
 }

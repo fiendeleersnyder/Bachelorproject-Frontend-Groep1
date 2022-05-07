@@ -8,6 +8,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import InfoIcon from '@mui/icons-material/Info';
 import { SimpleGrid } from '@chakra-ui/react'
+import GroupsIcon from "@mui/icons-material/Groups";
 
 const OnderwerpLijst = () => {
     const [onderwerpen, setOnderwerpen] = useState();
@@ -122,7 +123,7 @@ const OnderwerpLijst = () => {
                                                 <h3 >{onderwerp.name}</h3>
                                                 <p>Target group: {onderwerp.doelgroep}</p>
                                                 <p> Promoter: {onderwerp.promotor}</p>
-                                                <p> Capacity: {onderwerp.capacity}</p>
+                                                <p> <GroupsIcon /> : {onderwerp.capacity}</p>
                                                 {onderwerp.disciplines.isEmpty ? (
                                                     <p> Disciplines: {onderwerp.disciplines}</p>) : <p></p>
                                                 }
