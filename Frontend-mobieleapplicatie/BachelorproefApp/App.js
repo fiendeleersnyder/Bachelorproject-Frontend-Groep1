@@ -11,16 +11,16 @@ import Login from './app/components/Login/Login';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons'; //home focused: 'home-sharp' // niet focused 'home-outline
+
 //onderwerpen focused: 'albums' // niet focused 'albums-outline'
 //indienen focused: 'arrow-redo-circle' //niet focused: 'arrow-redo-circle-outline'
 //logout focused: 'exit' //niet focused: 'exit-outline'
-
 
 export default function App() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  function uitloggen() {
+  function Uitloggen() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>uitlogknop werkt joepie!</Text>
@@ -62,7 +62,7 @@ export default function App() {
         <Tab.Screen name="Subjects" component={Onderwerpenscreen} />
         <Tab.Screen name="Add Subject" component={AddOnderwerpscreen} />
         <Tab.Screen name="Submit" component={Indienenscreen} />
-        <Tab.Screen name="Logout" component={uitloggen} />
+        <Tab.Screen name="Logout" component={Uitloggen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
