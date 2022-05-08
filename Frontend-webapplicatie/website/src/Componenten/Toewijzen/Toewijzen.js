@@ -1,13 +1,11 @@
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import classes from './Toewijzen.module.css';
 import Card from "../ui/Card";
 import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
-import GroupsIcon from "@mui/icons-material/Groups";
-import InfoIcon from "@mui/icons-material/Info";
 import CheckIcon from "@mui/icons-material/Check";
+import GroupsIcon from '@mui/icons-material/Groups';
 import * as React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -19,7 +17,7 @@ import Paper from '@mui/material/Paper';
 
 const Toewijzen = () => {
     const [onderwerpen, setOnderwerpen] = useState([]);
-    const [gebruikers, setGebruikers] = useState([]);
+    const [student, setStudenten] = useState([]);
     const [veranderd, setVeranderd] = useState();
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
@@ -27,7 +25,7 @@ const Toewijzen = () => {
     var arrayOnderwerpen;
     var idarray = [];
     var gebruikerarray = [];
-    var gebruikerarray2;
+
 
     useEffect(() => {
         const controller = new AbortController();
@@ -39,7 +37,7 @@ const Toewijzen = () => {
                 });
                 console.log(response.data);
                 arrayOnderwerpen = response.data;
-                setOnderwerpen(arrayOnderwerpen)
+                setOnderwerpen(response.data)
                 arrayOnderwerpen?.map((onderwerp, i) => {
                     if (!onderwerp.hideObject)
                         return(
@@ -50,22 +48,17 @@ const Toewijzen = () => {
                 console.error(err);
                 navigate('/login', { state: {from: location}, replace: true})
             }
-            idarray.map(async (id, i) => {
-                try {
-                    const response = await axiosPrivate.get('/selection/' + id, {
-                        signal: controller.signal
-                    });
-                    console.log(response.data);
-                    gebruikerarray.push(response.data);
-                    gebruikerarray2 = gebruikerarray;
-                    console.log(gebruikerarray);
-                    setGebruikers(gebruikerarray2)
-                    console.log(gebruikers);
-                } catch (err) {
-                    console.error(err);
-                    navigate('/login', { state: {from: location}, replace: true})
-                }
-            })
+            try {
+                const response = await axiosPrivate.get('/selection/all', {
+                    signal: controller.signal
+                });
+                console.log(response.data);
+                setStudenten(response.data)
+            } catch (err) {
+                console.error(err);
+                navigate('/login', { state: {from: location}, replace: true})
+            }
+
         }
 
         getOnderwerpen();
@@ -75,12 +68,25 @@ const Toewijzen = () => {
         }
     }, [veranderd])
 
+
     const checkGebruikers = () => {
-        console.log(gebruikers);
+        console.log(student);
+        student.map((array, i) => {
+            console.log(array);
+            array.map((gebruiker, i2) => {
+                console.log(gebruiker);
+            })
+        })
     }
 
-    const checkArray = (array) => {
-        console.log(array);
+    const studentToewijzen = async (oid, sid) => {
+        try {
+            const response = await axiosPrivate.post('/auth/toewijzen/' + oid + "/" + sid);
+            console.log(response.data);
+        } catch (err) {
+            console.error(err);
+            navigate('/login', { state: {from: location}, replace: true})
+        }
     }
     return(
         <ul>
@@ -111,23 +117,26 @@ const Toewijzen = () => {
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
-                                                {gebruikers?.map((array, i2) => {
-                                                    array?.map((gebruiker, i3) => {
-                                                        <TableRow>
-                                                            <TableCell>{gebruiker.name}</TableCell>
-                                                            <TableCell>{gebruiker.selection?.map((onderwerp1, i3) => {
-                                                                    if (onderwerp.name === onderwerp1.name)
-                                                                        return(
-                                                                            i3
-                                                                        )
-                                                                }
-                                                            )}</TableCell>
-                                                            <TableCell>{gebruiker.id === onderwerp.boosted ?
-                                                                <p>Yes</p> : <p>No</p>}</TableCell>
-                                                            <TableCell><IconButton className={classes.knopje}><CheckIcon /></IconButton></TableCell>
-                                                        </TableRow>
-                                                    })
-                                                })}
+                                                {student?.length ?
+                                                    student.map((array, i2) => {
+                                                    i2 === i1 ?
+                                                        array?.map((gebruiker, i3) => {
+                                                            <TableRow>
+                                                                <TableCell>{gebruiker.name}</TableCell>
+                                                                <TableCell>{gebruiker.selection?.map((onderwerp1, i3) => {
+                                                                        if (onderwerp.name === onderwerp1.name)
+                                                                            return(
+                                                                                i3
+                                                                            )
+                                                                    }
+                                                                )}</TableCell>
+                                                                <TableCell>{gebruiker.id === onderwerp.boosted ?
+                                                                    <p>Yes</p> : <p>No</p>}</TableCell>
+                                                                <TableCell><IconButton onClick={()=>studentToewijzen(onderwerp.id, gebruiker.id)} className={classes.knopje}><CheckIcon /></IconButton></TableCell>
+                                                            </TableRow>
+                                                        })
+                                                        :<p>There are no students that choose this subject</p>
+                                                }) : <p>No students</p>}
                                             </TableBody>
                                         </Table>
                                     </TableContainer>
@@ -143,7 +152,7 @@ const Toewijzen = () => {
         ? (
                 onderwerpen.map((onderwerp, i) =>
                     {
-                        if (onderwerp.toegewezen.isEmpty)
+                        if (onderwerp.toegewezen?.length !== 0)
                             return(
                                 <Card key={i}>
                                     <div className={classes.content}>
@@ -154,6 +163,9 @@ const Toewijzen = () => {
                                         {onderwerp.disciplines.isEmpty ? (
                                             <p> Disciplines: {onderwerp.disciplines}</p>) : <p></p>
                                         }
+                                        {onderwerp.toegewezen?.map((student, i1) => {
+                                            <p>{student.name}</p>
+                                        })}
                                     </div>
                                 </Card>
                             )

@@ -18,7 +18,6 @@ function MenubalkStudent(){
                 <a className="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white floatleft"><Link to='/student/onderwerpen'>Subjects</Link></a>
                 <a className="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white floatleft"><Link to='/student/addonderwerp'>Add subject</Link></a>
                 <a className="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white floatleft"><Link to='/student/indienen'>Submit</Link></a>
-                <a className="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white floatleft"><Link to='/student/chat'>Chat</Link></a>
                 <button className="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white floatright" onClick={signOut}>Log out</button>
                 <a className="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white floatright"><Link to='/student/account'>My account</Link></a>
             </div>

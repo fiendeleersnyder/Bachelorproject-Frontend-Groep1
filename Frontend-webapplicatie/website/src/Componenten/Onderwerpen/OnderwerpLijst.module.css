@@ -14,6 +14,10 @@ ul {
     background-color: transparent;
 }
 
+.icon {
+    padding-bottom: 5px;
+}
+
 .margin-left {
     margin-left: 5px;
 }
