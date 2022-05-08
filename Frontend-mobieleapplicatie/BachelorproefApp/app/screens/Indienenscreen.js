@@ -7,9 +7,9 @@ function Indienenscreen() {
         Dear student
         {"\n"}
         {"\n"}
-        Select <b>3 subjects</b>. Assign a score, based on your 
+        Select 3 subjects. Assign a score, based on your 
         personal preference, to each of the subjects in your 
-        selection. Submit your selection the latest on <b>30 April 2022 23:55</b>. 
+        selection. Submit your selection the latest on 30 April 2022 23:55. 
         </Text>
     </View>
    );
@@ -19,11 +19,14 @@ function Indienenscreen() {
      view: {
         flex: 1, 
         alignItems: 'center', 
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: '#fff',
      },
      text: {
         fontSize:16,
         fontWeight:'normal',
+        marginLeft:10,
+        marginRight:10,
      }
  })
 

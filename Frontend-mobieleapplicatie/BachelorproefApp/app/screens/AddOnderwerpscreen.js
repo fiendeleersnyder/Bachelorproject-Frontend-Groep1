@@ -31,11 +31,15 @@ class AddOnderwerp extends React.Component {
       container: {
         flex: 1,
         backgroundColor: '#fff',
-        alignItems: 'center',
+      },
+      view:{
+        marginLeft:10,
+        marginRight:10,
       },
       formLabel: {
         fontSize: 20,
         color: '#303436',
+        fontWeight:'400',
       },
       formLabel2:{
         fontSize:15,
@@ -47,7 +51,7 @@ class AddOnderwerp extends React.Component {
       },
       inputStyle: {
         marginTop: 5,
-        width: 300,
+        width: '75%',
         height: 40,
         paddingHorizontal: 10,
         borderRadius: 50,
@@ -62,11 +66,29 @@ class AddOnderwerp extends React.Component {
       text: {
         color: '#fff',
         fontSize: 20,
+      },
+      pickerStyle:{  
+        marginTop: 5,
+        height: 40,  
+        width: '75%',
+        borderRadius: 50, 
+        borderColor:'#b4e5fa', 
+        backgroundColor: '#b4e5fa',
+        justifyContent: 'center',  
+      }, 
+      knop:{
+        marginTop: 5,
+        height: 150,  
+        borderRadius: 50, 
+        borderColor:'#b4e5fa', 
+        backgroundColor: '#b4e5fa',
+        justifyContent: 'center',  
       }
      })
 
     return (
       <SafeAreaView style={styles.container}>
+      <View style={styles.view}>
         <Text style={styles.formLabel}> Title </Text>
           <View> 
             <TextInput 
@@ -76,9 +98,9 @@ class AddOnderwerp extends React.Component {
               />
             </View>
         <Text style={styles.formLabel}> Doelgroep </Text>
-              <Picker 
+              <Picker style={styles.pickerStyle}
               //selectedValue={groep}
-              onValueChange={currentGroep => {this.setState({doelgroep:currentGroep})}}>
+              onValueChange={currentValue => {this.setState({doelgroep:currentValue})}}>
               <Picker.Item label="IW E-ICT GroepT" value="IW E-ICT GroepT" />
               <Picker.Item label="IW EM GroepT" value="IW EM GroepT" />
               <Picker.Item label="IW CH GroepT" value="IW CH GroepT" />
@@ -158,7 +180,7 @@ class AddOnderwerp extends React.Component {
         <Text style={styles.formLabel}> Disciplines</Text>
           <Text style={styles.formLabel2}> Discipline 1 </Text>
           <Picker
-            //selectedValue={kernWoord1}
+            style={styles.pickerStyle}
             onValueChange={currentCurrency => {this.setState({kernwoord1:currentCurrency})}}>
             <Picker.Item label="Analog Electronics and Design" value="Analog Electronics and Design" />
             <Picker.Item label="Digital Electronics and Design" value="Digital Electronics and Design" />
@@ -206,7 +228,7 @@ class AddOnderwerp extends React.Component {
           </Picker>
           <Text style={styles.formLabel2}> Discipline 2 </Text>
           <Picker
-            //selectedValue={kernWoord2}
+            style={styles.pickerStyle}
             onValueChange={currentCurrency => {this.setState({kernwoord2:currentCurrency})}}>
             <Picker.Item label="Analog Electronics and Design" value="Analog Electronics and Design" />
             <Picker.Item label="Digital Electronics and Design" value="Digital Electronics and Design" />
@@ -254,7 +276,7 @@ class AddOnderwerp extends React.Component {
           </Picker>
           <Text style={styles.formLabel2}> Discipline 3 </Text>
           <Picker
-            //selectedValue={kernWoord3}
+            style={styles.pickerStyle}
             onValueChange={currentCurrency => {this.setState({kernwoord3:currentCurrency})}}>
             <Picker.Item label="Analog Electronics and Design" value="Analog Electronics and Design" />
             <Picker.Item label="Digital Electronics and Design" value="Digital Electronics and Design" />
@@ -308,7 +330,8 @@ class AddOnderwerp extends React.Component {
                 style={styles.inputStyle}
             />
   
-      <Button style={styles.inputStyle} title='Submit!' onPress={()=>{this.submit()}}/>
+      <Button style={styles.knop} title='Submit!' onPress={()=>{this.submit()}}/>
+      </View>
       </SafeAreaView>
      
      );

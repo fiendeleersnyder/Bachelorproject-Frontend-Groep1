@@ -12,11 +12,14 @@ function Onderwerpenscreen() {
      view: {
         flex: 1, 
         alignItems: 'center', 
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: '#fff',
      },
      text: {
         fontSize:16,
-        fontWeight:'700'
+        fontWeight:'normal',
+        marginLeft:10,
+        marginRight:10,
      }
  })
 
