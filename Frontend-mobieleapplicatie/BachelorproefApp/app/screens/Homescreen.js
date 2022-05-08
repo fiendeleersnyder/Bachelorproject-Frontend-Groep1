@@ -7,12 +7,12 @@ function Homescreen() {
         Welcome
         {"\n"}
         {"\n"}
-        Between <Text style={styles.vet}>01 April 2022 00:00</Text> and 30 April 2022 23:55 this offer of 
+        Between <Text style={styles.vet}>01 April 2022 00:00</Text> and <Text style={styles.vet}>30 April 2022 23:55</Text> this offer of 
         thesis subject will be open for choosing a master thesis. During 
         this time you will be able to set favorites, add subjects to a 
         selection and submit a selection. For this target group you have 
         to submit a selection of 3 subjects. Finalize your submission the 
-        latest on 30 April 2022 23:55. After this date the application 
+        latest on <Text style={styles.vet}>30 April 2022 23:55</Text>. After this date the application 
         will no longer be available.
         </Text>
     </View>

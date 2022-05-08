@@ -47,7 +47,8 @@ class AddOnderwerp extends React.Component {
       },
       slider:{
         marginTop: 10,
-        marginBottom:10
+        marginBottom:10,
+        width: '75%',
       },
       inputStyle: {
         marginTop: 5,

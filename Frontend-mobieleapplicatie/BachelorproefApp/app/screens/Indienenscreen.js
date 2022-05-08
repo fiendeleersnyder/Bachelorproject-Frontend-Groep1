@@ -9,7 +9,7 @@ function Indienenscreen() {
         {"\n"}
         Select 3 subjects. Assign a score, based on your 
         personal preference, to each of the subjects in your 
-        selection. Submit your selection the latest on 30 April 2022 23:55. 
+        selection. Submit your selection the latest on <Text style={styles.vet}>30 April 2022 23:55</Text>. 
         </Text>
     </View>
    );
