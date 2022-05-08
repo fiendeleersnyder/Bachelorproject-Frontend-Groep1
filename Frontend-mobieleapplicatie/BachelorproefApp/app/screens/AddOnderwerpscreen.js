@@ -8,16 +8,16 @@ class AddOnderwerp extends React.Component {
     super();
     this.state={
       title: '.',
-      doelgroep:groep,
+      doelgroep:'.',
       begeleiding:'.', 
       contactpersoon:'.', 
       email:'.',
       telefoonnummer:'.',
-      aantalpersonen:personen,
+      aantalpersonen:'.',
       omschrijving:'.',
-      kernwoord1:kernWoord1,
-      kernwoord2:kernWoord2,
-      kerwoord3:kernWoord3,
+      kernwoord1:'.',
+      kernwoord2:'.',
+      kerwoord3:'.',
       trefwoorden:'.'
     };
   };
@@ -27,12 +27,6 @@ class AddOnderwerp extends React.Component {
   };
   
   render(){
-    const [groep, setGroep] = useState('---');
-    const [personen, setPersonen] = useState('1');
-    const [kernWoord1, setkernWoord1] = useState('---');
-    const [kernWoord2, setkernWoord2] = useState('---');
-    const [kernWoord3, setkernWoord3] = useState('---');
-
     const styles = StyleSheet.create({
       container: {
         flex: 1,
@@ -40,6 +34,7 @@ class AddOnderwerp extends React.Component {
         alignItems: 'center',
         justifyContent: 'center',
       },
+
       formLabel: {
         fontSize: 20,
         color: '#303436',
@@ -80,8 +75,8 @@ class AddOnderwerp extends React.Component {
             </View>
         <Text style={styles.formLabel}> Doelgroep </Text>
               <Picker 
-              selectedValue={groep}
-              onValueChange={currentGroep => setGroep(currentGroep)}>
+              //selectedValue={groep}
+              onValueChange={currentGroep => {this.setState({doelgroep:currentGroep})}}>
               <Picker.Item label="IW E-ICT GroepT" value="IW E-ICT GroepT" />
               <Picker.Item label="IW EM GroepT" value="IW EM GroepT" />
               <Picker.Item label="IW CH GroepT" value="IW CH GroepT" />
@@ -147,8 +142,8 @@ class AddOnderwerp extends React.Component {
               step={1}
               minimumValue={1}
               maximumValue={2}
-              selectedValue={personen}
-              onValueChange={slideValue => setPersonen(slideValue)}
+              //selectedValue={personen}
+              onValueChange={slideValue => {this.setState({aantalpersonen:currentGroep})}}
               minimumTrackTintColor="#52BDEC"
               maximumTrackTintColor="#d3d3d3"
               thumbTintColor="#b4e5fa"
@@ -163,8 +158,8 @@ class AddOnderwerp extends React.Component {
         <Text style={styles.formLabel}> Disciplines</Text>
           <Text style={styles.formLabel2}> Discipline 1 </Text>
           <Picker
-            selectedValue={kernWoord1}
-            onValueChange={currentCurrency => setkernWoord1(currentCurrency)}>
+            //selectedValue={kernWoord1}
+            onValueChange={currentCurrency => {this.setState({kernwoord1:currentCurrency})}}>
             <Picker.Item label="Analog Electronics and Design" value="Analog Electronics and Design" />
             <Picker.Item label="Digital Electronics and Design" value="Digital Electronics and Design" />
             <Picker.Item label="Software Development" value="Software Development" />
@@ -211,8 +206,8 @@ class AddOnderwerp extends React.Component {
           </Picker>
           <Text style={styles.formLabel2}> Discipline 2 </Text>
           <Picker
-            selectedValue={kernWoord2}
-            onValueChange={currentCurrency => setkernWoord2(currentCurrency)}>
+            //selectedValue={kernWoord2}
+            onValueChange={currentCurrency => {this.setState({kernwoord2:currentCurrency})}}>
             <Picker.Item label="Analog Electronics and Design" value="Analog Electronics and Design" />
             <Picker.Item label="Digital Electronics and Design" value="Digital Electronics and Design" />
             <Picker.Item label="Software Development" value="Software Development" />
@@ -259,8 +254,8 @@ class AddOnderwerp extends React.Component {
           </Picker>
           <Text style={styles.formLabel2}> Discipline 3 </Text>
           <Picker
-            selectedValue={kernWoord3}
-            onValueChange={currentCurrency => setkernWoord3(currentCurrency)}>
+            //selectedValue={kernWoord3}
+            onValueChange={currentCurrency => {this.setState({kernwoord3:currentCurrency})}}>
             <Picker.Item label="Analog Electronics and Design" value="Analog Electronics and Design" />
             <Picker.Item label="Digital Electronics and Design" value="Digital Electronics and Design" />
             <Picker.Item label="Software Development" value="Software Development" />
