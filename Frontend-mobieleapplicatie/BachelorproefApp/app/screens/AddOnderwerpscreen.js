@@ -168,7 +168,7 @@ class AddOnderwerp extends React.Component {
               minimumValue={1}
               maximumValue={2}
               //selectedValue={personen}
-              onValueChange={slideValue => {this.setState({aantalpersonen:currentGroep})}}
+              onValueChange={slideValue => {this.setState({aantalpersonen:slideValue})}}
               thumbTintColor="#b4e5fa"
             />
         <Text style={styles.formLabel}> Description</Text>
@@ -330,7 +330,7 @@ class AddOnderwerp extends React.Component {
                 style={styles.inputStyle}
             />
   
-      <Button style={styles.knop} title='Submit!' onPress={()=>{this.submit()}}/>
+      <Button style={styles.knop} title='Add Subject!' onPress={()=>{this.submit()}}/>
       </View>
       </SafeAreaView>
      
