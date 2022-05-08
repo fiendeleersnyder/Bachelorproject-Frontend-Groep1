@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions, Text, TextInput, Alert, Button, Platform, TouchableOpacity, View, Irmage, SafeAreaView} from 'react-native';
+import { StyleSheet, Dimensions, Text, TextInput, Alert, Button, Platform, TouchableOpacity, View, Image, SafeAreaView} from 'react-native';
 import React from 'react';
 import { Picker } from '@react-native-picker/picker';
 import Slider from '@react-native-community/slider';
@@ -32,9 +32,7 @@ class AddOnderwerp extends React.Component {
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center',
       },
-
       formLabel: {
         fontSize: 20,
         color: '#303436',
@@ -43,8 +41,12 @@ class AddOnderwerp extends React.Component {
         fontSize:15,
         color: '#303436'
       },
+      slider:{
+        marginTop: 10,
+        marginBottom:10
+      },
       inputStyle: {
-        marginTop: 20,
+        marginTop: 5,
         width: 300,
         height: 40,
         paddingHorizontal: 10,
@@ -64,7 +66,7 @@ class AddOnderwerp extends React.Component {
      })
 
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Text style={styles.formLabel}> Title </Text>
           <View> 
             <TextInput 
@@ -137,21 +139,19 @@ class AddOnderwerp extends React.Component {
                 style={styles.inputStyle}
                 />
             </View>
-        <Text> style={styles.formLabel} Permitted number of students per group</Text>
+        <Text style={styles.formLabel}> Permitted number of students per group</Text>
           <Slider
+              style={styles.slider}
               step={1}
               minimumValue={1}
               maximumValue={2}
               //selectedValue={personen}
               onValueChange={slideValue => {this.setState({aantalpersonen:currentGroep})}}
-              minimumTrackTintColor="#52BDEC"
-              maximumTrackTintColor="#d3d3d3"
               thumbTintColor="#b4e5fa"
             />
         <Text style={styles.formLabel}> Description</Text>
           <TextInput 
                 placeholder="Enter description"
-                multiline={true}
                 onChangeText={(text)=>{this.setState({omschrijving:text})}}
                 style={styles.inputStyle}
             />
@@ -309,7 +309,7 @@ class AddOnderwerp extends React.Component {
             />
   
       <Button style={styles.inputStyle} title='Submit!' onPress={()=>{this.submit()}}/>
-      </View>
+      </SafeAreaView>
      
      );
    

@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions, Text, Alert, Button, Platform, TouchableOpacity, View, Irmage, SafeAreaView} from 'react-native';
+import { StyleSheet, Dimensions, Text, Alert, Button, Platform, TouchableOpacity, View, Image, SafeAreaView} from 'react-native';
 
 function Homescreen() {
    return (
@@ -7,12 +7,12 @@ function Homescreen() {
         Welcome
         {"\n"}
         {"\n"}
-        Between 01 April 2022 00:00 and 30 April 2022 23:55 this offer of 
+        Between <b>01 April 2022 00:00</b> and <b>30 April 2022 23:55</b> this offer of 
         thesis subject will be open for choosing a master thesis. During 
         this time you will be able to set favorites, add subjects to a 
         selection and submit a selection. For this target group you have 
         to submit a selection of 3 subjects. Finalize your submission the 
-        latest on 30 April 2022 23:55. After this date the application 
+        latest on <b>30 April 2022 23:55</b>. After this date the application 
         will no longer be available.
         </Text>
     </View>
@@ -27,7 +27,7 @@ function Homescreen() {
      },
      text: {
         fontSize:16,
-        fontWeight:'700'
+        fontWeight: 'normal' 
      }
  })
 
