@@ -1,24 +1,34 @@
 import { StyleSheet, Dimensions, Text, TextInput, Alert, Button, Platform, TouchableOpacity, View, Irmage, SafeAreaView} from 'react-native';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
 import Slider from '@react-native-community/slider';
 
 
 function AddOnderwerp() {
-  this.state={
-    title:'.',
-    doelgroep:groep,
-    begeleiding:'.', 
-    contactpersoon:'.', 
-    email:'.',
-    telefoonnummer:'.',
-    aantalpersonen:personen,
-    omschrijving:'.',
-    kernwoord1:kernWoord1,
-    kernwoord2:kernWoord2,
-    kerwoord3:kernWoord3,
-    trefwoorden:'.'
-    }
+  constructor()
+  {
+    super();
+    this.state = {
+      title:'.',
+      doelgroep:groep,
+      begeleiding:'.', 
+      contactpersoon:'.', 
+      email:'.',
+      telefoonnummer:'.',
+      aantalpersonen:personen,
+      omschrijving:'.',
+      kernwoord1:kernWoord1,
+      kernwoord2:kernWoord2,
+      kerwoord3:kernWoord3,
+      trefwoorden:'.'
+      }
+  };
+
+  submit()
+  {
+    console.warn(this.state)
+  } 
+  
   const [groep, setGroep] = useState('---');
   const [personen, setPersonen] = useState('1');
   const [kernWoord1, setkernWoord1] = useState('---');
@@ -268,6 +278,8 @@ function AddOnderwerp() {
               onChangeText={(text)=>{this.setState({trefwoorden:text})}}
               style={styles.inputStyle}
           />
+
+    <Button style={styles.inputStyle} title='Submit!' onPress={()=>{this.submit()}}/>
     </View>
    );
  }
@@ -285,7 +297,7 @@ function AddOnderwerp() {
     color: '#303436',
   },
   formLabel2:{
-    fontsize:15,
+    fontSize:15,
     color: '#303436'
   },
   inputStyle: {
@@ -305,7 +317,7 @@ function AddOnderwerp() {
   text: {
     color: '#fff',
     fontSize: 20,
-  },
+  }
 });
 
  export default AddOnderwerp;

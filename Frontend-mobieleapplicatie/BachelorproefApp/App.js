@@ -10,11 +10,7 @@ import AddOnderwerpscreen from './app/screens/AddOnderwerpscreen';
 import Login from './app/components/Login/Login';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons } from '@expo/vector-icons'; //home focused: 'home-sharp' // niet focused 'home-outline
-
-//onderwerpen focused: 'albums' // niet focused 'albums-outline'
-//indienen focused: 'arrow-redo-circle' //niet focused: 'arrow-redo-circle-outline'
-//logout focused: 'exit' //niet focused: 'exit-outline'
+import { Ionicons } from '@expo/vector-icons'; 
 
 export default function App() {
   const [email, setEmail] = useState();
