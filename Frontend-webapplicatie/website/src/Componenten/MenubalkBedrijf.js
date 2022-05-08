@@ -17,7 +17,6 @@ function MenubalkBedrijf(){
                     <a className="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white floatleft"><Link to='/bedrijf/'>Home</Link></a>
                     <a className="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white floatleft"><Link to='/bedrijf/onderwerpen'>Subjects</Link></a>
                     <a className="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white floatleft"><Link to='/bedrijf/addonderwerp'>Add subject</Link></a>
-                    <a className="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white floatleft"><Link to='/bedrijf/chat'>Chat</Link></a>
                     <button className="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white floatright" onClick={signOut}>Log out</button>
                     <a className="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white floatright"><Link to='/bedrijf/account'>My account</Link></a>
                 </div>

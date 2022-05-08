@@ -2,7 +2,6 @@ import './App.css';
 import StartPage from '../../Pages/startpage'
 import Account from '../../Pages/account';
 import AddOnderwerp from '../../Pages/addonderwerp';
-import Chat from '../../Pages/chat';
 import HomePagina from '../../Pages/home';
 import Indienen from '../../Pages/indienen';
 import OnderwerpenLijst from '../../Pages/onderwerpen';
@@ -25,7 +24,7 @@ import LayoutStudent from '../Layout/LayoutStudent';
 import LayoutAdmin from '../Layout/LayoutAdmin';
 import LayoutCoordinator from '../Layout/LayoutCoodinator'
 import LayoutBedrijf from '../Layout/LayoutBedrijf'
-
+import LayoutPromotor from '../Layout/LayoutPromotor'
 
 function App() {
     const [phase, setPhase] = useState();
@@ -36,7 +35,8 @@ function App() {
         1: 'Admin',
         2: 'Student',
         3: 'Coordinator',
-        4: 'Bedrijf'
+        4: 'Bedrijf',
+        5: 'Promotor'
     }
 
     useEffect(() => {
@@ -53,7 +53,7 @@ function App() {
         getPhase();
     }, [])
     return (
-        phase==="None" ?
+        phase==="P1" ?
         <Routes>
             <Route path="/login" element={<Login/>}/>
             <Route path="/unauthorized" element={<UnAuthorized/>}/>
@@ -82,7 +82,6 @@ function App() {
                         <Route path='/student/onderwerpen/:id' element = {<OnderwerpDetail />}/>
                         <Route path='/student/addonderwerp' element={<AddOnderwerp/>}/>
                         <Route path='/student/indienen' element={<Indienen/>}/>
-                        <Route path='/student/chat' element={<Chat/>}/>
                         <Route path='/student/account' element={<Account/>}/>
                     </Route>
                 </Route>
@@ -96,7 +95,6 @@ function App() {
                         <Route path='/coordinator/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
                         <Route path='/coordinator/addonderwerp' element={<AddOnderwerp/>}/>
                         <Route path='/coordinator/toewijzen' element={<Toewijzen />}/>
-                        <Route path='/coordinator/chat' element={<Chat/>}/>
                         <Route path='/coordinator/account' element={<Account/>}/>
                     </Route>
                 </Route>
@@ -109,8 +107,20 @@ function App() {
                         <Route path='/bedrijf/onderwerpen' element={<OnderwerpenLijst />}/>
                         <Route path='/bedrijf/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
                         <Route path='/bedrijf/addonderwerp' element={<AddOnderwerp/>}/>
-                        <Route path='/bedrijf/chat' element={<Chat/>}/>
                         <Route path='/bedrijf/account' element={<Account/>}/>
+                    </Route>
+                </Route>
+            </Route>
+            <Route path="/" element={<LayoutPromotor/>}>
+                <Route element={<PersistLogin/>}>
+                    {/* protected routes */}
+                    <Route path="/promotor/" element={<RequireAuth AllowedRoles={[ROLES["3"]]}/>}>
+                        <Route path='/promotor/' element={<HomePagina/>}/>
+                        <Route path='/promotor/onderwerpen' element={<OnderwerpenLijst />}/>
+                        <Route path='/promotor/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
+                        <Route path='/promotor/addonderwerp' element={<AddOnderwerp/>}/>
+                        <Route path='/promotor/toewijzen' element={<Toewijzen />}/>
+                        <Route path='/promotor/account' element={<Account/>}/>
                     </Route>
                 </Route>
             </Route>

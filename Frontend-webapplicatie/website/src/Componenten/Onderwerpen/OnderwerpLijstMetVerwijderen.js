@@ -120,7 +120,7 @@ const OnderwerpLijstMetVerwijderen = () => {
                                             <h3>{onderwerp.name}</h3>
                                             <p>Target group: {onderwerp.doelgroep}</p>
                                             <p> Promoter: {onderwerp.promotor}</p>
-                                            <p> <GroupsIcon /> : {onderwerp.capacity}</p>
+                                            <p> <GroupsIcon/> : {onderwerp.capacity}</p>
                                             {onderwerp.disciplines.isEmpty ? (
                                                 <p> Disciplines: {onderwerp.disciplines}</p>) : <p></p>
                                             }
