@@ -2,7 +2,7 @@ import { StyleSheet, Dimensions, Text, Alert, Button, Platform, TouchableOpacity
 import React, {useState} from 'react';
 import { Picker } from '@react-native-picker/picker';
 
-function Indienenscreen() {
+function AddOnderwerpscreen() {
    return (
     <View style={styles.view}>
          <TextInput 
@@ -37,4 +37,4 @@ function Indienenscreen() {
      }
  })
 
- export default Indienenscreen;
+ export default AddOnderwerpscreen;
