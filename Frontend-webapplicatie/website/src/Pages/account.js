@@ -1,6 +1,7 @@
+import Accounting from '../Componenten/Authorization/Account'
 function Account() {
   return(
-      <div>account</div>
+      <div><Accounting /></div>
   );
 }
 

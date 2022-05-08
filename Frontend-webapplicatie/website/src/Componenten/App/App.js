@@ -10,6 +10,8 @@ import OnderwerpenLijstMetVerwijderen from '../../Pages/onderwerpenmetverwijdere
 import OnderwerpDetail from '../../Pages/onderwerpdetail'
 import UserLijst from '../../Pages/users'
 import Phases from '../../Pages/phases'
+import None from '../../Pages/faseNone'
+import Toewijzen from '../../Pages/toewijzen'
 import Login from '../Login/Login';
 import Missing from '../Missing/Missing'
 import RequireAuth from '../Authorization/RequireAuth'
@@ -17,8 +19,8 @@ import UnAuthorized from '../Authorization/Unauthorized'
 import PersistLogin from '../Login/PersistLogin'
 import {Routes, Route} from 'react-router-dom';
 import { useNavigate, useLocation } from "react-router-dom";
-import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
-import React, {useEffect} from 'react';
+import axios from '../../API/axios'
+import React, {useEffect, useState} from 'react';
 import LayoutStudent from '../Layout/LayoutStudent';
 import LayoutAdmin from '../Layout/LayoutAdmin';
 import LayoutCoordinator from '../Layout/LayoutCoodinator'
@@ -26,7 +28,7 @@ import LayoutBedrijf from '../Layout/LayoutBedrijf'
 
 
 function App() {
-    const axiosPrivate = useAxiosPrivate();
+    const [phase, setPhase] = useState();
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -37,29 +39,21 @@ function App() {
         4: 'Bedrijf'
     }
 
-    var thedate   = new Date();
-    //console.log(thedate);
-    var hourofday = thedate.getUTCHours();
-    //console.log(hourofday);
-    var minuteofday = thedate.getMinutes()
-    //console.log(minuteofday);
-    var day = thedate.getDate();
-    //console.log(day);
-    var maand = thedate.getMonth();
-    //console.log(maand);
-    /*useEffect(() => {
+    useEffect(() => {
         const getPhase = async () => {
             try {
-                const response = await axiosPrivate.get("/phase/getcurrent");
+                const response = await axios.get("/phase/getcurrent");
                 console.log(response.data);
+                setPhase(response.data)
             } catch (err) {
             console.error(err);
             navigate('/login', { state: {from: location}, replace: true})
         }
         }
         getPhase();
-    }, [])*/
+    }, [])
     return (
+        phase==="None" ?
         <Routes>
             <Route path="/login" element={<Login/>}/>
             <Route path="/unauthorized" element={<UnAuthorized/>}/>
@@ -101,6 +95,7 @@ function App() {
                         <Route path='/coordinator/onderwerpen' element={<OnderwerpenLijstMetVerwijderen />}/>
                         <Route path='/coordinator/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
                         <Route path='/coordinator/addonderwerp' element={<AddOnderwerp/>}/>
+                        <Route path='/coordinator/toewijzen' element={<Toewijzen />}/>
                         <Route path='/coordinator/chat' element={<Chat/>}/>
                         <Route path='/coordinator/account' element={<Account/>}/>
                     </Route>
@@ -119,9 +114,11 @@ function App() {
                     </Route>
                 </Route>
             </Route>
+            {/*<Route path='*' element={<None />}/>*/}
             {/* catch all */}
             <Route path="*" element={<Missing/>}/>
         </Routes>
+            : <Routes><Route path='/*' element={<None />}/></Routes>
     );
 }
 

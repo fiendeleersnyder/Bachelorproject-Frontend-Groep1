@@ -41,7 +41,6 @@ const Login = () => {
                 {
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     withCredentials: true
-
                 }
             );
             console.log(JSON.stringify(response?.data));

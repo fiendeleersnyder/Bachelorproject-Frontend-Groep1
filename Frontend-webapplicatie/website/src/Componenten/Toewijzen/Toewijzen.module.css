@@ -1,0 +1,17 @@
+.container {
+    display: grid;
+    grid-template-columns: 300px 700px;
+    grid-template-rows: 300px;
+    grid-column-gap: 100px;
+}
+
+.knopje {
+    float: right;
+    border: none;
+    background-color: transparent;
+}
+
+.content {
+    text-align: center;
+    padding: 1rem;
+}
