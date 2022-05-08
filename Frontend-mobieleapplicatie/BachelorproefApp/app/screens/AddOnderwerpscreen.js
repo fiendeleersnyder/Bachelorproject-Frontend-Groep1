@@ -167,7 +167,6 @@ class AddOnderwerp extends React.Component {
               step={1}
               minimumValue={1}
               maximumValue={2}
-              //selectedValue={personen}
               onValueChange={slideValue => {this.setState({aantalpersonen:slideValue})}}
               thumbTintColor="#b4e5fa"
             />

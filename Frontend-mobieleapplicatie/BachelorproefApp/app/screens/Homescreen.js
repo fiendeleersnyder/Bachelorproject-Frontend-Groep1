@@ -7,7 +7,7 @@ function Homescreen() {
         Welcome
         {"\n"}
         {"\n"}
-        Between 01 April 2022 00:00 and 30 April 2022 23:55 this offer of 
+        Between <Text style={styles.vet}>01 April 2022 00:00</Text> and 30 April 2022 23:55 this offer of 
         thesis subject will be open for choosing a master thesis. During 
         this time you will be able to set favorites, add subjects to a 
         selection and submit a selection. For this target group you have 
@@ -31,6 +31,10 @@ function Homescreen() {
         fontWeight: 'normal', 
         marginLeft:10,
         marginRight:10,
+     }, 
+     vet:{
+      fontSize:16,
+      fontWeight: 'bold',
      }
  })
 
