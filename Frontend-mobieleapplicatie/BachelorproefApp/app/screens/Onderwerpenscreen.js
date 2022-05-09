@@ -132,7 +132,7 @@ function Onderwerpenscreen() {
                                                 <CardAction 
                                                 separator={true} 
                                                 inColumn={false}>
-                                                   <IconButton onClick={()=>favoriet(onderwerp.id)}>{favorieten_id.includes(onderwerp.id) ? <Ionicons name="heart-sharp" size={24} color="black" /> : <Ionicons name="heart-outline" size={24} color="#00407A" />}</IconButton>
+                                                   <IconButton onClick={()=>favoriet(onderwerp.id)}>{favorieten_id.includes(onderwerp.id) ? <Ionicons name="heart-sharp" size={24} color="#ff084a" /> : <Ionicons name="heart-outline" size={24} color="#00407A" />}</IconButton>
                                                    <CardButton
                                                       onPress={() => {OnderwerpUitbreiden(onderwerp.id)}}
                                                       title="More info"
