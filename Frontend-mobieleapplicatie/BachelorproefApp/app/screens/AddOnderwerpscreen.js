@@ -100,7 +100,6 @@ class AddOnderwerp extends React.Component {
             </View>
         <Text style={styles.formLabel}> Doelgroep </Text>
               <Picker style={styles.pickerStyle}
-              //selectedValue={groep}
               onValueChange={currentValue => {this.setState({doelgroep:currentValue})}}>
               <Picker.Item label="IW E-ICT GroepT" value="IW E-ICT GroepT" />
               <Picker.Item label="IW EM GroepT" value="IW EM GroepT" />

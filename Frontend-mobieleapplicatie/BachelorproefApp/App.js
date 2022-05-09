@@ -19,7 +19,8 @@ export default function App() {
   function Uitloggen() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>uitlogknop werkt joepie!</Text>
+        <Text>uitlogknop werkt joepie!
+        nu nog effectief uitloggen</Text>
       </View>
     );
   }
