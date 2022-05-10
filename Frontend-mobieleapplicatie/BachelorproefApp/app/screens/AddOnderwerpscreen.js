@@ -80,7 +80,7 @@ class AddOnderwerp extends React.Component {
         justifyContent: 'center',  
       }, 
       knop:{
-        marginTop: 5,
+        marginTop: 15,
         height: 150,  
         borderRadius: 50, 
         borderColor:'#b4e5fa', 
@@ -331,8 +331,19 @@ class AddOnderwerp extends React.Component {
                 onChangeText={(text)=>{this.setState({trefwoorden:text})}}
                 style={styles.inputStyle}
             />
-  
-      <Button style={styles.knop} title='Add Subject!' onPress={()=>{this.submit()}}/>
+      <View>
+        <Text>
+        {"\n"}
+        </Text> 
+        <Button style={styles.knop} title='Add Subject!' onPress={()=>{this.submit()}}/>
+      </View>
+      <View>
+        <Text>
+        {"\n"}
+        {"\n"}
+        {"\n"}
+        </Text>
+      </View>
       </ScrollView>
       </SafeAreaView>
      

@@ -1,11 +1,12 @@
 import { StyleSheet, Dimensions, Text, Alert, Button, Platform, View, Irmage, SafeAreaView} from 'react-native';
 import { Card, CardTitle, CardContent, CardAction, CardButton, CardImage } from 'react-native-material-cards';
-import useAxiosPrivate from '../Hooks/useAxiosPrivate';
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation, Link } from "react-router-dom";
 import { Ionicons } from '@expo/vector-icons';
 import { IconButton } from 'react-native-paper';
 import { PropTypes } from 'react';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 function OnderwerpUitbreiden(id){
     let nummer =id;
@@ -16,9 +17,8 @@ function OnderwerpUitbreiden(id){
       const [onderwerpen, setOnderwerpen] = useState();
       const [favorieten_id, setFavorieten_id] = useState([]);
       const [veranderd, setVeranderd] = useState();
-      const axiosPrivate = useAxiosPrivate();
-      const navigate = useNavigate();
-      const location = useLocation();
+      const navigate = useNavigation();
+      const location = useRoute();
   
       useEffect(() => {
           let isMounted = true;
@@ -26,8 +26,8 @@ function OnderwerpUitbreiden(id){
   
           const getOnderwerpen = async () => {
               try {
-                  const response = await axiosPrivate.get('/onderwerpen', {
-                      signal: controller.signal
+                  const response = await axios.get('/onderwerpen', {
+                      withCredentials: true
                   });
                   console.log(response.data);
                   isMounted && setOnderwerpen(response.data);
@@ -37,7 +37,7 @@ function OnderwerpUitbreiden(id){
               }
               let array = [];
               try{
-                  const response = await axiosPrivate.get("/auth/favorieten");
+                  const response = await axios.get("/auth/favorieten");
                   array = response?.data;
                   console.log(array);
                   setVeranderd(false)
@@ -63,7 +63,7 @@ function OnderwerpUitbreiden(id){
           const favoriet = async (id) => {
             let array = [];
             try{
-                const response = await axiosPrivate.get("/auth/favorieten");
+                const response = await axios.get("/auth/favorieten");
                     array = response?.data;
                     console.log(array);
             } catch (err) {
@@ -84,7 +84,7 @@ function OnderwerpUitbreiden(id){
             console.log(found);
             if (found) {
                 try {
-                    axiosPrivate.delete("/auth/deletefavoriet/" + id,
+                    axios.delete("/auth/deletefavoriet/" + id,
                     {
                         headers: { 'Content-Type': 'application/json'}
                     });
@@ -96,7 +96,7 @@ function OnderwerpUitbreiden(id){
             }
             else{
                 try {
-                    axiosPrivate.post("/auth/addfavoriet/" + id,
+                    axios.post("/auth/addfavoriet/" + id,
                         {
                             headers: { 'Content-Type': 'application/json'}
                         });
@@ -109,7 +109,7 @@ function OnderwerpUitbreiden(id){
         }
 
    return (
-    <View style={styles.view}>
+    <ScrollView contentContainerStyle={styles.view}>
         <Text style={styles.text}>Subjects Screen</Text>
 
         {onderwerpen?.length
@@ -146,7 +146,7 @@ function OnderwerpUitbreiden(id){
 
                 ) : <Text style={styles.text}>No subjects to show</Text>
             }
-    </View>
+    </ScrollView>
    );
  }
 
