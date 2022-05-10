@@ -2,6 +2,7 @@ import {useEffect, useRef, useState} from 'react';
 import classes from './IndienenForm.module.css';
 import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
 import {useLocation, useNavigate} from "react-router-dom";
+import { Alert } from 'react-alert'
 
 function IndienenForm() {
     const voorkeur1InputRef = useRef();
@@ -18,13 +19,12 @@ function IndienenForm() {
     const location = useLocation();
 
     useEffect(() => {
-        setVeranderd(false);
         let isMounted = true;
         const controller = new AbortController();
 
         const getOnderwerpen = async () => {
             try {
-                const response = await axiosPrivate.get("/auth/favorieten", { //zou eigenlijk de favorieten van die student moeten oproepen
+                const response = await axiosPrivate.get("/auth/favorieten", {
                     signal: controller.signal
                 });
                 console.log(response.data);
@@ -39,6 +39,7 @@ function IndienenForm() {
                 console.log(response.data);
                 array = response.data;
                 setIngediend(array);
+                setVeranderd(false);
             }catch (err) {
                 console.error(err);
                 navigate('/login', { state: {from: location}, replace: true})
@@ -51,13 +52,18 @@ function IndienenForm() {
             isMounted = false;
             controller.abort();
         }
-    }, [])
+    }, [veranderd])
 
     const submitHandler = () => {
 
         const enteredVoorkeur1 = voorkeur1InputRef.current.value;
         const enteredVoorkeur2 = voorkeur2InputRef.current.value;
         const enteredVoorkeur3 = voorkeur3InputRef.current.value;
+
+        if (enteredVoorkeur1 === "---" || enteredVoorkeur2 === "---" || enteredVoorkeur3 === "---"){
+            alert("At least one of the subject isn't correctly submit, try again.")
+            return;}
+
 
         var id1;
         var id2;
@@ -103,7 +109,7 @@ function IndienenForm() {
             </div>
             <div>
                 <div>
-                    <form className={classes.form}  onSubmit={submitHandler}>
+                    <div className={classes.form}  onSubmit={submitHandler}>
                         <div className={classes.control}>
                             <label htmlFor='voorkeur1'>Preference 1</label>
                              <select required id='voorkeur1' ref={voorkeur1InputRef}>
@@ -132,9 +138,9 @@ function IndienenForm() {
                             </select>
                         </div>
                         <div className={classes.actions}>
-                            <button onClick={submitHandler}>Submit</button> {/*na voorkeur in te dienen mss naar ergens sturen of pagina tonen dat ze ingediend hebben en dat niet nog een keer kunnen*/}
+                            <button onClick={submitHandler}>Submit</button>
                         </div>
-                    </form>
+                    </div>
                 </div>
                 <div>
                     <h4>Your selection</h4>
