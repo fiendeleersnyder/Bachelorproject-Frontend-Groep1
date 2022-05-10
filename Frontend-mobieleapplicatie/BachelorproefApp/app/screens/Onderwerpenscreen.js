@@ -12,8 +12,6 @@ function OnderwerpUitbreiden(id){
    <Text>nummer</Text>
 }
 
-function Onderwerpenscreen() {
-
    const OnderwerpLijst = () => {
       const [onderwerpen, setOnderwerpen] = useState();
       const [favorieten_id, setFavorieten_id] = useState([]);
@@ -166,6 +164,5 @@ function Onderwerpenscreen() {
         marginRight:10,
      },
  })
-}
 
- export default Onderwerpenscreen;
+ export default OnderwerpLijst;

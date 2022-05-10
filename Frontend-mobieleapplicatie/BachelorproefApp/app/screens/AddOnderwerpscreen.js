@@ -31,6 +31,8 @@ class AddOnderwerp extends React.Component {
       container: {
         flex: 1,
         backgroundColor: '#fff',
+        //paddingTop: Platform.OS === "android" ? 20 :0,
+        //paddingBottom: Platform.OS === "android" ? 20 :0,
       },
       view:{
         marginLeft:10,
@@ -99,7 +101,8 @@ class AddOnderwerp extends React.Component {
               />
             </View>
         <Text style={styles.formLabel}> Doelgroep </Text>
-              <Picker style={styles.pickerStyle}
+              <Picker 
+              style={styles.pickerStyle}
               onValueChange={currentValue => {this.setState({doelgroep:currentValue})}}>
               <Picker.Item label="IW E-ICT GroepT" value="IW E-ICT GroepT" />
               <Picker.Item label="IW EM GroepT" value="IW EM GroepT" />
