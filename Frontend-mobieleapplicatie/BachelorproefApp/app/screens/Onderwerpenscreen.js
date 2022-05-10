@@ -1,18 +1,20 @@
-import { StyleSheet, Dimensions, Text, Alert, Button, Platform, TouchableOpacity, View, Irmage, SafeAreaView} from 'react-native';
-import { Card, CardTitle, CardContent, CardAction, CardButton, CardImage } from 'react-native-material-cards';
+import { StyleSheet, Dimensions, Text, Alert, Button, Platform, TouchableOpacity, View, Image, SafeAreaView} from 'react-native';
+import { Card, CardTitle, CardContent, CardAction, CardButton } from 'react-native-material-cards';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { Ionicons } from '@expo/vector-icons';
 import { IconButton } from 'react-native-paper';
+import { PropTypes } from 'react';
 
 function OnderwerpUitbreiden(id){
-   <Text>id</Text>
+    let nummer =id;
+   <Text>nummer</Text>
 }
 
 function Onderwerpenscreen() {
 
-   OnderwerpLijst = () => {
+   const OnderwerpLijst = () => {
       const [onderwerpen, setOnderwerpen] = useState();
       const [favorieten_id, setFavorieten_id] = useState([]);
       const [veranderd, setVeranderd] = useState();
