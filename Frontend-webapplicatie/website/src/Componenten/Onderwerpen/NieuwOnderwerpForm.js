@@ -54,11 +54,11 @@ function NieuwOnderwerpForm() {
         <div className={classes.card}>
             <form className={classes.form} onSubmit={submitHandler}>
                 <div className={classes.control}>
-                    <label htmlFor='title'>Onderwerptitel</label>
+                    <label htmlFor='title'>Title *</label>
                     <input type='text' required id='title' ref={titleInputRef}/>
                 </div>
                 <div className={classes.control}>
-                    <label htmlFor='doelgroep'>Doelgroep</label>
+                    <label htmlFor='doelgroep'>Targetgroup *</label>
                     <select required id='doelgroep' ref={doelgroepInputRef} >
                         <option>---</option>
                         <option>IW E-ICT GroepT</option>
@@ -90,7 +90,7 @@ function NieuwOnderwerpForm() {
                     </select>
                 </div>
                 <div className={classes.control}>
-                    <label htmlFor='begeleiding'>Bedrijf-Onderzoeksgroep</label>
+                    <label htmlFor='begeleiding'>Extern partner-Research group *</label>
                     <input type='text' required id='begeleiding' ref={begeleidingInputRef}/>
                 </div>
                 <div className={classes.control}>
@@ -98,14 +98,14 @@ function NieuwOnderwerpForm() {
                     <input type='text' required id='contactpersoon' ref={contactpersoonInputRef}/>
                 </div>
                 <div className={classes.control}>
-                    <label1>Contactgegevens</label1>
-                    <label2 htmlFor='email'>E-mail</label2>
+                    <label1>Contact details</label1>
+                    <label2 htmlFor='email'>E-mail * </label2>
                     <input type='text' required id='email' ref={emailInputRef}/>
-                    <label2 htmlFor='telefoon'>Telefoonnummer</label2>
+                    <label2 htmlFor='telefoon'>Phone number</label2>
                     <input type='text' id='telefoon' ref={telefoonInputRef}/>
                 </div>
                 <div className={classes.control}>
-                    <label htmlFor='aantalpersonen'>Aantal personen</label>
+                    <label htmlFor='aantalpersonen'>Permitted amount of students per group *</label>
                     <select required id='aantalpersonen' ref={aantalpersonenInputRef} >
                         <option>---</option>
                         <option>1</option>
@@ -113,12 +113,12 @@ function NieuwOnderwerpForm() {
                     </select>
                 </div>
                 <div className={classes.control}>
-                    <label htmlFor='description'>Omschrijving</label>
+                    <label htmlFor='description'>Description *</label>
                     <textarea required id='description' rows='10' ref={descriptionInputRef}></textarea>
                 </div>
                 <div className={classes.control}>
                     <label>Disciplines</label>
-                    <label1 htmlFor={'kermerkwoord1'}>Discipline 1</label1>
+                    <label1 htmlFor={'kermerkwoord1'}>Discipline 1 *</label1>
                     <select required id='kenmerkwoord1' ref={kenmerkwoord1InputRef}>
                         <option>---</option>
                         <option>Analog Electronics and Design</option>
@@ -261,8 +261,8 @@ function NieuwOnderwerpForm() {
                     </select>
                 </div>
                 <div className={classes.control}>
-                    <label htmlFor={'trefwoorden'}>Trefwoorden</label>
-                    <textarea required id='trefwoorden' rows='5' ref={trefwoordInputRef}></textarea>
+                    <label htmlFor={'trefwoorden'}>Keywords</label>
+                    <textarea id='trefwoorden' rows='5' ref={trefwoordInputRef}></textarea>
                 </div>
                 <div className={classes.actions}>
                     <button>Add subject</button>

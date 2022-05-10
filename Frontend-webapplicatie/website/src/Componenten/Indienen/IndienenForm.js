@@ -95,11 +95,14 @@ function IndienenForm() {
     return (
         <div>
             <div><p className={classes.card}>Beste student <br/>
-                Selecteer 3 onderwerpen. Je moet minstens 1 onderwerp selecteren om te kunnen indienen.
-                Plaats het onderwerp met je grootste voorkeur op plaats 1. Je tweede en derde voorkeur plaats je respectievelijk op plaats
-                2 en 3. Je kan hier een selectie maken uit de onderwerpen die je bij je favorieten plaatste, zet dus zeker de onderwerpen die je wenst
-                te selecteren bij je favorieten. Dien jouw selecte in uiterlijk op 30 april 2022 23:55. Een selectie die voor deze datum werd ingediend
-                kun je nog altijd wijzigen tot uiterlijk deze datum.</p>
+                Select 3 topics. You must select at least 1 topic to submit.
+                Put the topic with your highest preference in place 1.
+                Put your second and third preference in place 2 and 3, respectively.
+                Here you can make a selection from the subjects that you have placed
+                in your favourites, so be sure to put the subjects you wish to select
+                in your favourites. Submit your selection the latest on 30 April
+                2022 23:55. A selection that is submitted before this date can always
+                be changed until this date.</p>
             </div>
             <div>
                 <div>
