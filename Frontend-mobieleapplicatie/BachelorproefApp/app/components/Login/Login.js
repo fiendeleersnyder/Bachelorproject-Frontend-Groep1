@@ -35,7 +35,7 @@ import {
             withCredentials: true
         });
         
-        const {accessToken} = response?.data;
+        const {accessToken} = response?.data?.acces_token;
         authContext.setAuthState({
           accessToken,
           //refreshToken,

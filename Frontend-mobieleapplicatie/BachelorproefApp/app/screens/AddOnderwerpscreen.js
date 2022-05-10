@@ -3,6 +3,7 @@ import React from 'react';
 import { Picker } from '@react-native-picker/picker';
 import Slider from '@react-native-community/slider';
 
+
 class AddOnderwerp extends React.Component {
   constructor(){
     super();
@@ -49,8 +50,7 @@ class AddOnderwerp extends React.Component {
       },
       slider:{
         marginTop: 10,
-        marginBottom:10,
-        width: '75%',
+        marginBottom:10
       },
       inputStyle: {
         marginTop: 5,
