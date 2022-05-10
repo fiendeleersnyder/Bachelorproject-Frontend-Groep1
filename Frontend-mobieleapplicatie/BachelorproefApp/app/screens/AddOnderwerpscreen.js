@@ -8,18 +8,18 @@ class AddOnderwerp extends React.Component {
   constructor(){
     super();
     this.state={
-      title: '.',
-      doelgroep:'.',
-      begeleiding:'.', 
-      contactpersoon:'.', 
-      email:'.',
-      telefoonnummer:'.',
-      aantalpersonen:'.',
-      omschrijving:'.',
-      kernwoord1:'.',
-      kernwoord2:'.',
-      kerwoord3:'.',
-      trefwoorden:'.'
+      title: '',
+      doelgroep:'',
+      begeleiding:'', 
+      contactpersoon:'', 
+      email:'',
+      telefoonnummer:'',
+      aantalpersonen:'',
+      omschrijving:'',
+      kernwoord1:'',
+      kernwoord2:'',
+      kerwoord3:'',
+      trefwoorden:''
     };
   };
 
@@ -97,10 +97,10 @@ class AddOnderwerp extends React.Component {
             <TextInput 
               placeholder="Enter title"
               onChangeText={(text)=>{this.setState({title:text})}}
-              style={styles.inputStyle}
+              style={styles.inputStyle}             
               />
             </View>
-        <Text style={styles.formLabel}> Doelgroep </Text>
+        <Text style={styles.formLabel}> Targetgroup </Text>
               <Picker 
               style={styles.pickerStyle}
               onValueChange={currentValue => {this.setState({doelgroep:currentValue})}}>
@@ -139,7 +139,7 @@ class AddOnderwerp extends React.Component {
               style={styles.inputStyle}
               />
           </View>
-        <Text style={styles.formLabel}> Supervisor-Co-Supervisor-Contact person</Text>
+        <Text style={styles.formLabel}> Promotor-Co-promotor-Contact person</Text>
           <View> 
             <TextInput 
               placeholder="Enter supervisor-co-supervisor-contact person"
@@ -173,6 +173,7 @@ class AddOnderwerp extends React.Component {
               onValueChange={slideValue => {this.setState({aantalpersonen:slideValue})}}
               thumbTintColor="#b4e5fa"
             />
+            <Text>Permitted number: {this.state.aantalpersonen}</Text>
         <Text style={styles.formLabel}> Description</Text>
           <TextInput 
                 placeholder="Enter description"
