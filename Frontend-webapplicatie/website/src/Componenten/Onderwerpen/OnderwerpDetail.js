@@ -40,7 +40,7 @@ return (
             <li>Promoter: {onderwerp?.promotor}</li>
             <li>E-mail promotor: {onderwerp?.email}</li>
             <li>Phone number: {onderwerp?.phone}</li>
-            <li>Capacity: {onderwerp?.capacity}</li>
+            <li>Permitted amount of students per group: {onderwerp?.capacity}</li>
             {onderwerp?.disciplines.isEmpty ? (
                 <li> Disciplines: {onderwerp?.disciplines}</li>) : <p></p>
             }

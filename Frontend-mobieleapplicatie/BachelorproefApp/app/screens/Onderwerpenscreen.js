@@ -132,39 +132,39 @@ function OnderwerpUitbreiden(id){
         <Text style={styles.text}>Subjects Screen</Text>
 
         {onderwerpen?.length
-                ? (
-                     onderwerpen.map((onderwerp, i) =>
-                            {
-                                if(!onderwerp.hideObject)
-                                    return(
-                                        <Card>
-                                                <CardTitle
-                                                   title={onderwerp.name}
-                                                   subtitle={onderwerp.doelgroep}>
-                                                   </CardTitle>
-                                                <CardContent text={onderwerp.promotor}></CardContent>
-                                                <CardContent><Ionicons name="people" size={24} color="#00407A" />{onderwerp.capacity}</CardContent>
-                                                {onderwerp.disciplines.isEmpty ? (
-                                                    <CardContent> Disciplines: {onderwerp.disciplines}</CardContent>) : <CardContent></CardContent>
-                                                }
+            ? (
+                onderwerpen.map((onderwerp, i) =>
+                {
+                    if(!onderwerp.hideObject)
+                        return(
+                            <Card>
+                                <CardTitle
+                                    title={onderwerp.name}
+                                    subtitle={onderwerp.doelgroep}>
+                                </CardTitle>
+                                <CardContent text={onderwerp.promotor}></CardContent>
+                                <CardContent><Ionicons name="people" size={24} color="#00407A" />{onderwerp.capacity}</CardContent>
+                                {onderwerp.disciplines.isEmpty ? (
+                                    <CardContent> Disciplines: {onderwerp.disciplines}</CardContent>) : <CardContent></CardContent>
+                                }
 
-                                                <CardAction 
-                                                separator={true} 
-                                                inColumn={false}>
-                                                   <IconButton onClick={()=>favoriet(onderwerp.id)}>{favorieten_id.includes(onderwerp.id) ? <Ionicons name="heart-sharp" size={24} color="#ff084a" /> : <Ionicons name="heart-outline" size={24} color="#00407A" />}</IconButton>
-                                                   <CardButton
-                                                      onPress={() => {OnderwerpUitbreiden(onderwerp.id)}}
-                                                      title="More info"
-                                                      color="#00407A"
-                                                   />
-                                                </CardAction>
-                                        </Card>
-                                    )
-                            }
+                                <CardAction 
+                                    separator={true} 
+                                    inColumn={false}>
+                                    <IconButton onClick={()=>favoriet(onderwerp.id)}>{favorieten_id.includes(onderwerp.id) ? <Ionicons name="heart-sharp" size={24} color="#ff084a" /> : <Ionicons name="heart-outline" size={24} color="#00407A" />}</IconButton>
+                                    <CardButton
+                                        onPress={() => {OnderwerpUitbreiden(onderwerp.id)}}
+                                        title="More info"
+                                        color="#00407A"
+                                    />
+                                </CardAction>
+                            </Card>
                         )
+                }
+            )
 
-                ) : <Text style={styles.text}>No subjects to show</Text>
-            }
+        ) : <Text style={styles.text}>No subjects to show</Text>
+        }
     </ScrollView>
    );
  }
