@@ -2,7 +2,7 @@ import { StyleSheet, Dimensions, Text, Alert, Button, Platform, View, Irmage, Sa
 import { Card, CardTitle, CardContent, CardAction, CardButton, CardImage } from 'react-native-material-cards';
 import axios from 'axios';
 import {AuthContext} from '../components/AuthContext/AuthContext';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { IconButton } from 'react-native-paper';
 import { PropTypes } from 'react';
@@ -26,9 +26,9 @@ function OnderwerpUitbreiden(id){
           let isMounted = true;
           const controller = new AbortController();
   
-          const getOnderwerpen = async () => {
+          const getOnderwerpen = () => {
               try {
-                  const response = await axios.get('http://localhost:8080/onderwerpen', {
+                  const response = axios.get('http://10.110.182.41:8080/onderwerpen', {
                       withCredentials: true,
                       headers: {
                         'Authorization' : `Bearer ${authContext.authState?.accessToken}`
@@ -42,7 +42,7 @@ function OnderwerpUitbreiden(id){
               }
               let array = [];
               try{
-                  const response = await axios.get("http://localhost:8080/auth/favorieten", {
+                  const response = axios.get("http://10.110.182.41:8080/auth/favorieten", {
                     withCredentials: true,
                     headers: {
                         'Authorization' : `Bearer ${authContext.authState?.accessToken}`
@@ -70,10 +70,10 @@ function OnderwerpUitbreiden(id){
           }, [veranderd])
 
 
-          const favoriet = async (id) => {
+          const favoriet = (id) => {
             let array = [];
             try{
-                const response = await axios.get("http://localhost:8080/auth/favorieten", {
+                const response = axios.get("http://10.110.182.41:8080/auth/favorieten", {
                     withCredentials: true,
                     headers: {
                         'Authorization' : `Bearer ${authContext.authState?.accessToken}`
@@ -99,7 +99,7 @@ function OnderwerpUitbreiden(id){
             console.log(found);
             if (found) {
                 try {
-                    axios.delete("http://localhost:8080/auth/deletefavoriet/" + id,
+                    axios.delete("http://10.110.182.41:8080/auth/deletefavoriet/" + id,
                     {
                         headers: { 'Content-Type': 'application/json',
                         'Authorization' : `Bearer ${authContext.authState?.accessToken}`},
@@ -113,7 +113,7 @@ function OnderwerpUitbreiden(id){
             }
             else{
                 try {
-                    axios.post("http://localhost:8080/auth/addfavoriet/" + id,
+                    axios.post("http://10.110.182.41:8080/auth/addfavoriet/" + id,
                         {
                             headers: { 'Content-Type': 'application/json',
                             'Authorization' : `Bearer ${authContext.authState?.accessToken}`},
