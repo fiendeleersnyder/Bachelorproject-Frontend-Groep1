@@ -1,7 +1,7 @@
 import { StyleSheet, Dimensions, Text, Alert, Button, Platform, View, Irmage, SafeAreaView} from 'react-native';
 import { Card, CardTitle, CardContent, CardAction, CardButton, CardImage } from 'react-native-material-cards';
 import axios from 'axios';
-import {AuthContext} from '../AuthContext/AuthContext';
+import {AuthContext} from '../components/AuthContext/AuthContext';
 import React, { useState, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { IconButton } from 'react-native-paper';
