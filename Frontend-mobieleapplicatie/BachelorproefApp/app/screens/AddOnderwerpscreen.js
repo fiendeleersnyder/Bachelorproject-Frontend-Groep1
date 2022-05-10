@@ -1,7 +1,8 @@
-import { StyleSheet, Dimensions, Text, TextInput, Alert, Button, Platform, TouchableOpacity, View, Image, SafeAreaView} from 'react-native';
+import { StyleSheet, ScrollView, Dimensions, Text, TextInput, Alert, Button, Platform, TouchableOpacity, View, Image, SafeAreaView} from 'react-native';
 import React from 'react';
 import { Picker } from '@react-native-picker/picker';
 import Slider from '@react-native-community/slider';
+
 
 class AddOnderwerp extends React.Component {
   constructor(){
@@ -31,6 +32,8 @@ class AddOnderwerp extends React.Component {
       container: {
         flex: 1,
         backgroundColor: '#fff',
+        //paddingTop: Platform.OS === "android" ? 20 :0,
+        //paddingBottom: Platform.OS === "android" ? 20 :0,
       },
       view:{
         marginLeft:10,
@@ -47,8 +50,7 @@ class AddOnderwerp extends React.Component {
       },
       slider:{
         marginTop: 10,
-        marginBottom:10,
-        width: '75%',
+        marginBottom:10
       },
       inputStyle: {
         marginTop: 5,
@@ -78,7 +80,7 @@ class AddOnderwerp extends React.Component {
         justifyContent: 'center',  
       }, 
       knop:{
-        marginTop: 5,
+        marginTop: 15,
         height: 150,  
         borderRadius: 50, 
         borderColor:'#b4e5fa', 
@@ -89,7 +91,7 @@ class AddOnderwerp extends React.Component {
 
     return (
       <SafeAreaView style={styles.container}>
-      <View style={styles.view}>
+      <ScrollView style={styles.view}>
         <Text style={styles.formLabel}> Title </Text>
           <View> 
             <TextInput 
@@ -99,8 +101,8 @@ class AddOnderwerp extends React.Component {
               />
             </View>
         <Text style={styles.formLabel}> Doelgroep </Text>
-              <Picker style={styles.pickerStyle}
-              //selectedValue={groep}
+              <Picker 
+              style={styles.pickerStyle}
               onValueChange={currentValue => {this.setState({doelgroep:currentValue})}}>
               <Picker.Item label="IW E-ICT GroepT" value="IW E-ICT GroepT" />
               <Picker.Item label="IW EM GroepT" value="IW EM GroepT" />
@@ -329,9 +331,20 @@ class AddOnderwerp extends React.Component {
                 onChangeText={(text)=>{this.setState({trefwoorden:text})}}
                 style={styles.inputStyle}
             />
-  
-      <Button style={styles.knop} title='Add Subject!' onPress={()=>{this.submit()}}/>
+      <View>
+        <Text>
+        {"\n"}
+        </Text> 
+        <Button style={styles.knop} title='Add Subject!' onPress={()=>{this.submit()}}/>
       </View>
+      <View>
+        <Text>
+        {"\n"}
+        {"\n"}
+        {"\n"}
+        </Text>
+      </View>
+      </ScrollView>
       </SafeAreaView>
      
      );
