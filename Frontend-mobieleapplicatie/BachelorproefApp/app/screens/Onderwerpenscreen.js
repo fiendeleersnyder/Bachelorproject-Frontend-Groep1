@@ -26,7 +26,7 @@ function OnderwerpUitbreiden(id){
   
           const getOnderwerpen = async () => {
               try {
-                  const response = await axios.get('/onderwerpen', {
+                  const response = await axios.get('http://localhost:8080/onderwerpen', {
                       withCredentials: true
                   });
                   console.log(response.data);
@@ -37,7 +37,9 @@ function OnderwerpUitbreiden(id){
               }
               let array = [];
               try{
-                  const response = await axios.get("/auth/favorieten");
+                  const response = await axios.get("http://localhost:8080/auth/favorieten", {
+                    withCredentials: true
+                });
                   array = response?.data;
                   console.log(array);
                   setVeranderd(false)
@@ -63,7 +65,9 @@ function OnderwerpUitbreiden(id){
           const favoriet = async (id) => {
             let array = [];
             try{
-                const response = await axios.get("/auth/favorieten");
+                const response = await axios.get("http://localhost:8080/auth/favorieten", {
+                    withCredentials: true
+                });
                     array = response?.data;
                     console.log(array);
             } catch (err) {
@@ -84,9 +88,10 @@ function OnderwerpUitbreiden(id){
             console.log(found);
             if (found) {
                 try {
-                    axios.delete("/auth/deletefavoriet/" + id,
+                    axios.delete("http://localhost:8080/auth/deletefavoriet/" + id,
                     {
-                        headers: { 'Content-Type': 'application/json'}
+                        headers: { 'Content-Type': 'application/json'},
+                        withCredentials: true
                     });
                     setVeranderd(true)
                 } catch (err) {
@@ -96,9 +101,10 @@ function OnderwerpUitbreiden(id){
             }
             else{
                 try {
-                    axios.post("/auth/addfavoriet/" + id,
+                    axios.post("http://localhost:8080/auth/addfavoriet/" + id,
                         {
-                            headers: { 'Content-Type': 'application/json'}
+                            headers: { 'Content-Type': 'application/json'},
+                            withCredentials: true
                         });
                     setVeranderd(true)
                 } catch (err) {
