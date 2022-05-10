@@ -117,10 +117,10 @@ const Toewijzen = () => {
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
-                                                {student?.length ?
-                                                    student.map((array, i2) => {
+                                                {student.length ?
+                                                    (student.map((array, i2) => {
                                                     i2 === i1 ?
-                                                        array?.map((gebruiker, i3) => {
+                                                        (array?.map((gebruiker, i3) => {
                                                             <TableRow>
                                                                 <TableCell>{gebruiker.name}</TableCell>
                                                                 <TableCell>{gebruiker.selection?.map((onderwerp1, i3) => {
@@ -135,8 +135,8 @@ const Toewijzen = () => {
                                                                 <TableCell><IconButton onClick={()=>studentToewijzen(onderwerp.id, gebruiker.id)} className={classes.knopje}><CheckIcon /></IconButton></TableCell>
                                                             </TableRow>
                                                         })
-                                                        :<p>There are no students that choose this subject</p>
-                                                }) : <p>No students</p>}
+                                                        ):<p>There are no students that choose this subject</p>
+                                                }) ): <p>No students</p>}
                                             </TableBody>
                                         </Table>
                                     </TableContainer>

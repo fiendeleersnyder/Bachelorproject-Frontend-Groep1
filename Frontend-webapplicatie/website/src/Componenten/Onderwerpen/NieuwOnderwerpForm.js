@@ -1,11 +1,13 @@
-import {useRef} from 'react';
+import {useEffect, useState, useRef} from 'react';
 import classes from './NieuwOnderwerpForm.module.css';
+import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
+import {useLocation, useNavigate} from "react-router-dom";
 
 function NieuwOnderwerpForm() {
     const titleInputRef = useRef();
     const doelgroepInputRef = useRef();
     const begeleidingInputRef = useRef();
-    const contactpersoonInputRef = useRef();
+    const promotorInputRef = useRef();
     const emailInputRef = useRef();
     const telefoonInputRef = useRef();
     const aantalpersonenInputRef = useRef();
@@ -15,13 +17,44 @@ function NieuwOnderwerpForm() {
     const kenmerkwoord3InputRef = useRef();
     const trefwoordInputRef= useRef();
 
-    function submitHandler(event){
+    const axiosPrivate = useAxiosPrivate();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const [promotoren, setPromotoren] = useState([]);
+    var array = [];
+
+    useEffect(() => {
+        let isMounted = true;
+        const controller = new AbortController();
+
+        const getPromotoren = async () => {
+            try {
+                const response = await axiosPrivate.get("/auth/promotoren", {
+                    signal: controller.signal
+                });
+                console.log(response.data);
+                isMounted && setPromotoren(promotoren => response.data);
+            } catch (err) {
+                console.error(err);
+                navigate('/login', { state: {from: location}, replace: true})
+            }
+        }
+
+        getPromotoren();
+
+        return () => {
+            isMounted = false;
+            controller.abort();
+        }
+    }, [])
+
+    function submitHandler(event, id){
         event.preventDefault();
 
         const enteredTitle = titleInputRef.current.value;
         const enteredDoelgroep = doelgroepInputRef.current.value;
         const enteredBegeleiding = begeleidingInputRef.current.value;
-        const enteredContactpersoon = contactpersoonInputRef.current.value;
+        const enteredPromotor = promotorInputRef.current.value;
         const enteredEmail = emailInputRef.current.value;
         const enteredTelefoon = telefoonInputRef.current.value;
         const enteredAantal = aantalpersonenInputRef.current.value;
@@ -30,13 +63,24 @@ function NieuwOnderwerpForm() {
         const enteredKern3 = kenmerkwoord3InputRef.current.value;
         const enteredDescription = descriptionInputRef.current.value;
         const enteredTrefwoord = trefwoordInputRef.current.value;
+        var idPromotor;
 
+        if (enteredDoelgroep === "---" || enteredPromotor === "---" || enteredAantal === "---" || enteredKern1 === "---" || enteredKern2 === "---" || enteredKern3 === "---"){
+            alert("Something went wrong, please try again. Make sure to fill in every field marked with a star.")
+            return;}
+
+        promotoren.map((promotor, i) => {
+            if(enteredPromotor === promotor.name)
+                return(
+                    idPromotor = promotor.id
+                )
+        })
 
         const onderwerpData = {
             title: enteredTitle,
             doelgroep: enteredDoelgroep,
             begeleiding: enteredBegeleiding,
-            contactpersoon: enteredContactpersoon,
+            promotor: idPromotor,
             email:enteredEmail,
             telefoon: enteredTelefoon,
             aantalpersonen:enteredAantal,
@@ -48,17 +92,28 @@ function NieuwOnderwerpForm() {
         };
 
         console.log(onderwerpData);
+
+        try {
+            const response = axiosPrivate.post("/addonderwerp/" + id,
+                JSON.stringify(onderwerpData),
+                {
+                    headers: { 'Content-Type': 'application/json' }
+                });
+        }catch (err) {
+            console.error(err);
+            navigate('/login', { state: {from: location}, replace: true})
+        }
     }
 
     return (
         <div className={classes.card}>
             <form className={classes.form} onSubmit={submitHandler}>
                 <div className={classes.control}>
-                    <label htmlFor='title'>Onderwerptitel</label>
+                    <label htmlFor='title'>Title *</label>
                     <input type='text' required id='title' ref={titleInputRef}/>
                 </div>
                 <div className={classes.control}>
-                    <label htmlFor='doelgroep'>Doelgroep</label>
+                    <label htmlFor='doelgroep'>Targetgroup *</label>
                     <select required id='doelgroep' ref={doelgroepInputRef} >
                         <option>---</option>
                         <option>IW E-ICT GroepT</option>
@@ -90,22 +145,27 @@ function NieuwOnderwerpForm() {
                     </select>
                 </div>
                 <div className={classes.control}>
-                    <label htmlFor='begeleiding'>Bedrijf-Onderzoeksgroep</label>
+                    <label htmlFor='begeleiding'>Extern partner-Research group *</label>
                     <input type='text' required id='begeleiding' ref={begeleidingInputRef}/>
                 </div>
                 <div className={classes.control}>
-                    <label1 htmlFor='contactpersoon'>Promotor-Copromotor-Contactpersoon</label1>
-                    <input type='text' required id='contactpersoon' ref={contactpersoonInputRef}/>
+                    <label1 htmlFor='contactpersoon'>Promotor</label1>
+                    <select required id='promotor' ref={promotorInputRef} >
+                        <option>---</option>
+                        {promotoren.map((promotor, i) => {
+                            <option key={i}>promotor</option>
+                        })}
+                    </select>
                 </div>
                 <div className={classes.control}>
-                    <label1>Contactgegevens</label1>
-                    <label2 htmlFor='email'>E-mail</label2>
+                    <label1>Contact details</label1>
+                    <label2 htmlFor='email'>E-mail * </label2>
                     <input type='text' required id='email' ref={emailInputRef}/>
-                    <label2 htmlFor='telefoon'>Telefoonnummer</label2>
+                    <label2 htmlFor='telefoon'>Phone number</label2>
                     <input type='text' id='telefoon' ref={telefoonInputRef}/>
                 </div>
                 <div className={classes.control}>
-                    <label htmlFor='aantalpersonen'>Aantal personen</label>
+                    <label htmlFor='aantalpersonen'>Permitted amount of students per group *</label>
                     <select required id='aantalpersonen' ref={aantalpersonenInputRef} >
                         <option>---</option>
                         <option>1</option>
@@ -113,12 +173,12 @@ function NieuwOnderwerpForm() {
                     </select>
                 </div>
                 <div className={classes.control}>
-                    <label htmlFor='description'>Omschrijving</label>
+                    <label htmlFor='description'>Description *</label>
                     <textarea required id='description' rows='10' ref={descriptionInputRef}></textarea>
                 </div>
                 <div className={classes.control}>
                     <label>Disciplines</label>
-                    <label1 htmlFor={'kermerkwoord1'}>Discipline 1</label1>
+                    <label1 htmlFor={'kermerkwoord1'}>Discipline 1 *</label1>
                     <select required id='kenmerkwoord1' ref={kenmerkwoord1InputRef}>
                         <option>---</option>
                         <option>Analog Electronics and Design</option>
@@ -261,8 +321,8 @@ function NieuwOnderwerpForm() {
                     </select>
                 </div>
                 <div className={classes.control}>
-                    <label htmlFor={'trefwoorden'}>Trefwoorden</label>
-                    <textarea required id='trefwoorden' rows='5' ref={trefwoordInputRef}></textarea>
+                    <label htmlFor={'trefwoorden'}>Keywords</label>
+                    <textarea id='trefwoorden' rows='5' ref={trefwoordInputRef}></textarea>
                 </div>
                 <div className={classes.actions}>
                     <button>Add subject</button>

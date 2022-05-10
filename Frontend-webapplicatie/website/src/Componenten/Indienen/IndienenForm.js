@@ -2,6 +2,7 @@ import {useEffect, useRef, useState} from 'react';
 import classes from './IndienenForm.module.css';
 import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
 import {useLocation, useNavigate} from "react-router-dom";
+import { Alert } from 'react-alert'
 
 function IndienenForm() {
     const voorkeur1InputRef = useRef();
@@ -18,13 +19,12 @@ function IndienenForm() {
     const location = useLocation();
 
     useEffect(() => {
-        setVeranderd(false);
         let isMounted = true;
         const controller = new AbortController();
 
         const getOnderwerpen = async () => {
             try {
-                const response = await axiosPrivate.get("/auth/favorieten", { //zou eigenlijk de favorieten van die student moeten oproepen
+                const response = await axiosPrivate.get("/auth/favorieten", {
                     signal: controller.signal
                 });
                 console.log(response.data);
@@ -39,6 +39,7 @@ function IndienenForm() {
                 console.log(response.data);
                 array = response.data;
                 setIngediend(array);
+                setVeranderd(false);
             }catch (err) {
                 console.error(err);
                 navigate('/login', { state: {from: location}, replace: true})
@@ -51,13 +52,18 @@ function IndienenForm() {
             isMounted = false;
             controller.abort();
         }
-    }, [])
+    }, [veranderd])
 
     const submitHandler = () => {
 
         const enteredVoorkeur1 = voorkeur1InputRef.current.value;
         const enteredVoorkeur2 = voorkeur2InputRef.current.value;
         const enteredVoorkeur3 = voorkeur3InputRef.current.value;
+
+        if (enteredVoorkeur1 === "---" || enteredVoorkeur2 === "---" || enteredVoorkeur3 === "---"){
+            alert("At least one of the subject isn't correctly submit, try again.")
+            return;}
+
 
         var id1;
         var id2;
@@ -95,15 +101,18 @@ function IndienenForm() {
     return (
         <div>
             <div><p className={classes.card}>Beste student <br/>
-                Selecteer 3 onderwerpen. Je moet minstens 1 onderwerp selecteren om te kunnen indienen.
-                Plaats het onderwerp met je grootste voorkeur op plaats 1. Je tweede en derde voorkeur plaats je respectievelijk op plaats
-                2 en 3. Je kan hier een selectie maken uit de onderwerpen die je bij je favorieten plaatste, zet dus zeker de onderwerpen die je wenst
-                te selecteren bij je favorieten. Dien jouw selecte in uiterlijk op 30 april 2022 23:55. Een selectie die voor deze datum werd ingediend
-                kun je nog altijd wijzigen tot uiterlijk deze datum.</p>
+                Select 3 topics. You must select at least 1 topic to submit.
+                Put the topic with your highest preference in place 1.
+                Put your second and third preference in place 2 and 3, respectively.
+                Here you can make a selection from the subjects that you have placed
+                in your favourites, so be sure to put the subjects you wish to select
+                in your favourites. Submit your selection the latest on 30 April
+                2022 23:55. A selection that is submitted before this date can always
+                be changed until this date.</p>
             </div>
             <div>
                 <div>
-                    <form className={classes.form}  onSubmit={submitHandler}>
+                    <div className={classes.form}  onSubmit={submitHandler}>
                         <div className={classes.control}>
                             <label htmlFor='voorkeur1'>Preference 1</label>
                              <select required id='voorkeur1' ref={voorkeur1InputRef}>
@@ -132,9 +141,9 @@ function IndienenForm() {
                             </select>
                         </div>
                         <div className={classes.actions}>
-                            <button onClick={submitHandler}>Submit</button> {/*na voorkeur in te dienen mss naar ergens sturen of pagina tonen dat ze ingediend hebben en dat niet nog een keer kunnen*/}
+                            <button onClick={submitHandler}>Submit</button>
                         </div>
-                    </form>
+                    </div>
                 </div>
                 <div>
                     <h4>Your selection</h4>

@@ -6,6 +6,7 @@ import HomePagina from '../../Pages/home';
 import Indienen from '../../Pages/indienen';
 import OnderwerpenLijst from '../../Pages/onderwerpen';
 import OnderwerpenLijstMetVerwijderen from '../../Pages/onderwerpenmetverwijderen'
+import OnderwerpenLijstPromotorEnBedrijf from '../../Pages/onderwerpenpromotor'
 import OnderwerpDetail from '../../Pages/onderwerpdetail'
 import UserLijst from '../../Pages/users'
 import Phases from '../../Pages/phases'
@@ -36,7 +37,7 @@ function App() {
         2: 'Student',
         3: 'Coordinator',
         4: 'Bedrijf',
-        5: 'Promotor'
+        5: 'Promotor',
     }
 
     useEffect(() => {
@@ -104,7 +105,7 @@ function App() {
                     {/* protected routes */}
                     <Route path="/bedrijf/" element={<RequireAuth AllowedRoles={[ROLES["4"]]}/>}>
                         <Route path='/bedrijf/' element={<HomePagina/>}/>
-                        <Route path='/bedrijf/onderwerpen' element={<OnderwerpenLijst />}/>
+                        <Route path='/bedrijf/onderwerpen' element={<OnderwerpenLijstPromotorEnBedrijf />}/>
                         <Route path='/bedrijf/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
                         <Route path='/bedrijf/addonderwerp' element={<AddOnderwerp/>}/>
                         <Route path='/bedrijf/account' element={<Account/>}/>
@@ -114,9 +115,9 @@ function App() {
             <Route path="/" element={<LayoutPromotor/>}>
                 <Route element={<PersistLogin/>}>
                     {/* protected routes */}
-                    <Route path="/promotor/" element={<RequireAuth AllowedRoles={[ROLES["3"]]}/>}>
+                    <Route path="/promotor/" element={<RequireAuth AllowedRoles={[ROLES["5"]]}/>}>
                         <Route path='/promotor/' element={<HomePagina/>}/>
-                        <Route path='/promotor/onderwerpen' element={<OnderwerpenLijst />}/>
+                        <Route path='/promotor/onderwerpen' element={<OnderwerpenLijstPromotorEnBedrijf />}/>
                         <Route path='/promotor/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
                         <Route path='/promotor/addonderwerp' element={<AddOnderwerp/>}/>
                         <Route path='/promotor/toewijzen' element={<Toewijzen />}/>
