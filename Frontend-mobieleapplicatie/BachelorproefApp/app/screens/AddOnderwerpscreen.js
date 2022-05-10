@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions, Text, TextInput, Alert, Button, Platform, TouchableOpacity, View, Image, SafeAreaView} from 'react-native';
+import { StyleSheet, ScrollView, Dimensions, Text, TextInput, Alert, Button, Platform, TouchableOpacity, View, Image, SafeAreaView} from 'react-native';
 import React from 'react';
 import { Picker } from '@react-native-picker/picker';
 import Slider from '@react-native-community/slider';
@@ -89,7 +89,7 @@ class AddOnderwerp extends React.Component {
 
     return (
       <SafeAreaView style={styles.container}>
-      <View style={styles.view}>
+      <ScrollView style={styles.view}>
         <Text style={styles.formLabel}> Title </Text>
           <View> 
             <TextInput 
@@ -100,7 +100,6 @@ class AddOnderwerp extends React.Component {
             </View>
         <Text style={styles.formLabel}> Doelgroep </Text>
               <Picker style={styles.pickerStyle}
-              //selectedValue={groep}
               onValueChange={currentValue => {this.setState({doelgroep:currentValue})}}>
               <Picker.Item label="IW E-ICT GroepT" value="IW E-ICT GroepT" />
               <Picker.Item label="IW EM GroepT" value="IW EM GroepT" />
@@ -331,7 +330,7 @@ class AddOnderwerp extends React.Component {
             />
   
       <Button style={styles.knop} title='Add Subject!' onPress={()=>{this.submit()}}/>
-      </View>
+      </ScrollView>
       </SafeAreaView>
      
      );

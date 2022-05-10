@@ -5,14 +5,16 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { Ionicons } from '@expo/vector-icons';
 import { IconButton } from 'react-native-paper';
+import { PropTypes } from 'react';
 
 function OnderwerpUitbreiden(id){
-   <Text>id</Text>
+    let nummer =id;
+   <Text>nummer</Text>
 }
 
 function Onderwerpenscreen() {
 
-   OnderwerpLijst = () => {
+   const OnderwerpLijst = () => {
       const [onderwerpen, setOnderwerpen] = useState();
       const [favorieten_id, setFavorieten_id] = useState([]);
       const [veranderd, setVeranderd] = useState();
@@ -132,7 +134,7 @@ function Onderwerpenscreen() {
                                                 <CardAction 
                                                 separator={true} 
                                                 inColumn={false}>
-                                                   <IconButton onClick={()=>favoriet(onderwerp.id)}>{favorieten_id.includes(onderwerp.id) ? <Ionicons name="heart-sharp" size={24} color="black" /> : <Ionicons name="heart-outline" size={24} color="#00407A" />}</IconButton>
+                                                   <IconButton onClick={()=>favoriet(onderwerp.id)}>{favorieten_id.includes(onderwerp.id) ? <Ionicons name="heart-sharp" size={24} color="#ff084a" /> : <Ionicons name="heart-outline" size={24} color="#00407A" />}</IconButton>
                                                    <CardButton
                                                       onPress={() => {OnderwerpUitbreiden(onderwerp.id)}}
                                                       title="More info"
