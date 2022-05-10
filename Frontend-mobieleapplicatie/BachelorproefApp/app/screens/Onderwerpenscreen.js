@@ -1,6 +1,6 @@
-import { StyleSheet, Dimensions, Text, Alert, Button, Platform, TouchableOpacity, View, Irmage, SafeAreaView} from 'react-native';
+import { StyleSheet, Dimensions, Text, Alert, Button, Platform, View, Irmage, SafeAreaView} from 'react-native';
 import { Card, CardTitle, CardContent, CardAction, CardButton, CardImage } from 'react-native-material-cards';
-import axios from 'axios';
+import useAxiosPrivate from '../Hooks/useAxiosPrivate';
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { Ionicons } from '@expo/vector-icons';

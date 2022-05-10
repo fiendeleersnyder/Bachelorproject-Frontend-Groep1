@@ -1,5 +1,5 @@
 import React, {createContext, useContext} from 'react';
-import {axios} from 'axios';
+import {axiosPrivate} from '../../API/axios'
 import {AuthContext} from './AuthContext';
 import createAuthRefreshInterceptor from 'axios-auth-refresh';
 import * as Keychain from 'react-native-keychain';
@@ -10,18 +10,7 @@ const {Provider} = AxiosContext;
 const AxiosProvider = ({children}) => {
   const authContext = useContext(AuthContext);
 
-  const authAxios = axios.create({
-    baseURL: 'http://localhost:8080',
-    headers: { 'Content-Type': 'application/json'},
-    withCredentials: true,
-  });
-
-  const publicAxios = axios.create({
-    baseURL: 'http://localhost:8080',
-
-  });
-
-  authAxios.interceptors.request.use(
+  axiosPrivate.interceptors.request.use(
     config => {
       if (!config.headers.Authorization) {
         config.headers.Authorization = `Bearer ${authContext.getAccessToken()}`;
@@ -73,13 +62,12 @@ const AxiosProvider = ({children}) => {
       });
   };
 
-  createAuthRefreshInterceptor(authAxios, refreshAuthLogic, {});
+  createAuthRefreshInterceptor(axiosPrivate, refreshAuthLogic, {});
 
   return (
     <Provider
       value={{
-        authAxios,
-        publicAxios,
+        axiosPrivate,
       }}>
       {children}
     </Provider>
