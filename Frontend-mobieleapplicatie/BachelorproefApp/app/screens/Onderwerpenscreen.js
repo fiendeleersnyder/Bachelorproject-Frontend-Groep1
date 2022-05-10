@@ -1,6 +1,7 @@
 import { StyleSheet, Dimensions, Text, Alert, Button, Platform, View, Irmage, SafeAreaView} from 'react-native';
 import { Card, CardTitle, CardContent, CardAction, CardButton, CardImage } from 'react-native-material-cards';
 import axios from 'axios';
+import useAuth from '../Hooks/useAuth';
 import React, { useState, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { IconButton } from 'react-native-paper';
@@ -19,6 +20,7 @@ function OnderwerpUitbreiden(id){
       const [veranderd, setVeranderd] = useState();
       const navigate = useNavigation();
       const location = useRoute();
+      const auth = useAuth();
   
       useEffect(() => {
           let isMounted = true;
@@ -27,7 +29,10 @@ function OnderwerpUitbreiden(id){
           const getOnderwerpen = async () => {
               try {
                   const response = await axios.get('http://localhost:8080/onderwerpen', {
-                      withCredentials: true
+                      withCredentials: true,
+                      headers: {
+                        'Authorization' : `Bearer ${auth?.accessToken}`
+                      }
                   });
                   console.log(response.data);
                   isMounted && setOnderwerpen(response.data);
@@ -38,7 +43,10 @@ function OnderwerpUitbreiden(id){
               let array = [];
               try{
                   const response = await axios.get("http://localhost:8080/auth/favorieten", {
-                    withCredentials: true
+                    withCredentials: true,
+                    headers: {
+                        'Authorization' : `Bearer ${auth?.accessToken}`
+                      }
                 });
                   array = response?.data;
                   console.log(array);
@@ -66,7 +74,10 @@ function OnderwerpUitbreiden(id){
             let array = [];
             try{
                 const response = await axios.get("http://localhost:8080/auth/favorieten", {
-                    withCredentials: true
+                    withCredentials: true,
+                    headers: {
+                        'Authorization' : `Bearer ${auth?.accessToken}`
+                      }
                 });
                     array = response?.data;
                     console.log(array);
@@ -90,7 +101,8 @@ function OnderwerpUitbreiden(id){
                 try {
                     axios.delete("http://localhost:8080/auth/deletefavoriet/" + id,
                     {
-                        headers: { 'Content-Type': 'application/json'},
+                        headers: { 'Content-Type': 'application/json',
+                        'Authorization' : `Bearer ${auth?.accessToken}`},
                         withCredentials: true
                     });
                     setVeranderd(true)
@@ -103,7 +115,8 @@ function OnderwerpUitbreiden(id){
                 try {
                     axios.post("http://localhost:8080/auth/addfavoriet/" + id,
                         {
-                            headers: { 'Content-Type': 'application/json'},
+                            headers: { 'Content-Type': 'application/json',
+                            'Authorization' : `Bearer ${auth?.accessToken}`},
                             withCredentials: true
                         });
                     setVeranderd(true)
