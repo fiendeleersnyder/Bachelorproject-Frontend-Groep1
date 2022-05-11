@@ -1,5 +1,5 @@
-import { StyleSheet, Dimensions, Text, Alert, Button, Platform, View, Irmage, SafeAreaView} from 'react-native';
-import { Card, CardTitle, CardContent, CardAction, CardButton, CardImage } from 'react-native-material-cards';
+import { StyleSheet, Text } from 'react-native';
+import { Card, CardTitle, CardContent, CardAction, CardButton } from 'react-native-material-cards';
 import axios from 'axios';
 import useAuth from '../Hooks/useAuth';
 import React, { useState, useEffect, useContext } from 'react';
@@ -29,7 +29,7 @@ function OnderwerpUitbreiden(id){
   
           const getOnderwerpen = () => {
               try {
-                  const response = axios.get('http://10.110.182.41:8080/onderwerpen', {
+                  const response = axios.get('http://10.110.179.18:8080/onderwerpen', {
                       withCredentials: true,
                       headers: {
                         'Authorization' : `Bearer ${auth.accessToken}`
@@ -39,11 +39,11 @@ function OnderwerpUitbreiden(id){
                   isMounted && setOnderwerpen(response.data);
               } catch (err) {
                   console.error(err);
-                  navigate('/login', { state: {from: location}, replace: true})
+                  //navigate('/login', { state: {from: location}, replace: true})
               }
               let array = [];
               try{
-                  const response = axios.get("http://10.110.182.41:8080/auth/favorieten", {
+                  const response = axios.get("http://10.110.179.18:8080/auth/favorieten", {
                     withCredentials: true,
                     headers: {
                         'Authorization' : `Bearer ${auth.accessToken}`
@@ -54,7 +54,7 @@ function OnderwerpUitbreiden(id){
                   setVeranderd(false)
               } catch (err) {
                   console.error(err);
-                  navigate('/login', { state: {from: location}, replace: true})
+                  //navigate('/login', { state: {from: location}, replace: true})
               }
               let idarray = [];
               array.map((onderwerp, i) =>
@@ -74,7 +74,7 @@ function OnderwerpUitbreiden(id){
           const favoriet = (id) => {
             let array = [];
             try{
-                const response = axios.get("http://10.110.182.41:8080/auth/favorieten", {
+                const response = axios.get("http://10.110.179.18:8080/auth/favorieten", {
                     withCredentials: true,
                     headers: {
                         'Authorization' : `Bearer ${auth.accessToken}`
@@ -84,7 +84,7 @@ function OnderwerpUitbreiden(id){
                     console.log(array);
             } catch (err) {
                 console.error(err);
-                navigate('/login', { state: {from: location}, replace: true})
+                //navigate('/login', { state: {from: location}, replace: true})
             }
             setFavorieten_id([])
             let idarray = [];
@@ -100,7 +100,7 @@ function OnderwerpUitbreiden(id){
             console.log(found);
             if (found) {
                 try {
-                    axios.delete("http://10.110.182.41:8080/auth/deletefavoriet/" + id,
+                    axios.delete("http://10.110.179.18:8080/auth/deletefavoriet/" + id,
                     {
                         headers: { 'Content-Type': 'application/json',
                         'Authorization' : `Bearer ${auth.accessTokenn}`},
@@ -109,12 +109,12 @@ function OnderwerpUitbreiden(id){
                     setVeranderd(true)
                 } catch (err) {
                     console.error(err);
-                    navigate('/login', { state: {from: location}, replace: true})
+                    //navigate('/login', { state: {from: location}, replace: true})
                 }
             }
             else{
                 try {
-                    axios.post("http://10.110.182.41:8080/auth/addfavoriet/" + id,
+                    axios.post("http://10.110.179.18:8080/auth/addfavoriet/" + id,
                         {
                             headers: { 'Content-Type': 'application/json',
                             'Authorization' : `Bearer ${auth.accessToken}`},
@@ -123,7 +123,7 @@ function OnderwerpUitbreiden(id){
                     setVeranderd(true)
                 } catch (err) {
                     console.error(err);
-                    navigate('/login', { state: {from: location}, replace: true})
+                    //navigate('/login', { state: {from: location}, replace: true})
                 }
                 }
         }
