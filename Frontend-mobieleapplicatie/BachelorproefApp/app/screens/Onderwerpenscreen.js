@@ -131,12 +131,12 @@ function OnderwerpUitbreiden(id){
         <Text style={styles.text}>Subjects Screen</Text>
 
         {onderwerpen?.length
-            ? (
+            ? 
                 onderwerpen.map((onderwerp, i) =>
                 {
                     if(!onderwerp.hideObject)
                         return(
-                            <Card>
+                            <Card key={i}>
                                 <CardTitle
                                     title={onderwerp.name}
                                     subtitle={onderwerp.doelgroep}>
@@ -160,7 +160,7 @@ function OnderwerpUitbreiden(id){
                             </Card>
                         )
                 }
-            )
+            
 
         ) : <Text style={styles.text}>No subjects to show</Text>
         }
