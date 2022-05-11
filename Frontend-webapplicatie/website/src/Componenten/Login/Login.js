@@ -1,7 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import useAuth from '../../Hooks/useAuth';
 import { useNavigate, useLocation} from "react-router-dom";
-
 import axios from '../../API/axios'
 import qs from 'qs'
 import classes from './Login.module.css';
@@ -78,8 +77,6 @@ const Login = () => {
                     <div className={classes.text}>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     <h1>Sign In</h1>
-                    {/*<button onClick={admin}>Admin</button>
-                    <button onClick={student}>Student</button>*/}
                     <form onSubmit={handleSubmit}>
                         <label></label>
                         <p htmlFor="username">Username:</p>

@@ -1,40 +1,22 @@
-import React, {createContext, useState} from 'react';
-import * as Keychain from 'react-native-keychain';
+import React, { useState, useEffect, useContext, createContext } from 'react'
 
-const AuthContext = createContext(null);
-const {Provider} = AuthContext;
+const authContext = createContext()
 
-const AuthProvider = ({children}) => {
-  const [authState, setAuthState] = useState({
-    accessToken: null,
-    //refreshToken: null,
-    authenticated: null,
-  });
+export function AuthProvider({ children }) {
+  const auth = useProvideAuth()
+  return <authContext.Provider value={auth}>{children}</authContext.Provider>
+}
 
-  const logout = async () => {
-    await Keychain.resetGenericPassword();
-    setAuthState({
-      accessToken: null,
-      //refreshToken: null,
-      authenticated: false,
-    });
-  };
+export const useAuth = () => {
+  return useContext(authContext)
+}
 
-  const getAccessToken = () => {
-    return authState.accessToken;
-  };
+function useProvideAuth() {
+  const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(true)
 
-  return (
-    <Provider
-      value={{
-        authState,
-        getAccessToken,
-        setAuthState,
-        logout,
-      }}>
-      {children}
-    </Provider>
-  );
-};
-
-export {AuthContext, AuthProvider};
+  return {
+    user,
+    loading,
+  }
+}

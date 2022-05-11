@@ -1,19 +1,19 @@
 import React, {createContext, useContext} from 'react';
 import {axiosPrivate} from '../../API/axios'
-import {AuthContext} from './AuthContext';
+import useAuth from '../../Hooks/useAuth';
 import createAuthRefreshInterceptor from 'axios-auth-refresh';
 import * as Keychain from 'react-native-keychain';
 
 const AxiosContext = createContext();
 const {Provider} = AxiosContext;
+const {auth, setAuth} = useAuth();
 
 const AxiosProvider = ({children}) => {
-  const authContext = useContext(AuthContext);
 
   axiosPrivate.interceptors.request.use(
     config => {
       if (!config.headers.Authorization) {
-        config.headers.Authorization = `Bearer ${authContext.getAccessToken()}`;
+        config.headers.Authorization = `Bearer ${auth.accessToken}`;
       }
 
       return config;
@@ -39,9 +39,8 @@ const AxiosProvider = ({children}) => {
         failedRequest.response.config.headers.Authorization =
           'Bearer ' + tokenRefreshResponse.data.accessToken;
 
-        authContext.setAuthState({
-          ...authContext.authState,
-          accessToken: tokenRefreshResponse.data.accessToken,
+        setAuth({
+          accessToken: tokenRefreshResponse.data.access_token,
         });
 
         await Keychain.setGenericPassword(
@@ -55,10 +54,12 @@ const AxiosProvider = ({children}) => {
         return Promise.resolve();
       })
       .catch(e => {
-        authContext.setAuthState({
-          accessToken: null,
-          //refreshToken: null,
-        });
+        setAuth(prev => {
+          return {
+              ...prev,
+              roles: response.data.roles,
+              accessToken: response.data.acces_token }
+      });
       });
   };
 

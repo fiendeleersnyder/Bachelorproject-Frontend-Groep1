@@ -1,34 +1,23 @@
-import {
-    View,
-    Text,
-    StyleSheet,
-    SafeAreaView,
-    TextInput,
-    TouchableOpacity,
-    Image,
-    Button,
-    Alert,
-  } from 'react-native';
-  import React, {useContext, useState} from 'react';
-  import {AuthContext} from '../AuthContext/AuthContext';
+import {View,Text,StyleSheet,SafeAreaView,TextInput,TouchableOpacity,Image,Button,Alert,} from 'react-native';
+  import React, {useState} from 'react';
   import * as Keychain from 'react-native-keychain';
-  import {AxiosContext} from '../AuthContext/AxiosContext';
   import qs from 'qs';
   import axios from 'axios';
+  import * as SecureStore from 'expo-secure-store';
   
   export const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const authContext = useContext(AuthContext);
-    const publicAxios = useContext(AxiosContext);
-  
+    //const { setAuth } = useAuth();
+    const [user, setUser] = useState('');
+
     const onLogin = async () => {
       if (!email.trim() || !password.trim()) {
         alert("Name or Email is invalid");
         return;
       }
       try {
-        const response = await axios.post('http://localhost:8080/login', 
+        const response = await axios.post('http://10.110.182.41:8080/login', 
         qs.stringify({ username:email, password:password })
           ,{
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -36,32 +25,40 @@ import {
         });
         
         const {accessToken} = response?.data?.acces_token;
-        authContext.setAuthState({
-          accessToken,
-          //refreshToken,
-          authenticated: true,
-        });
+        console.log(accessToken);
+        const {roles} = response?.data?.roles;
+        console.log(accessToken);
+        await SecureStore.setItemAsync("accesToken", accessToken);
+        //setAuth(accessToken);
+        //setUser('');
+        //setPwd('');
+        // authContext.setAuthState({
+        //   accessToken,
+        //   //refreshToken,
+        //   authenticated: true,
+        // });
   
-        await Keychain.setGenericPassword(
-          'token',
-          JSON.stringify({
-            accessToken,
-            //refreshToken,
-          }),
-        );
-      } catch (error) {
-        if (error.response) {
+        // await Keychain.setGenericPassword(
+        //   'token',
+        //   JSON.stringify({
+        //     accessToken,
+        //     //refreshToken,
+        //   }),
+        // );
+      } catch (err) {
+        if (err.response) {
             // There is an error response from the server
             // You can anticipate error.response.data here
             const error = err.response.data;
-            dispatch(addError(error.message));
-        } else if (error.request) {
+            console.log(error);
+            //dispatch(addError(error.message));
+        } else if (err.request) {
             // The request was made but no response was received
             // Error details are stored in error.reqeust
-            console.log(error.request);
+            console.log(err.request);
         } else {
             // Some other errors
-            console.log('Error', error.message);
+            console.log('Error', err.message);
         }
     }
     };
