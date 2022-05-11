@@ -1,4 +1,4 @@
-import { StyleSheet, ScrollView, Dimensions, Text, TextInput, Alert, Button, Platform, TouchableOpacity, View, Image, SafeAreaView} from 'react-native';
+import { StyleSheet, ScrollView, Text, TextInput, Button, View, SafeAreaView} from 'react-native';
 import React from 'react';
 import { Picker } from '@react-native-picker/picker';
 import Slider from '@react-native-community/slider';

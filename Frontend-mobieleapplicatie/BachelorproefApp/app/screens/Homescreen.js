@@ -1,8 +1,8 @@
-import { StyleSheet, Dimensions, Text, Alert, Button, Platform, TouchableOpacity, View, Image, SafeAreaView} from 'react-native';
+import { StyleSheet, Text, View, ScrollView} from 'react-native';
 
 function Homescreen() {
    return (
-    <View style={styles.view}>
+    <ScrollView contentContainerStyle={styles.view}>
         <Text style={styles.text}>
         Welcome
         {"\n"}
@@ -15,7 +15,7 @@ function Homescreen() {
         latest on <Text style={styles.vet}>30 April 2022 23:55</Text>. After this date the application 
         will no longer be available.
         </Text>
-    </View>
+    </ScrollView>
    );
  }
  
