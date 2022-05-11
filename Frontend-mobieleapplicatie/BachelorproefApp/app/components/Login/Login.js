@@ -3,13 +3,11 @@ import {View,Text,StyleSheet,SafeAreaView,TextInput,TouchableOpacity,Image,Butto
   import * as Keychain from 'react-native-keychain';
   import qs from 'qs';
   import axios from 'axios';
-  import * as SecureStore from 'expo-secure-store';
+  import AsyncStorage from '@react-native-async-storage/async-storage';
   
   export const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    //const { setAuth } = useAuth();
-    const [user, setUser] = useState('');
 
     const onLogin = async () => {
       if (!email.trim() || !password.trim()) {
@@ -17,18 +15,20 @@ import {View,Text,StyleSheet,SafeAreaView,TextInput,TouchableOpacity,Image,Butto
         return;
       }
       try {
-        const response = await axios.post('http://10.110.182.41:8080/login', 
+        const response = await axios.post('http://localhost:8080/login', 
         qs.stringify({ username:email, password:password })
           ,{
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             withCredentials: true
         });
-        
-        const {accessToken} = response?.data?.acces_token;
+        console.log(response.data);
+        const accessToken = response.data.acces_token;
         console.log(accessToken);
-        const {roles} = response?.data?.roles;
-        console.log(accessToken);
-        await SecureStore.setItemAsync("accesToken", accessToken);
+        await AsyncStorage.setItem(
+          'accesToken',
+          accessToken
+        );
+        console.log(await AsyncStorage.getItem('accesToken'));
         //setAuth(accessToken);
         //setUser('');
         //setPwd('');

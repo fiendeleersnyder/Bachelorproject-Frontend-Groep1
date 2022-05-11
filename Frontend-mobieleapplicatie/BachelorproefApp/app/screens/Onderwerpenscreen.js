@@ -7,7 +7,7 @@ import { IconButton } from 'react-native-paper';
 import { PropTypes } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
-import * as SecureStore from 'expo-secure-store';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function OnderwerpUitbreiden(id){
     let nummer =id;
@@ -20,33 +20,31 @@ function OnderwerpUitbreiden(id){
       const [veranderd, setVeranderd] = useState();
       const navigate = useNavigation();
       const location = useRoute();
-      let accessToken = await SecureStore.getItemAsync("accesToken");
-
   
       useEffect(() => {
-          let isMounted = true;
           const controller = new AbortController();
   
-          const getOnderwerpen = () => {
+          const getOnderwerpen = async () => {
+            const accessToken = await AsyncStorage.getItem('accesToken');
               try {
-                  const response = axios.get('http://10.110.179.18:8080/onderwerpen', {
+                  const response = await axios.get('http://localhost:8080/onderwerpen', {
                       withCredentials: true,
                       headers: {
-                        'Authorization' : `Bearer ${accessToken}`
+                        'Authorization' : "Bearer " + accessToken
                       }
                   });
                   console.log(response.data);
-                  isMounted && setOnderwerpen(response.data);
+                    setOnderwerpen(response.data);
               } catch (err) {
                   console.error(err);
                   //navigate('/login', { state: {from: location}, replace: true})
               }
               let array = [];
               try{
-                  const response = axios.get("http://10.110.179.18:8080/auth/favorieten", {
+                  const response = await axios.get("http://localhost:8080/auth/favorieten", {
                     withCredentials: true,
                     headers: {
-                        'Authorization' : `Bearer ${accessToken}`
+                        'Authorization' : "Bearer " + accessToken
                       }
                 });
                   array = response?.data;
@@ -57,7 +55,7 @@ function OnderwerpUitbreiden(id){
                   //navigate('/login', { state: {from: location}, replace: true})
               }
               let idarray = [];
-              array.map((onderwerp, i) =>
+              array?.map((onderwerp, i) =>
                   idarray.push(onderwerp.id))
               setFavorieten_id(idarray);
           }
@@ -65,19 +63,19 @@ function OnderwerpUitbreiden(id){
           getOnderwerpen();
   
           return () => {
-              isMounted = false;
               controller.abort();
           }
           }, [veranderd])
 
 
-          const favoriet = (id) => {
+          const favoriet = async (id) => {
+            const accessToken = await AsyncStorage.getItem('accesToken');
             let array = [];
             try{
-                const response = axios.get("http://10.110.179.18:8080/auth/favorieten", {
+                const response = axios.get("http://localhost:8080/auth/favorieten", {
                     withCredentials: true,
                     headers: {
-                        'Authorization' : `Bearer ${accessToken}`
+                        'Authorization' : "Bearer " + accessToken
                       }
                 });
                     array = response?.data;
@@ -100,10 +98,10 @@ function OnderwerpUitbreiden(id){
             console.log(found);
             if (found) {
                 try {
-                    axios.delete("http://10.110.179.18:8080/auth/deletefavoriet/" + id,
+                    axios.delete("http://localhost:8080/auth/deletefavoriet/" + id,
                     {
                         headers: { 'Content-Type': 'application/json',
-                        'Authorization' : `Bearer ${accessToken}`},
+                        'Authorization' : "Bearer " + accessToken},
                         withCredentials: true
                     });
                     setVeranderd(true)
@@ -114,10 +112,10 @@ function OnderwerpUitbreiden(id){
             }
             else{
                 try {
-                    axios.post("http://10.110.179.18:8080/auth/addfavoriet/" + id,
+                    axios.post("http://localhost:8080/auth/addfavoriet/" + id,
                         {
                             headers: { 'Content-Type': 'application/json',
-                            'Authorization' : `Bearer ${accessToken}`},
+                            'Authorization' : "Bearer " + accessToken},
                             withCredentials: true
                         });
                     setVeranderd(true)
