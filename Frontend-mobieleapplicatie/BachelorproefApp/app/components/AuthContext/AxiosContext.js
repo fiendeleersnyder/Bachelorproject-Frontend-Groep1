@@ -1,12 +1,10 @@
 import React, {createContext, useContext} from 'react';
 import {axiosPrivate} from '../../API/axios'
-import useAuth from '../../Hooks/useAuth';
 import createAuthRefreshInterceptor from 'axios-auth-refresh';
 import * as Keychain from 'react-native-keychain';
 
 const AxiosContext = createContext();
 const {Provider} = AxiosContext;
-const {auth, setAuth} = useAuth();
 
 const AxiosProvider = ({children}) => {
 

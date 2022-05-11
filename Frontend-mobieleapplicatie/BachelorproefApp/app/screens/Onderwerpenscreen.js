@@ -1,13 +1,13 @@
 import { StyleSheet, Text } from 'react-native';
 import { Card, CardTitle, CardContent, CardAction, CardButton } from 'react-native-material-cards';
 import axios from 'axios';
-import useAuth from '../Hooks/useAuth';
 import React, { useState, useEffect, useContext } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { IconButton } from 'react-native-paper';
 import { PropTypes } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
+import * as SecureStore from 'expo-secure-store';
 
 function OnderwerpUitbreiden(id){
     let nummer =id;
@@ -20,7 +20,7 @@ function OnderwerpUitbreiden(id){
       const [veranderd, setVeranderd] = useState();
       const navigate = useNavigation();
       const location = useRoute();
-      const {auth} = useAuth();
+      let accessToken = await SecureStore.getItemAsync("accesToken");
 
   
       useEffect(() => {
@@ -32,7 +32,7 @@ function OnderwerpUitbreiden(id){
                   const response = axios.get('http://10.110.179.18:8080/onderwerpen', {
                       withCredentials: true,
                       headers: {
-                        'Authorization' : `Bearer ${auth.accessToken}`
+                        'Authorization' : `Bearer ${accessToken}`
                       }
                   });
                   console.log(response.data);
@@ -46,7 +46,7 @@ function OnderwerpUitbreiden(id){
                   const response = axios.get("http://10.110.179.18:8080/auth/favorieten", {
                     withCredentials: true,
                     headers: {
-                        'Authorization' : `Bearer ${auth.accessToken}`
+                        'Authorization' : `Bearer ${accessToken}`
                       }
                 });
                   array = response?.data;
@@ -77,7 +77,7 @@ function OnderwerpUitbreiden(id){
                 const response = axios.get("http://10.110.179.18:8080/auth/favorieten", {
                     withCredentials: true,
                     headers: {
-                        'Authorization' : `Bearer ${auth.accessToken}`
+                        'Authorization' : `Bearer ${accessToken}`
                       }
                 });
                     array = response?.data;
@@ -103,7 +103,7 @@ function OnderwerpUitbreiden(id){
                     axios.delete("http://10.110.179.18:8080/auth/deletefavoriet/" + id,
                     {
                         headers: { 'Content-Type': 'application/json',
-                        'Authorization' : `Bearer ${auth.accessTokenn}`},
+                        'Authorization' : `Bearer ${accessToken}`},
                         withCredentials: true
                     });
                     setVeranderd(true)
@@ -117,7 +117,7 @@ function OnderwerpUitbreiden(id){
                     axios.post("http://10.110.179.18:8080/auth/addfavoriet/" + id,
                         {
                             headers: { 'Content-Type': 'application/json',
-                            'Authorization' : `Bearer ${auth.accessToken}`},
+                            'Authorization' : `Bearer ${accessToken}`},
                             withCredentials: true
                         });
                     setVeranderd(true)
