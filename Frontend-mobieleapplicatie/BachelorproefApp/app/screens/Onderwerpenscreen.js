@@ -1,4 +1,4 @@
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { Card, CardTitle, CardContent, CardAction, CardButton } from 'react-native-material-cards';
 import axios from 'axios';
 import {AuthContext} from '../components/AuthContext/AuthContext';
@@ -165,6 +165,16 @@ function OnderwerpUitbreiden(id){
 
         ) : <Text style={styles.text}>No subjects to show</Text>
         }
+
+
+    <View>
+        <Text>
+        {"\n"}
+        {"\n"}
+        {"\n"}
+        </Text>
+      </View>
+
     </ScrollView>
    );
  }
