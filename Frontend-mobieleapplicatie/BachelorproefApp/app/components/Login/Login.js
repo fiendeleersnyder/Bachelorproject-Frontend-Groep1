@@ -15,7 +15,7 @@ import {View,Text,StyleSheet,SafeAreaView,TextInput,TouchableOpacity,Image,Butto
         return;
       }
       try {
-        const response = await axios.post('http://localhost:8080/login', 
+        const response = await axios.post('http://10.110.176.65:8080/login', 
         qs.stringify({ username:email, password:password })
           ,{
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
