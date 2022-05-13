@@ -46,6 +46,7 @@ const OnderwerpLijst = () => {
             let idarray = [];
             array.map((onderwerp, i) =>
                 idarray.push(onderwerp.id))
+            console.log(idarray)
             setFavorieten_id(idarray);
         }
 

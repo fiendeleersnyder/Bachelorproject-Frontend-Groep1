@@ -13,6 +13,7 @@ const Phases = () => {
     const [selectedEndDateP1, setSelectedEndDateP1] = useState();
     const [selectedEndDateP2, setSelectedEndDateP2] = useState();
     const [selectedEndDateP3, setSelectedEndDateP3] = useState();
+    const [selectedEndDateP4, setSelectedEndDateP4] = useState();
     const [currentPhases, setcurrentPhases] = useState([]);
     const [veranderd, setVeranderd] = useState();
 
@@ -30,6 +31,7 @@ const Phases = () => {
                 var p2 = response.data.endP1;
                 var p3 = response.data.endP2;
                 var p4 = response.data.endP3;
+                var p5 = response.data.endP4;
                 console.log(p1);
                 var datep1 = toISO(p1)
                 array.push(datep1);
@@ -39,11 +41,14 @@ const Phases = () => {
                 array.push(datep3);
                 var datep4 = toISO(p4)
                 array.push(datep4);
+                var datep5 = toISO(p5)
+                array.push(datep5);
                 const onderwerpData = {
                     startP1: datep1,
                     endP1: datep2,
                     endP2: datep3,
-                    endP3: datep4
+                    endP3: datep4,
+                    endP4: datep5
                 };
                 setcurrentPhases(array)
             } catch (err) {
@@ -90,22 +95,21 @@ const Phases = () => {
     }, [veranderd])
 
     const verzendfases = async () => {
-        console.log(`${selectedEndDateP2}`);
-        console.log(`${selectedEndDateP3}`);
         var offset = (new Date()).getTimezoneOffset() * 60000
         var startP1 = (new Date(selectedStartDateP1-offset)).toISOString().split("Z")[0];
         var endP1 = (new Date(selectedEndDateP1-offset)).toISOString().split("Z")[0];
         var endP2 = (new Date(selectedEndDateP2-offset)).toISOString().split("Z")[0];
         var endP3 = (new Date(selectedEndDateP3-offset)).toISOString().split("Z")[0];
+        var endP4 = (new Date(selectedEndDateP4-offset)).toISOString().split("Z")[0];
+
         const onderwerpData = {
             id:1,
             startP1: startP1,
             endP1: endP1,
             endP2: endP2,
             endP3: endP3,
+            endP4: endP4
         };
-        console.log(endP2);
-        console.log(endP3);
         console.log(onderwerpData);
 
         try {
@@ -119,6 +123,7 @@ const Phases = () => {
             setSelectedEndDateP1(null)
             setSelectedEndDateP2(null)
             setSelectedEndDateP3(null)
+            setSelectedEndDateP4(null)
         }catch (err) {
             console.error(err);
             navigate('/login', { state: {from: location}, replace: true})
@@ -130,19 +135,26 @@ const Phases = () => {
         setSelectedEndDateP1(date)
         setSelectedEndDateP2(date)
         setSelectedEndDateP3(date)
+        setSelectedEndDateP4(date)
     }
 
     const veranderEndP1 = (date) => {
         setSelectedEndDateP1(date)
         setSelectedEndDateP2(date)
         setSelectedEndDateP3(date)
+        setSelectedEndDateP4(date)
     }
     const veranderEndP2 = (date) => {
         setSelectedEndDateP2(date)
         setSelectedEndDateP3(date)
+        setSelectedEndDateP4(date)
     }
     const veranderEndP3 = (date) => {
         setSelectedEndDateP3(date)
+        setSelectedEndDateP4(date)
+    }
+    const veranderEndP4 = (date) => {
+        setSelectedEndDateP4(date)
 
     }
 
@@ -154,7 +166,8 @@ const Phases = () => {
         <div className={classes.container}>
             <div className={classes.element}>
             <h2>Update phases</h2>
-            <h4>Start date P1: <DatePicker
+                <h3>Decide start date from every phase</h3>
+            <h4>Subjects phase: <DatePicker
                 selected={selectedStartDateP1}
                 onChange={date => veranderStartP1(date)}
                 dateFormat='dd/MM/yyyy hh:mm aa'
@@ -163,7 +176,7 @@ const Phases = () => {
                 showTimeSelect
                 timeIntervals={5}
             /></h4>
-            <h4>End date P1: <DatePicker
+            <h4>Choice phase : <DatePicker
                 selected={selectedEndDateP1}
                 onChange={date => veranderEndP1(date)}
                 dateFormat='dd/MM/yyyy hh:mm aa'
@@ -173,7 +186,7 @@ const Phases = () => {
                 showTimeSelect
                 timeIntervals={5}
             /></h4>
-            <h4>End date P2: <DatePicker
+            <h4>Boost phase: <DatePicker
                 selected={selectedEndDateP2}
                 onChange={date => veranderEndP2(date)}
                 dateFormat='dd/MM/yyyy hh:mm aa'
@@ -183,11 +196,21 @@ const Phases = () => {
                 showTimeSelect
                 timeIntervals={5}
             /></h4>
-                <h4>End date P3: <DatePicker
+                <h4>Assign phase: <DatePicker
                     selected={selectedEndDateP3}
                     onChange={date => veranderEndP3(date)}
                     dateFormat='dd/MM/yyyy hh:mm aa'
                     minDate={selectedEndDateP2}
+                    showYearDropdown
+                    scrolllableMonthYearDropdown
+                    showTimeSelect
+                    timeIntervals={5}
+                /></h4>
+                <h4>Rest phase: <DatePicker
+                    selected={selectedEndDateP4}
+                    onChange={date => veranderEndP4(date)}
+                    dateFormat='dd/MM/yyyy hh:mm aa'
+                    minDate={selectedEndDateP3}
                     showYearDropdown
                     scrolllableMonthYearDropdown
                     showTimeSelect
@@ -200,25 +223,31 @@ const Phases = () => {
                 {currentPhases.map((date, i) => {
                     if(i===0)
                         return(
-                            <h4>Start date P1:
+                            <h4>Subjects phase:
                                 <p>{date}</p>
                             </h4>
                         )
                     else if(i===1)
                         return (
-                            <h4>End date P1:
+                            <h4>Choice phase:
                                 <p>{date}</p>
                             </h4>
                         )
                     else if(i===2)
                         return (
-                            <h4>End date P2:
+                            <h4>Boost phase:
                                 <p>{date}</p>
                             </h4>
                         )
                     else if (i===3)
                         return (
-                            <h4>End date P4:
+                            <h4>Assign phase:
+                                <p>{date}</p>
+                            </h4>
+                        )
+                    else if (i===4)
+                        return (
+                            <h4>Rest phase:
                                 <p>{date}</p>
                             </h4>
                         )

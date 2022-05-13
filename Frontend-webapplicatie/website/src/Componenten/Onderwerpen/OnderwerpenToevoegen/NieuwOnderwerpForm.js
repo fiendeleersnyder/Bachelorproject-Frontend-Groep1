@@ -1,6 +1,6 @@
 import {useEffect, useState, useRef} from 'react';
 import classes from './NieuwOnderwerpForm.module.css';
-import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
+import useAxiosPrivate from "../../../Hooks/useAxiosPrivate";
 import {useLocation, useNavigate} from "react-router-dom";
 
 function NieuwOnderwerpForm() {
