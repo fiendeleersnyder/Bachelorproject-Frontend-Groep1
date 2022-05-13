@@ -12,6 +12,7 @@ import UserLijst from '../../Pages/users'
 import Phases from '../../Pages/phases'
 import None from '../../Pages/faseNone'
 import Toewijzen from '../../Pages/toewijzen'
+import Toewijzing from '../../Pages/toewijzing'
 import Login from '../Login/Login';
 import Missing from '../Missing/Missing'
 import RequireAuth from '../Authorization/RequireAuth'
@@ -83,6 +84,7 @@ function App() {
                         <Route path='/student/onderwerpen/:id' element = {<OnderwerpDetail />}/>
                         <Route path='/student/addonderwerp' element={<AddOnderwerp/>}/>
                         <Route path='/student/indienen' element={<Indienen/>}/>
+                        <Route path='/student/toewijzing' element={<Toewijzing/>}/>
                         <Route path='/student/account' element={<Account/>}/>
                     </Route>
                 </Route>

@@ -65,7 +65,7 @@ function NieuwOnderwerpForm() {
         const enteredTrefwoord = trefwoordInputRef.current.value;
         var idPromotor;
 
-        if (enteredDoelgroep === "---" || enteredPromotor === "---" || enteredAantal === "---" || enteredKern1 === "---" || enteredKern2 === "---" || enteredKern3 === "---"){
+        if (enteredDoelgroep === "---" || enteredPromotor === "---" || enteredAantal === "---" || enteredKern1 === "---"){
             alert("Something went wrong, please try again. Make sure to fill in every field marked with a star.")
             return;}
 
@@ -152,9 +152,9 @@ function NieuwOnderwerpForm() {
                     <label1 htmlFor='contactpersoon'>Promotor</label1>
                     <select required id='promotor' ref={promotorInputRef} >
                         <option>---</option>
-                        {promotoren.map((promotor, i) => {
-                            <option key={i}>promotor</option>
-                        })}
+                        {promotoren?.map((onderwerp, i) =>
+                            <option key={i}>{ onderwerp.firstname + " " + onderwerp.name}</option>
+                        )}
                     </select>
                 </div>
                 <div className={classes.control}>
