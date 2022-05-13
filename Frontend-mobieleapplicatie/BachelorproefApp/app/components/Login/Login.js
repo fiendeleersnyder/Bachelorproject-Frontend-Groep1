@@ -15,7 +15,11 @@ import {View,Text,StyleSheet,SafeAreaView,TextInput,TouchableOpacity,Image,Butto
         return;
       }
       try {
-        const response = await axios.post('http://10.110.176.65:8080/login', 
+
+        const response = await axios.post('http://192.168.0.172:8080/login', 
+
+        //const response = await axios.post('http://10.110.176.65:8080/login', 
+
         qs.stringify({ username:email, password:password })
           ,{
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -65,7 +69,7 @@ import {View,Text,StyleSheet,SafeAreaView,TextInput,TouchableOpacity,Image,Butto
   
     return (
       <View style={styles.container}>
-        <Image source = {require("../../assets/logo_kuleuven.png")}/>
+        <Image source = {require("../../assets/logo_kuleuven.png")} style={styles.image}/>
         <View style={styles.inputView}>
           <TextInput
             style={styles.TextInput}
@@ -94,7 +98,15 @@ import {View,Text,StyleSheet,SafeAreaView,TextInput,TouchableOpacity,Image,Butto
              <Text style={styles.loginText}>LOGIN</Text>
         </TouchableOpacity>
         {/* <Button title="Login"  style={styles.loginBtn.loginText} onPress={() => onLogin()} /> */}
+        {/* <View>
+          <Text>
+          {"\n"}
+          {"\n"}
+          {"\n"}
+          </Text>
+      </View> */}
       </View>
+      
     );
   };
   
@@ -105,12 +117,11 @@ import {View,Text,StyleSheet,SafeAreaView,TextInput,TouchableOpacity,Image,Butto
         alignItems: 'center',
         justifyContent: 'center',
     },
-
     image :{
-        marginBottom: 40, 
+        marginTop: -70,
+        marginBottom: -50, 
         alignItems: "center"
     },
-
     inputView: {
         backgroundColor: "#52BDEC",
         borderRadius: 30,
@@ -119,17 +130,10 @@ import {View,Text,StyleSheet,SafeAreaView,TextInput,TouchableOpacity,Image,Butto
         marginBottom: 20,
         alignItems: "center",
       },
-
-    logo: {
-      fontSize: 60,
-      color: '#fff',
-      margin: '20%',
-    },
     form: {
       width: '80%',
       margin: '10%',
     },
-
     TextInput: {
         height: 50,
         flex: 1,
@@ -144,14 +148,13 @@ import {View,Text,StyleSheet,SafeAreaView,TextInput,TouchableOpacity,Image,Butto
       borderBottomWidth: 1,
       marginVertical: 20,
     },
-    button: {},
     loginBtn:{
         width:"80%",
         borderRadius:25,
         height:50,
         alignItems:"center",
         justifyContent:"center",
-        marginTop:40,
+        marginTop:30,
         backgroundColor:"#00407A",
         },
         
