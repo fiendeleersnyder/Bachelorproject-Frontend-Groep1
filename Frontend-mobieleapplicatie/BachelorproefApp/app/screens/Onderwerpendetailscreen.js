@@ -1,69 +1,73 @@
-import { StyleSheet, Button, Text, View, SafeAreaView } from 'react-native';
-import { Card, CardTitle, CardContent, CardAction, CardButton } from 'react-native-material-cards';
+import { StyleSheet, Button, Text, SafeAreaView, ScrollView } from 'react-native';
+import { Card, CardTitle, CardContent, CardAction, } from 'react-native-material-cards';
 import axios from 'axios';
-import React, { useState, useEffect, useContext } from 'react';
+import { useState, useEffect} from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { ScrollView } from 'react-native-gesture-handler';
-import { useHistory,  useParams } from "react-router-dom";
-import * as React from 'react';
-import Onderwerpenscreen from './app/screens/Onderwerpenscreen';
 
-const OnderwerpDetail = () => {
-    //const history = useHistory();
-    const {id} = useParams();
+import * as React from 'react';
+
+
+const OnderwerpDetail = ({route, navigation}) => {
+    const { itemId, otherParam } = route.params;
     const [onderwerp, setOnderwerp] = useState();
+    
+    
 
     useEffect(() => {
         const controller = new AbortController();
-
+    
         const getInfo = async () => {
             try {
-                const response = await axios.get("/onderwerpen/" + id);
-                console.log(response.data);
-                setOnderwerp(response?.data)
-            } catch (AxiosError) {
-                console.error(AxiosError);
+                // const response = await axios.get("/onderwerpen/" + itemId);
+                // console.log(response.data);
+                //setOnderwerp(response?.data)
+                setOnderwerp(otherParam)
+            } catch (err) {
+                console.error(err);
             }
         }
-
+    
         getInfo();
-
+    
         return () => {
             controller.abort();
         }
     }, [])
-
-return (
+    
+    return (
     <SafeAreaView style={styles.view}>
     <ScrollView style={styles.scrollView}>
-    <Card  style={styles.kaart}>
-            <CardTitle title={"titel van het onderwrep komt hier te staan"} subtitle={"          "} numberofLines={2} />
-            <Text>{"\n"}</Text>
-            <CardContent text={"doelgoep"}></CardContent>
-            <CardContent text={"promotor"}></CardContent>
-            <CardContent text={"email"}></CardContent>
-            {onderwerp.telefoonnummer.isEmpty ? (
-                <CardContent> Telefoonnummer: {"telnr"}</CardContent>) : <CardContent></CardContent>
-            }
-            <CardContent><Text><Ionicons name="people" size={24} color="#00407A" />  {" 2"}</Text></CardContent>
-            <CardContent text={"omschrijving"}></CardContent>
-            {onderwerp.disciplines.isEmpty ? (
-                <CardContent> Disciplines: {"hier komen de verschillende discplines te staan"}</CardContent>) : <CardContent></CardContent>
-            }
-            {onderwerp.trefwoorden.isEmpty ? (
-                <CardContent> Trefwoorden: {"hier komen de verschillende trefwoorden te staan"}</CardContent>) : <CardContent></CardContent>
-            }
-            <CardAction 
-                separator={true} 
-                inColumn={false}>
-                <CardButton
-                    //onPress={() => navigation.navigate('Subjects')}
-                    //onPress={history.goBack()}
-                    title="Less info"
-                    color="#00407A"
-                />
-            </CardAction>
-            </Card>
+        <Card style={styles.kaart}>
+                <CardTitle title={otherParam.name} subtitle={"          "}  />
+                <Text>{"\n"}</Text>
+                <CardContent text={otherParam.doelgroep}></CardContent>
+                <CardContent text={otherParam.promotor}></CardContent>
+                <CardContent text={otherParam.email}></CardContent>
+                {otherParam.phone.isEmpty ? (
+                    <CardContent> Telefoonnummer: {otherParam.phone}</CardContent>) : <CardContent></CardContent>
+                }
+                <CardContent><Text><Ionicons name="people" size={24} color="#00407A" />  {" 2"}</Text></CardContent>
+                <CardContent text={otherParam.description}></CardContent>
+                {otherParam.disciplines.isEmpty ? (
+                    <CardContent> Disciplines: {otherParam.disciplines}</CardContent>) : <CardContent></CardContent>
+                }
+                {otherParam.trefwoorden.isEmpty ? (
+                    <CardContent> Trefwoorden: {otherParam.trefwoorden}</CardContent>) : <CardContent></CardContent>
+                }
+                <CardAction 
+                    separator={true} 
+                    inColumn={false}>
+                    <Button 
+                                onPress={() => console.log("favorietenknop")}
+                                color="#ff084a" 
+                                title="Add to favorites!"/>
+                    <Button
+                        onPress={() => navigation.navigate('Subjects')}
+                        title="Less info"
+                        color="#00407A"
+                    />
+                </CardAction>
+                </Card>
          </ScrollView>
     </SafeAreaView>
 );
@@ -78,6 +82,7 @@ const styles = StyleSheet.create({
     },
     scrollView:{
        flex: 1,
+       width:'90%',
        backgroundColor: '#fff', 
     },
     text: {
@@ -85,7 +90,7 @@ const styles = StyleSheet.create({
        fontWeight:'normal',
     },
     kaart: {
-       width:'90%',
+       //width:'100%',
        paddingBottom:10,
     },
 })

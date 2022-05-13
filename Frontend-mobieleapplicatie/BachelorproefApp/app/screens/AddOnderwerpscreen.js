@@ -46,7 +46,7 @@ class AddOnderwerp extends React.Component {
         begeleiding: this.state.begeleiding,
         promotor:idPromotor,
         email:this.state.email,
-        telefoon: this.state.telefoonnummer,
+        telefoonnummer: this.state.telefoonnummer,
         aantalpersonen:this.state.aantalpersonen,
         kermerkwoord1:this.state.kernwoord1,
         kermerkwoord2:this.state.kernwoord2,
