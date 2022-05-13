@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Button, Text, View, SafeAreaView } from 'react-native';
 import { Card, CardTitle, CardContent, CardAction, CardButton } from 'react-native-material-cards';
 import axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react';
@@ -8,11 +8,8 @@ import { PropTypes } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-function OnderwerpUitbreiden(id){
-    let nummer =id;
-   <Text>nummer</Text>
-}
+import { useHistory } from "react-router-dom";
+const history = useHistory();
 
    const OnderwerpLijst = () => {
       const [onderwerpen, setOnderwerpen] = useState();
@@ -27,7 +24,7 @@ function OnderwerpUitbreiden(id){
           const getOnderwerpen = async () => {
             const accessToken = await AsyncStorage.getItem('accesToken');
               try {
-                  const response = await axios.get('http://localhost:8080/onderwerpen', {
+                  const response = await axios.get('http://192.168.0.172:8080/onderwerpen', {
                       withCredentials: true,
                       headers: {
                         'Authorization' : "Bearer " + accessToken
@@ -41,7 +38,7 @@ function OnderwerpUitbreiden(id){
               }
               let array = [];
               try{
-                  const response = await axios.get("http://localhost:8080/auth/favorieten", {
+                  const response = await axios.get("http://192.168.0.172:8080/auth/favorieten", {
                     withCredentials: true,
                     headers: {
                         'Authorization' : "Bearer " + accessToken
@@ -72,7 +69,7 @@ function OnderwerpUitbreiden(id){
             const accessToken = await AsyncStorage.getItem('accesToken');
             let array = [];
             try{
-                const response = axios.get("http://localhost:8080/auth/favorieten", {
+                const response = axios.get("http://192.168.0.172:8080/auth/favorieten", {
                     withCredentials: true,
                     headers: {
                         'Authorization' : "Bearer " + accessToken
@@ -98,7 +95,7 @@ function OnderwerpUitbreiden(id){
             console.log(found);
             if (found) {
                 try {
-                    axios.delete("http://localhost:8080/auth/deletefavoriet/" + id,
+                    axios.delete("http://192.168.0.172:8080/auth/deletefavoriet/" + id,
                     {
                         headers: { 'Content-Type': 'application/json',
                         'Authorization' : "Bearer " + accessToken},
@@ -112,7 +109,7 @@ function OnderwerpUitbreiden(id){
             }
             else{
                 try {
-                    axios.post("http://localhost:8080/auth/addfavoriet/" + id,
+                    axios.post("http://192.168.0.172:8080/auth/addfavoriet/" + id,
                         {
                             headers: { 'Content-Type': 'application/json',
                             'Authorization' : "Bearer " + accessToken},
@@ -121,38 +118,34 @@ function OnderwerpUitbreiden(id){
                     setVeranderd(true)
                 } catch (err) {
                     console.error(err);
-                    //navigate('/login', { state: {from: location}, replace: true})
                 }
                 }
         }
 
    return (
-    <ScrollView contentContainerStyle={styles.view}>
-        <Text style={styles.text}>Subjects Screen</Text>
-
+    <SafeAreaView style={styles.view}>
+    <ScrollView style={styles.scrollView}>
         {onderwerpen?.length
             ? 
                 onderwerpen.map((onderwerp, i) =>
                 {
                     if(!onderwerp.hideObject)
                         return(
-                            <Card key={i}>
-                                <CardTitle
-                                    title={onderwerp.name}
-                                    subtitle={onderwerp.doelgroep}>
-                                </CardTitle>
+                            <Card key={i} style={styles.kaart}>
+                            <CardTitle title={onderwerp.name} subtitle={"          "} numberofLines={2} 
+                            />
+                            <Text>{"\n"}</Text>
                                 <CardContent text={onderwerp.promotor}></CardContent>
-                                <CardContent><Ionicons name="people" size={24} color="#00407A" />{onderwerp.capacity}</CardContent>
+                                <CardContent><Text><Ionicons name="people" size={24} color="#00407A" />  {onderwerp.capacity}</Text></CardContent>
                                 {onderwerp.disciplines.isEmpty ? (
                                     <CardContent> Disciplines: {onderwerp.disciplines}</CardContent>) : <CardContent></CardContent>
                                 }
-
                                 <CardAction 
                                     separator={true} 
                                     inColumn={false}>
-                                    <IconButton onClick={()=>favoriet(onderwerp.id)}>{favorieten_id.includes(onderwerp.id) ? <Ionicons name="heart-sharp" size={24} color="#ff084a" /> : <Ionicons name="heart-outline" size={24} color="#00407A" />}</IconButton>
+                                   <CardButton onClick={()=>favoriet(onderwerp.id)} color="#ff084a" title="Add to favorites!"/>
                                     <CardButton
-                                        onPress={() => {OnderwerpUitbreiden(onderwerp.id)}}
+                                        onPress={() => {history.push("/onderwerp.id")}}
                                         title="More info"
                                         color="#00407A"
                                     />
@@ -165,6 +158,26 @@ function OnderwerpUitbreiden(id){
         ) : <Text style={styles.text}>No subjects to show</Text>
         }
 
+        <Card  style={styles.kaart}>
+            <CardTitle title={"titel van het onderwrep komt hier te staan"} subtitle={"          "} numberofLines={2} />
+            <Text>{"\n"}</Text>
+                <CardContent text={"promotor"}></CardContent>
+                <CardContent><Text><Ionicons name="people" size={24} color="#00407A" />  {" 2"}</Text></CardContent>
+                {onderwerp.disciplines.isEmpty ? (
+                    <CardContent> Disciplines: {"hier komen de verschillende discplines te staan"}</CardContent>) : <CardContent></CardContent>
+                }
+                <CardAction 
+                    separator={true} 
+                    inColumn={false}>
+                    <CardButton onClick={()=>favoriet(onderwerp.id)} color="#ff084a" title="Add to favorites!"/>
+                    <CardButton
+                        //onPress={() => {history.push("/onderwerp.id")}
+                        title="More info"
+                        color="#00407A"
+                    />
+                </CardAction>
+            </Card>
+
 
     <View>
         <Text>
@@ -175,6 +188,7 @@ function OnderwerpUitbreiden(id){
       </View>
 
     </ScrollView>
+    </SafeAreaView>
    );
  }
 
@@ -185,11 +199,17 @@ function OnderwerpUitbreiden(id){
         justifyContent: 'center',
         backgroundColor: '#fff',
      },
+     scrollView:{
+        flex: 1,
+        backgroundColor: '#fff', 
+     },
      text: {
         fontSize:16,
         fontWeight:'normal',
-        marginLeft:10,
-        marginRight:10,
+     },
+     kaart: {
+        width:'90%',
+        paddingBottom:10,
      },
  })
 

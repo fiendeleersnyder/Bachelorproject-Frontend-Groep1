@@ -2,9 +2,12 @@ import { StyleSheet, ScrollView, Text, TextInput, Button, View, SafeAreaView} fr
 import React from 'react';
 import { Picker } from '@react-native-picker/picker';
 import Slider from '@react-native-community/slider';
+import axios from 'axios';
+
 
 
 class AddOnderwerp extends React.Component {
+    
   constructor(){
     super();
     this.state={
@@ -19,13 +22,52 @@ class AddOnderwerp extends React.Component {
       kernwoord1:'',
       kernwoord2:'',
       kerwoord3:'',
-      trefwoorden:''
+      trefwoorden:'',
     };
   };
 
-  submit(){
-    console.warn(this.state)
+  submit(id){
+    console.warn(this.state);
+    var idPromotor;
+
+    if (this.state.title === "" || this.state.begeleiding === "" || this.state.contactpersoon === "" || this.state.email === "" || this.state.omschrijving === ""){
+        alert("Something went wrong, please try again. Make sure to fill in every field marked with a star.")
+        return;}
+
+    promotoren.map((promotor, i) => {
+      if(enteredPromotor === promotor.name)
+          return(
+              idPromotor = promotor.id
+          )
+    })
+    const onderwerpData = {
+        title: this.state.title,
+        doelgroep: this.state.doelgroep,
+        begeleiding: this.state.begeleiding,
+        promotor:idPromotor,
+        email:this.state.email,
+        telefoon: this.state.telefoonnummer,
+        aantalpersonen:this.state.aantalpersonen,
+        kermerkwoord1:this.state.kernwoord1,
+        kermerkwoord2:this.state.kernwoord2,
+        kermerkwoord3:this.state.kerwoord3,
+        trefwoorden:this.state.trefwoorden,
+        description: this.state.omschrijving
+    };
+
+    console.log(onderwerpData);
+
+    try {
+        const response = axios.post("http://192.168.0.172:8080/addonderwerp/" + id,
+            JSON.stringify(onderwerpData),
+            {
+                headers: { 'Content-Type': 'application/json' }
+            });
+    }catch (AxiosError) {
+        console.error(AxiosError);
+    }
   };
+  
   
   render(){
     const styles = StyleSheet.create({
@@ -50,11 +92,12 @@ class AddOnderwerp extends React.Component {
       },
       slider:{
         marginTop: 10,
-        marginBottom:10
+        marginBottom:10,
+        width: '90%',
       },
       inputStyle: {
         marginTop: 5,
-        width: '75%',
+        width: '90%',
         height: 40,
         paddingHorizontal: 10,
         borderRadius: 50,
@@ -73,7 +116,7 @@ class AddOnderwerp extends React.Component {
       pickerStyle:{  
         marginTop: 5,
         height: 40,  
-        width: '75%',
+        width: '90%',
         borderRadius: 50, 
         borderColor:'#b4e5fa', 
         backgroundColor: '#b4e5fa',
@@ -336,7 +379,7 @@ class AddOnderwerp extends React.Component {
         <Text>
         {"\n"}
         </Text> 
-        <Button style={styles.knop} title='Add Subject!' onPress={()=>{this.submit()}}/>
+        <Button style={styles.knop} title='Add Subject!' onPress={()=>{this.submit(id)}}/>
       </View>
       <View>
         <Text>
