@@ -16,7 +16,7 @@ import {View,Text,StyleSheet,SafeAreaView,TextInput,TouchableOpacity,Image,Butto
       }
       try {
 
-        const response = await axios.post('http://192.168.0.172:8080/login', 
+        const response = await axios.post('http://192.168.0.164:8080/login', 
 
         //const response = await axios.post('http://10.110.176.65:8080/login', 
 
@@ -51,17 +51,11 @@ import {View,Text,StyleSheet,SafeAreaView,TextInput,TouchableOpacity,Image,Butto
         // );
       } catch (err) {
         if (err.response) {
-            // There is an error response from the server
-            // You can anticipate error.response.data here
             const error = err.response.data;
             console.log(error);
-            //dispatch(addError(error.message));
         } else if (err.request) {
-            // The request was made but no response was received
-            // Error details are stored in error.reqeust
             console.log(err.request);
         } else {
-            // Some other errors
             console.log('Error', err.message);
         }
     }
@@ -97,14 +91,6 @@ import {View,Text,StyleSheet,SafeAreaView,TextInput,TouchableOpacity,Image,Butto
           onPress={() => onLogin()}>
              <Text style={styles.loginText}>LOGIN</Text>
         </TouchableOpacity>
-        {/* <Button title="Login"  style={styles.loginBtn.loginText} onPress={() => onLogin()} /> */}
-        {/* <View>
-          <Text>
-          {"\n"}
-          {"\n"}
-          {"\n"}
-          </Text>
-      </View> */}
       </View>
       
     );
