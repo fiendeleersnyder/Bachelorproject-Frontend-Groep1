@@ -144,7 +144,6 @@ const styles = StyleSheet.create({
        fontWeight:'normal',
     },
     kaart: {
-       //width:'100%',
        paddingBottom:10,
     },
 })
