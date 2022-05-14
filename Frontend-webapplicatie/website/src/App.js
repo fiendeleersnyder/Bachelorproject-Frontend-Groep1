@@ -1,6 +1,6 @@
 import './App.css';
-import Account from './Pages/account';
-import AddOnderwerp from './Pages/addonderwerp';
+import Accountadmin from './Pages/accountpages/accountadmin';
+import AddOnderwerp from './Pages/onderwerpentoevoegen/addonderwerp';
 import Chat from './Pages/chat';
 import HomePagina from './Pages/home';
 import Indienen from './Pages/indienen';
@@ -27,7 +27,7 @@ function App() {
                 <Route path='/addonderwerp' element={<AddOnderwerp />}/>
                 <Route path='/indienen' element={<Indienen />}/>
                 <Route path='/chat' element={<Chat />}/>
-                <Route path='/account' element={<Account />}/>
+                <Route path='/account' element={<Accountadmin />}/>
             </Routes>
         </Layout>
   );

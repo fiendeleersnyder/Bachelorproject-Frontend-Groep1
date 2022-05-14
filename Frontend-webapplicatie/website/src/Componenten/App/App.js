@@ -1,7 +1,11 @@
 import './App.css';
 import StartPage from '../../Pages/startpage'
-import Account from '../../Pages/account';
-import AddOnderwerp from '../../Pages/addonderwerp';
+import Accountadmin from '../../Pages/accountpages/accountadmin';
+import AccountStudent from '../../Pages/accountpages/accountstudent';
+import AccountBedrijf from '../../Pages/accountpages/accountbedrijf';
+import AccountCoordinator from '../../Pages/accountpages/accountcoordinator'
+import AddOnderwerp from '../../Pages/onderwerpentoevoegen/addonderwerp';
+import AddOnderwerpBedrijf from '../../Pages/onderwerpentoevoegen/addonderwerpbedrijf'
 import HomePagina from '../../Pages/home';
 import Indienen from '../../Pages/indienen';
 import OnderwerpenLijst from '../../Pages/onderwerpen';
@@ -13,6 +17,7 @@ import Phases from '../../Pages/phases'
 import None from '../../Pages/faseNone'
 import Toewijzen from '../../Pages/toewijzen'
 import Toewijzing from '../../Pages/toewijzing'
+import ChangePassword from '../../Pages/changepassword'
 import Login from '../Login/Login';
 import Missing from '../Missing/Missing'
 import RequireAuth from '../Authorization/RequireAuth'
@@ -71,7 +76,8 @@ function App() {
                         <Route path='/admin/indienen' element={<Indienen/>}/>
                         <Route path='/admin/users' element={<UserLijst/>}/>
                         <Route path='/admin/phases' element={<Phases />} />
-                        <Route path='/admin/account' element={<Account/>}/>
+                        <Route path='/admin/account' element={<Accountadmin/>}/>
+                        <Route path='/admin/account/changepassword' element={<ChangePassword/>}/>
                     </Route>
                 </Route>
             </Route>
@@ -85,7 +91,8 @@ function App() {
                         <Route path='/student/addonderwerp' element={<AddOnderwerp/>}/>
                         <Route path='/student/indienen' element={<Indienen/>}/>
                         <Route path='/student/toewijzing' element={<Toewijzing/>}/>
-                        <Route path='/student/account' element={<Account/>}/>
+                        <Route path='/student/account' element={<AccountStudent/>}/>
+                        <Route path='/student/account/changepassword' element={<ChangePassword/>}/>
                     </Route>
                 </Route>
             </Route>
@@ -98,7 +105,8 @@ function App() {
                         <Route path='/coordinator/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
                         <Route path='/coordinator/addonderwerp' element={<AddOnderwerp/>}/>
                         <Route path='/coordinator/toewijzen' element={<Toewijzen />}/>
-                        <Route path='/coordinator/account' element={<Account/>}/>
+                        <Route path='/coordinator/account' element={<AccountCoordinator/>}/>
+                        <Route path='/coordinator/account/changepassword' element={<ChangePassword/>}/>
                     </Route>
                 </Route>
             </Route>
@@ -109,8 +117,9 @@ function App() {
                         <Route path='/bedrijf/' element={<HomePagina/>}/>
                         <Route path='/bedrijf/onderwerpen' element={<OnderwerpenLijstPromotorEnBedrijf />}/>
                         <Route path='/bedrijf/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
-                        <Route path='/bedrijf/addonderwerp' element={<AddOnderwerp/>}/>
-                        <Route path='/bedrijf/account' element={<Account/>}/>
+                        <Route path='/bedrijf/addonderwerp' element={<AddOnderwerpBedrijf/>}/>
+                        <Route path='/bedrijf/account' element={<AccountBedrijf/>}/>
+                        <Route path='/bedrijf/account/changepassword' element={<ChangePassword/>}/>
                     </Route>
                 </Route>
             </Route>
@@ -123,7 +132,8 @@ function App() {
                         <Route path='/promotor/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
                         <Route path='/promotor/addonderwerp' element={<AddOnderwerp/>}/>
                         <Route path='/promotor/toewijzen' element={<Toewijzen />}/>
-                        <Route path='/promotor/account' element={<Account/>}/>
+                        <Route path='/promotor/account' element={<Accountadmin/>}/>
+                        <Route path='/promotor/account/changepassword' element={<ChangePassword/>}/>
                     </Route>
                 </Route>
             </Route>

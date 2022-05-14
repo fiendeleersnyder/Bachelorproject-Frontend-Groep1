@@ -1,4 +1,4 @@
-import NieuwOnderwerpForm from '../Componenten/Onderwerpen/NieuwOnderwerpForm';
+import NieuwOnderwerpForm from '../../Componenten/Onderwerpen/OnderwerpenToevoegen/NieuwOnderwerpForm';
 
 function AddOnderwerp() {
   return <section>

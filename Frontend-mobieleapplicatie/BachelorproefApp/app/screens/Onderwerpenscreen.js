@@ -1,16 +1,25 @@
-import { StyleSheet, Button, Text, View, SafeAreaView } from 'react-native';
-import { Card, CardTitle, CardContent, CardAction } from 'react-native-material-cards';
+import { StyleSheet, Text, View } from 'react-native';
+import { Card, CardTitle, CardContent, CardAction, CardButton } from 'react-native-material-cards';
 import axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react';
 import { Ionicons } from '@expo/vector-icons';
+import { IconButton } from 'react-native-paper';
+import { PropTypes } from 'react';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+function OnderwerpUitbreiden(id){
+    let nummer =id;
+   <Text>nummer</Text>
+}
 
-    const OnderwerpLijst = ({navigation}) => {
+   const OnderwerpLijst = () => {
       const [onderwerpen, setOnderwerpen] = useState();
       const [favorieten_id, setFavorieten_id] = useState([]);
       const [veranderd, setVeranderd] = useState();
+      const navigate = useNavigation();
+      const location = useRoute();
   
       useEffect(() => {
           const controller = new AbortController();
@@ -28,20 +37,22 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
                     setOnderwerpen(response.data);
               } catch (err) {
                   console.error(err);
+                  //navigate('/login', { state: {from: location}, replace: true})
               }
               let array = [];
               try{
                 const response = await axios.get('http://192.168.0.164:8080/auth/favorieten', {
                     withCredentials: true,
                     headers: {
-                      'Authorization' : "Bearer " + accessToken
-                    }
+                        'Authorization' : "Bearer " + accessToken
+                      }
                 });
                   array = response?.data;
                   console.log(array);
                   setVeranderd(false)
               } catch (err) {
                   console.error(err);
+                  //navigate('/login', { state: {from: location}, replace: true})
               }
               let idarray = [];
               array?.map((onderwerp, i) =>
@@ -67,11 +78,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
                         'Authorization' : "Bearer " + accessToken
                       }
                 });
-                    console.log(response?.data)
                     array = response?.data;
                     console.log(array);
             } catch (err) {
                 console.error(err);
+                //navigate('/login', { state: {from: location}, replace: true})
             }
             setFavorieten_id([])
             let idarray = [];
@@ -96,6 +107,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
                     setVeranderd(true)
                 } catch (err) {
                     console.error(err);
+                    //navigate('/login', { state: {from: location}, replace: true})
                 }
             }
             else{
@@ -109,34 +121,38 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
                     setVeranderd(true)
                 } catch (err) {
                     console.error(err);
+                    //navigate('/login', { state: {from: location}, replace: true})
                 }
                 }
         }
 
    return (
-    <SafeAreaView style={styles.view}>
-    <ScrollView style={styles.scrollView}>
+    <ScrollView contentContainerStyle={styles.view}>
+        <Text style={styles.text}>Subjects Screen</Text>
+
         {onderwerpen?.length
             ? 
                 onderwerpen.map((onderwerp, i) =>
                 {
                     if(!onderwerp.hideObject)
                         return(
-                            <Card key={i} style={styles.kaart}>
-                            <CardTitle title={onderwerp.name} subtitle={"          "} 
-                            />
-                            <Text>{"\n"}</Text>
+                            <Card key={i}>
+                                <CardTitle
+                                    title={onderwerp.name}
+                                    subtitle={onderwerp.doelgroep}>
+                                </CardTitle>
                                 <CardContent text={onderwerp.promotor}></CardContent>
-                                <CardContent><Text><Ionicons name="people" size={24} color="#00407A" />  {onderwerp.capacity}</Text></CardContent>
+                                <CardContent><Ionicons name="people" size={24} color="#00407A" />{onderwerp.capacity}</CardContent>
                                 {onderwerp.disciplines.isEmpty ? (
                                     <CardContent> Disciplines: {onderwerp.disciplines}</CardContent>) : <CardContent></CardContent>
                                 }
+
                                 <CardAction 
                                     separator={true} 
                                     inColumn={false}>
-                                   <Button onPress={()=>favoriet(onderwerp.id)} color="#ff084a" title="Add to favorites!"/>
-                                    <Button
-                                        onPress={() => { navigation.navigate('Subject Details', {itemId:onderwerp.id, otherParam: onderwerp,});}}
+                                    <IconButton onClick={()=>favoriet(onderwerp.id)}>{favorieten_id.includes(onderwerp.id) ? <Ionicons name="heart-sharp" size={24} color="#ff084a" /> : <Ionicons name="heart-outline" size={24} color="#00407A" />}</IconButton>
+                                    <CardButton
+                                        onPress={() => {OnderwerpUitbreiden(onderwerp.id)}}
                                         title="More info"
                                         color="#00407A"
                                     />
@@ -144,31 +160,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
                             </Card>
                         )
                 }
+            
+
         ) : <Text style={styles.text}>No subjects to show</Text>
         }
-
-        <Card  style={styles.kaart}>
-            <CardTitle title={"titel van het onderwrep komt hier te staan"} subtitle={"          "}  />
-            <Text>{"\n"}</Text>
-                <CardContent text={"promotor"}></CardContent>
-                <CardContent><Text><Ionicons name="people" size={24} color="#00407A" />  {" 2"}</Text></CardContent>
-                
-                    <CardContent text={"Disciplines: hier komen de verschillende discplines te staan"}> </CardContent>
-                
-                <CardAction 
-                    separator={true} 
-                    inColumn={false}>
-                    <Button 
-                        onPress={() => console.log("favorietenknop")}
-                        color="#ff084a" 
-                        title="Add to favorites!"/>
-                    <Button
-                        onPress={() => console.log("moreinfo knop")}
-                        title="More info"
-                        color="#00407A"
-                    />
-                </CardAction>
-            </Card>
 
 
     <View>
@@ -180,7 +175,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
       </View>
 
     </ScrollView>
-    </SafeAreaView>
    );
  }
 
@@ -191,18 +185,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
         justifyContent: 'center',
         backgroundColor: '#fff',
      },
-     scrollView:{
-        flex: 1,
-        backgroundColor: '#fff', 
-     },
      text: {
         fontSize:16,
         fontWeight:'normal',
-     },
-     kaart: {
-        width:'90%',
-        paddingBottom:10,
-        paddingLeft:10,
+        marginLeft:10,
+        marginRight:10,
      },
  })
 
