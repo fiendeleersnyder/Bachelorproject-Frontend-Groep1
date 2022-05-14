@@ -1,4 +1,6 @@
 # Bachelorproject-Frontend-Groep1
+*****Frontend-webapplicatie*****
+uitleg over webapplicatie
 
 *****Frontend-mobieleapllicatie*****
 
