@@ -21,7 +21,7 @@ const OnderwerpLijstPromotor = () => {
 
         const getOnderwerpen = async () => {
             try {
-                const response = await axiosPrivate.get('/onderwerpen', {
+                const response = await axiosPrivate.get('/promotoronderwerpen', {
                     signal: controller.signal
                 });
                 console.log(response.data);

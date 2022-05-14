@@ -121,7 +121,7 @@ const OnderwerpLijst = () => {
                                     return(
                                         <Card key={i}>
                                             <div className={classes.content}>
-                                                <h3 >{onderwerp.name}</h3>
+                                                <h3>{onderwerp.name}</h3>
                                                 <p>Target group: {onderwerp.doelgroep}</p>
                                                 <p> Promoter: {onderwerp.promotor}</p>
                                                 <p> <GroupsIcon /> : {onderwerp.capacity}</p>

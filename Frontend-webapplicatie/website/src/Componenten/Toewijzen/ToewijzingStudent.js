@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const Toewijzing = () => {
+const ToewijzingStudent = () => {
     const [onderwerp, setOnderwerp] = useState(null);
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
@@ -46,4 +46,4 @@ const Toewijzing = () => {
     );
 };
 
-export default Toewijzing;
+export default ToewijzingStudent;

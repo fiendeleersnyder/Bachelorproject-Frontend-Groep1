@@ -58,7 +58,11 @@ const OnderwerpLijstMetVerwijderen = () => {
         }
     }
 
-    const verwijder = async (id) => {
+    const verwijder = async (id, selection) => {
+        if(selection.length !== 0){
+            alert("You can't delete subjects that already have been chosen")
+            return;}
+
         try {
             axiosPrivate.delete("/verwijder/" + id,
                 {
@@ -86,7 +90,7 @@ const OnderwerpLijstMetVerwijderen = () => {
                             if(!onderwerp.hideObject)
                             return(
                                     <Card key={i}>
-                                        <IconButton onClick={()=>verwijder(onderwerp.id)} className={classes.knopje}><DeleteIcon></DeleteIcon></IconButton>
+                                        <IconButton onClick={()=>verwijder(onderwerp.id, onderwerp.selection)} className={classes.knopje}><DeleteIcon></DeleteIcon></IconButton>
                                         <div className={classes.content}>
                                             <h3 >{onderwerp.name}</h3>
                                             <p>Target group: {onderwerp.doelgroep}</p>

@@ -1,5 +1,5 @@
 import classes from './Layout.module.css';
-import MenubalkPromotor from "../MenubalkPromotor";
+import MenubalkPromotor from "../Menubalken/MenubalkPromotor";
 import {Outlet} from "react-router-dom"
 
 function LayoutPromotor(props){

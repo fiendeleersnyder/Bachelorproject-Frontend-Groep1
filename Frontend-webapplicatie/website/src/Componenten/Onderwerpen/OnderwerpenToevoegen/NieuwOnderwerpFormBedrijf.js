@@ -48,12 +48,12 @@ function NieuwOnderwerpForm() {
         }
     }, [])
 
-    function submitHandler(event, id){
+    function submitHandler(event){
         event.preventDefault();
 
         const enteredTitle = titleInputRef.current.value;
         const enteredDoelgroep = doelgroepInputRef.current.value;
-        const enteredBegeleiding = begeleidingInputRef.current.value;
+        //const enteredBegeleiding = begeleidingInputRef.current.value;
         const enteredPromotor = promotorInputRef.current.value;
         const enteredEmail = emailInputRef.current.value;
         const enteredTelefoon = telefoonInputRef.current.value;
@@ -69,32 +69,43 @@ function NieuwOnderwerpForm() {
             alert("Something went wrong, please try again. Make sure to fill in every field marked with a star.")
             return;}
 
-        promotoren.map((promotor, i) => {
-            if(enteredPromotor === promotor.name)
+        promotoren?.map((promotor, i) => {
+            if(enteredPromotor === promotor.firstname + " " + promotor.name)
                 return(
                     idPromotor = promotor.id
                 )
         })
 
+        var arraydisciplines = []
+        if (enteredKern2 === "---" && enteredKern3 === "---")
+
+            arraydisciplines = [enteredKern1]
+
+        else if (enteredKern3 === "---")
+
+                arraydisciplines = [enteredKern1, enteredKern2]
+
+        else if(enteredKern2!== "---" && enteredKern3 !== "---")
+
+                arraydisciplines = [enteredKern1, enteredKern2, enteredKern3]
+
+        var arraytrefwoorden = [enteredTrefwoord]
+
         const onderwerpData = {
-            title: enteredTitle,
+            name: enteredTitle,
             doelgroep: enteredDoelgroep,
-            begeleiding: enteredBegeleiding,
-            promotor: idPromotor,
             email:enteredEmail,
-            telefoon: enteredTelefoon,
-            aantalpersonen:enteredAantal,
-            kermerkwoord1:enteredKern1,
-            kermerkwoord2:enteredKern2,
-            kermerkwoord3:enteredKern3,
-            trefwoorden:enteredTrefwoord,
+            phone: enteredTelefoon,
+            capacity:enteredAantal,
+            disciplines: arraydisciplines,
+            trefwoorden:arraytrefwoorden,
             description: enteredDescription
         };
 
         console.log(onderwerpData);
 
         try {
-            const response = axiosPrivate.post("/bedrijfaddonderwerp/" + id,
+            const response = axiosPrivate.post("/bedrijfaddonderwerp/" + idPromotor,
                 JSON.stringify(onderwerpData),
                 {
                     headers: { 'Content-Type': 'application/json' }
@@ -145,15 +156,11 @@ function NieuwOnderwerpForm() {
                     </select>
                 </div>
                 <div className={classes.control}>
-                    <label htmlFor='begeleiding'>Extern partner-Research group *</label>
-                    <input type='text' required id='begeleiding' ref={begeleidingInputRef}/>
-                </div>
-                <div className={classes.control}>
                     <label1 htmlFor='contactpersoon'>Promotor</label1>
                     <select required id='promotor' ref={promotorInputRef} >
                         <option>---</option>
-                        {promotoren?.map((onderwerp, i) =>
-                            <option key={i}>{ onderwerp.firstname + " " + onderwerp.name}</option>
+                        {promotoren?.map((promotor, i) =>
+                            <option key={i}>{ promotor.firstname + " " + promotor.name}</option>
                         )}
                     </select>
                 </div>

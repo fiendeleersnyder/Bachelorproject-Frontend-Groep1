@@ -64,6 +64,9 @@ function IndienenForm() {
             alert("At least one of the subject isn't correctly submit, try again.")
             return;}
 
+        if (enteredVoorkeur1 === enteredVoorkeur2 || enteredVoorkeur1 === enteredVoorkeur3 || enteredVoorkeur3 === enteredVoorkeur2){
+            alert("You have to choose 3 different subjects, try again.")
+            return;}
 
         var id1;
         var id2;
@@ -100,8 +103,8 @@ function IndienenForm() {
 
     return (
         <div>
-            <div><p className={classes.card}>Beste student <br/>
-                Select 3 topics. You must select at least 1 topic to submit.
+            <div><p className={classes.card}>Student, <br/>
+                select 3 topics. You must select at least 1 topic to submit.
                 Put the topic with your highest preference in place 1.
                 Put your second and third preference in place 2 and 3, respectively.
                 Here you can make a selection from the subjects that you have placed

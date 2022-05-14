@@ -21,13 +21,14 @@ function NieuwOnderwerpForm() {
     const navigate = useNavigate();
     const location = useLocation();
     const [promotoren, setPromotoren] = useState([]);
+    const [bedrijven, setBedrijven] = useState([]);
     var array = [];
 
     useEffect(() => {
         let isMounted = true;
         const controller = new AbortController();
 
-        const getPromotoren = async () => {
+        const getPromotorenEnBedrijven = async () => {
             try {
                 const response = await axiosPrivate.get("/auth/promotoren", {
                     signal: controller.signal
@@ -38,9 +39,19 @@ function NieuwOnderwerpForm() {
                 console.error(err);
                 navigate('/login', { state: {from: location}, replace: true})
             }
+            try {
+                const response = await axiosPrivate.get("/auth/bedrijven", {
+                    signal: controller.signal
+                });
+                console.log(response.data);
+                isMounted && setBedrijven(bedrijven => response.data);
+            } catch (err) {
+                console.error(err);
+                navigate('/login', { state: {from: location}, replace: true})
+            }
         }
 
-        getPromotoren();
+        getPromotorenEnBedrijven();
 
         return () => {
             isMounted = false;
@@ -70,31 +81,43 @@ function NieuwOnderwerpForm() {
             return;}
 
         promotoren.map((promotor, i) => {
-            if(enteredPromotor === promotor.name)
+            if(enteredPromotor === promotor.firstname + " " + promotor.name)
                 return(
                     idPromotor = promotor.id
                 )
         })
 
+        var arraydisciplines = []
+        if (enteredKern2 === "---" && enteredKern3 === "---")
+
+            arraydisciplines = [enteredKern1]
+
+        else if (enteredKern3 === "---")
+
+            arraydisciplines = [enteredKern1, enteredKern2]
+
+        else if(enteredKern2!== "---" && enteredKern3 !== "---")
+
+            arraydisciplines = [enteredKern1, enteredKern2, enteredKern3]
+
+        var arraytrefwoorden = [enteredTrefwoord]
+
         const onderwerpData = {
-            title: enteredTitle,
+            name: enteredTitle,
             doelgroep: enteredDoelgroep,
-            begeleiding: enteredBegeleiding,
-            promotor: idPromotor,
+            // begeleiding: enteredBegeleiding,
             email:enteredEmail,
-            telefoon: enteredTelefoon,
-            aantalpersonen:enteredAantal,
-            kermerkwoord1:enteredKern1,
-            kermerkwoord2:enteredKern2,
-            kermerkwoord3:enteredKern3,
-            trefwoorden:enteredTrefwoord,
+            phone: enteredTelefoon,
+            capacity:enteredAantal,
+            disciplines: arraydisciplines,
+            trefwoorden:arraytrefwoorden,
             description: enteredDescription
         };
 
         console.log(onderwerpData);
 
         try {
-            const response = axiosPrivate.post("/addonderwerp/" + id,
+            const response = axiosPrivate.post("/addonderwerp/" + idPromotor,
                 JSON.stringify(onderwerpData),
                 {
                     headers: { 'Content-Type': 'application/json' }
@@ -146,14 +169,19 @@ function NieuwOnderwerpForm() {
                 </div>
                 <div className={classes.control}>
                     <label htmlFor='begeleiding'>Extern partner-Research group *</label>
-                    <input type='text' required id='begeleiding' ref={begeleidingInputRef}/>
+                    <select type='text' id='begeleiding' ref={begeleidingInputRef}>
+                        <option>---</option>
+                        {bedrijven?.map((bedrijf, i) =>
+                            <option key={i}>{ bedrijf.firstname + " " + bedrijf.name}</option>
+                        )}
+                    </select>
                 </div>
                 <div className={classes.control}>
                     <label1 htmlFor='contactpersoon'>Promotor</label1>
                     <select required id='promotor' ref={promotorInputRef} >
                         <option>---</option>
-                        {promotoren?.map((onderwerp, i) =>
-                            <option key={i}>{ onderwerp.firstname + " " + onderwerp.name}</option>
+                        {promotoren?.map((promotor, i) =>
+                            <option key={i}>{ promotor.firstname + " " + promotor.name}</option>
                         )}
                     </select>
                 </div>

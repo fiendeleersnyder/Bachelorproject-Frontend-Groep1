@@ -42,13 +42,13 @@ return (
             <li>Phone number: {onderwerp?.phone}</li>
             <li>Permitted amount of students per group: {onderwerp?.capacity}</li>
             {onderwerp?.disciplines.isEmpty ? (
-                <li> Disciplines: {onderwerp?.disciplines}</li>) : <p></p>
+                <li> Disciplines: {onderwerp?.disciplines}</li>) : null
             }
             {onderwerp?.trefwoorden.isEmpty ? (
-                <li> Disciplines: {onderwerp?.trefwoorden}</li>) : <p></p>
+                <li> Keywords: {onderwerp?.trefwoorden}</li>) : null
             }
+            <li>Description: {onderwerp?.description}</li>
         </ul>
-        <p>Description: {onderwerp?.description}</p>
     </article>
 );
 };
