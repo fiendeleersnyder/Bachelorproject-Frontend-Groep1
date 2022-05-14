@@ -3,14 +3,15 @@ import { Card, CardTitle, CardContent, CardAction, } from 'react-native-material
 import axios from 'axios';
 import { useState, useEffect} from 'react';
 import { Ionicons } from '@expo/vector-icons';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as React from 'react';
 
 
 const OnderwerpDetail = ({route, navigation}) => {
     const { itemId, otherParam } = route.params;
     const [onderwerp, setOnderwerp] = useState();
-    
+    const [favorieten_id, setFavorieten_id] = useState([]);
+    const [veranderd, setVeranderd] = useState();
     
 
     useEffect(() => {
@@ -18,26 +19,79 @@ const OnderwerpDetail = ({route, navigation}) => {
     
         const getInfo = async () => {
             try {
-                // const response = await axios.get("/onderwerpen/" + itemId);
-                // console.log(response.data);
-                //setOnderwerp(response?.data)
                 setOnderwerp(otherParam)
             } catch (err) {
                 console.error(err);
             }
         }
-    
+
         getInfo();
     
         return () => {
             controller.abort();
         }
     }, [])
+
+    const favoriet = async (id) => {
+        const accessToken = await AsyncStorage.getItem('accesToken');
+        let array = [];
+        try{
+            const response = await axios.get("http://192.168.0.164:8080/auth/favorieten", {
+                withCredentials: true,
+                headers: {
+                    'Authorization' : "Bearer " + accessToken
+                  }
+            });
+                console.log(response?.data)
+                array = response?.data;
+                console.log(array);
+        } catch (err) {
+            console.error(err);
+        }
+        setFavorieten_id([])
+        let idarray = [];
+        array.map((onderwerp, i) =>
+                    idarray.push(onderwerp.id))
+        setFavorieten_id(idarray);
+        console.log("id array" + idarray);
+        let found = false;
+        if (favorieten_id !== []) {
+            found = favorieten_id.includes(id);
+        }
+        console.log(favorieten_id);
+        console.log(found);
+        if (found) {
+            try {
+                axios.delete("http://192.168.0.164:8080/auth/deletefavoriet/" + id,
+                {
+                    withCredentials: true,
+                    headers: { 'Content-Type': 'application/json',
+                    'Authorization' : "Bearer " + accessToken}
+                });
+                setVeranderd(true)
+            } catch (err) {
+                console.error(err);
+            }
+        }
+        else{
+            try {
+                 axios.post("http://192.168.0.164:8080/auth/addfavoriet/" + id,
+                    {
+                        withCredentials: true,
+                        headers: { 'Content-Type': 'application/json',
+                        'Authorization' : "Bearer " + accessToken}
+                    });    //.then(response=>console.log(response))
+                setVeranderd(true)
+            } catch (err) {
+                console.error(err);
+            }
+            }
+    }
     
     return (
     <SafeAreaView style={styles.view}>
-    <ScrollView style={styles.scrollView}>
-        <Card style={styles.kaart}>
+        <ScrollView style={styles.scrollView}>
+            <Card style={styles.kaart}>
                 <CardTitle title={otherParam.name} subtitle={"          "}  />
                 <Text>{"\n"}</Text>
                 <CardContent text={otherParam.doelgroep}></CardContent>
@@ -46,7 +100,7 @@ const OnderwerpDetail = ({route, navigation}) => {
                 {otherParam.phone.isEmpty ? (
                     <CardContent> Telefoonnummer: {otherParam.phone}</CardContent>) : <CardContent></CardContent>
                 }
-                <CardContent><Text><Ionicons name="people" size={24} color="#00407A" />  {" 2"}</Text></CardContent>
+                <CardContent><Text><Ionicons name="people" size={24} color="#00407A" />  {otherParam.capacity}</Text></CardContent>
                 <CardContent text={otherParam.description}></CardContent>
                 {otherParam.disciplines.isEmpty ? (
                     <CardContent> Disciplines: {otherParam.disciplines}</CardContent>) : <CardContent></CardContent>
@@ -58,7 +112,7 @@ const OnderwerpDetail = ({route, navigation}) => {
                     separator={true} 
                     inColumn={false}>
                     <Button 
-                                onPress={() => console.log("favorietenknop")}
+                                onPress={()=>favoriet(otherParam.id)}
                                 color="#ff084a" 
                                 title="Add to favorites!"/>
                     <Button
@@ -67,8 +121,8 @@ const OnderwerpDetail = ({route, navigation}) => {
                         color="#00407A"
                     />
                 </CardAction>
-                </Card>
-         </ScrollView>
+            </Card>
+        </ScrollView>
     </SafeAreaView>
 );
 };
@@ -90,7 +144,6 @@ const styles = StyleSheet.create({
        fontWeight:'normal',
     },
     kaart: {
-       //width:'100%',
        paddingBottom:10,
     },
 })

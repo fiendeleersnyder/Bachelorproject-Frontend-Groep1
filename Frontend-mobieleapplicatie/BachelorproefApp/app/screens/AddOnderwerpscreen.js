@@ -34,12 +34,12 @@ class AddOnderwerp extends React.Component {
         alert("Something went wrong, please try again. Make sure to fill in every field marked with a star.")
         return;}
 
-    promotoren.map((promotor, i) => {
-      if(enteredPromotor === promotor.name)
-          return(
-              idPromotor = promotor.id
-          )
-    })
+    // promotoren.map((promotor, i) => {
+    //   if(enteredPromotor === promotor.name)
+    //       return(
+    //           idPromotor = promotor.id
+    //       )
+    // })
     const onderwerpData = {
         title: this.state.title,
         doelgroep: this.state.doelgroep,
@@ -63,6 +63,7 @@ class AddOnderwerp extends React.Component {
             {
                 headers: { 'Content-Type': 'application/json' }
             });
+            console.log(response);
     }catch (AxiosError) {
         console.error(AxiosError);
     }
@@ -182,10 +183,10 @@ class AddOnderwerp extends React.Component {
               style={styles.inputStyle}
               />
           </View>
-        <Text style={styles.formLabel}> Promotor-Co-promotor-Contact person</Text>
+        <Text style={styles.formLabel}> Promotor-Co-promotor-Contact person id</Text>
           <View> 
             <TextInput 
-              placeholder="Enter supervisor-co-supervisor-contact person"
+              placeholder="Enter supervisor-co-supervisor-contact person id"
               onChangeText={(text)=>{this.setState({contactpersoon:text})}}
               style={styles.inputStyle}
               />
@@ -379,7 +380,7 @@ class AddOnderwerp extends React.Component {
         <Text>
         {"\n"}
         </Text> 
-        <Button style={styles.knop} title='Add Subject!' onPress={()=>{this.submit(id)}}/>
+        <Button style={styles.knop} title='Add Subject!' onPress={()=>{this.submit(this.state.contactpersoon)}}/>
       </View>
       <View>
         <Text>
