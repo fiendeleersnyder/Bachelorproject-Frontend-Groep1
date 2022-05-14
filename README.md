@@ -4,7 +4,11 @@ In deze repository kunt u de code van de frontend vinden gemaakt voor bachelorpr
 Contributers van deze repository zijn Fien De Leersnyder en Emmy Valckenier.
 
 *****Frontend-webapplicatie*****
-uitleg over webapplicatie
+
+Hier vindt u de code voor de masterproeftoolwebapplicatie. Deze webapp kan gebruikt worden door  studenten, promotoren, bedrijven, masterproefcoördinatoeren en de administrator.
+In deze webapp kunnen studenten goedgekeurde onderwerpen bekijken, onderwerpen indienen en hun masterproefkeuze doorgeven. 
+Bedrijven kunnen onderwerpen aanbieden. Promotoren kunnen onderwerpen aanbieden en studenten boosten. Masterproefcoördinatoren kunnen onderwerpen goedkeuren, zelf onderwerpen aanbieden en onderwerpen toewijzen aan studenten. Admin kan alle eerder genoemde functionaliteiten uitvoeren.
+Wenst u dit project te gebruiken, dient u eerst de bijhorende backend te runnen. Ook dient u de gebruikte packages te installeren via het commando *npm install* uit te voeren in de terminal van uw project.
 
 *****Frontend-mobieleapplicatie*****
 
