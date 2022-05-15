@@ -10,9 +10,48 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons'; 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
-export default function App() {
+export default function App({route ,navigation}) {
+  const Stack = createNativeStackNavigator();
+
+  function Root() {
+    return(
+    <Tab.Navigator 
+    screenOptions={({ route }) => ({
+    tabBarIcon: ({ focused, color, size }) => {
+        let iconName;
+
+        if (route.name === 'Home') {
+          iconName = focused
+            ? 'home-sharp'
+            : 'home-outline';
+        } else if (route.name === 'Subjects') {
+          iconName = focused ? 'albums' : 'albums-outline';
+        } else if (route.name === 'Submit') {
+          iconName = focused ? 'arrow-redo-circle' : 'arrow-redo-circle-outline';
+        } else if (route.name === 'Logout') {
+          iconName = focused ? 'exit' : 'exit-outline';
+        } else if (route.name === 'Add Subject') {
+          iconName = focused ? 'add-circle' : 'add-circle-outline';
+        }
+        
+        return <Ionicons name={iconName} size={size} color={color} />;
+      },
+      tabBarActiveTintColor: '#52BDEC',
+      tabBarInactiveTintColor: 'gray',
+  })}
+>
+  
+  <Tab.Screen name="Home" component={Homescreen} />
+  <Tab.Screen name="Subjects" component={Onderwerpenscreen} />
+  <Tab.Screen name="Add Subject" component={AddOnderwerpscreen} />
+  <Tab.Screen name="Submit" component={Indienenscreen} />
+  <Tab.Screen name="Logout" component={Uitloggen} />
+  <Tab.Screen name="Subject Details" component={Onderwerpendetailscreen} options={{tabBarButton: (props) => null}}></Tab.Screen>
+</Tab.Navigator>);
+  }
 
   function Uitloggen({route ,navigation}){
     AsyncStorage.removeItem('accesToken');
@@ -36,44 +75,10 @@ export default function App() {
 
     return (
       <NavigationContainer>
-      {accessToken === null ? (
-          //<Login/>
-          navigation.navigate('Login')
-      ) : (
-        <Tab.Navigator 
-            screenOptions={({ route }) => ({
-            tabBarIcon: ({ focused, color, size }) => {
-                let iconName;
-
-                if (route.name === 'Home') {
-                  iconName = focused
-                    ? 'home-sharp'
-                    : 'home-outline';
-                } else if (route.name === 'Subjects') {
-                  iconName = focused ? 'albums' : 'albums-outline';
-                } else if (route.name === 'Submit') {
-                  iconName = focused ? 'arrow-redo-circle' : 'arrow-redo-circle-outline';
-                } else if (route.name === 'Logout') {
-                  iconName = focused ? 'exit' : 'exit-outline';
-                } else if (route.name === 'Add Subject') {
-                  iconName = focused ? 'add-circle' : 'add-circle-outline';
-                }
-                
-                return <Ionicons name={iconName} size={size} color={color} />;
-              },
-              tabBarActiveTintColor: '#52BDEC',
-              tabBarInactiveTintColor: 'gray',
-          })}
-        >
-          <Tab.Screen name="Login" component={Login} options={{tabBarButton: (props) => null}}></Tab.Screen>
-          <Tab.Screen name="Home" component={Homescreen} />
-          <Tab.Screen name="Subjects" component={Onderwerpenscreen} />
-          <Tab.Screen name="Add Subject" component={AddOnderwerpscreen} />
-          <Tab.Screen name="Submit" component={Indienenscreen} />
-          <Tab.Screen name="Logout" component={Uitloggen} />
-          <Tab.Screen name="Subject Details" component={Onderwerpendetailscreen} options={{tabBarButton: (props) => null}}></Tab.Screen>
-        </Tab.Navigator>
-      )}
+      <Stack.Navigator>
+        <Stack.Screen name="Login" component={Login}/>
+        <Stack.Screen name="Root" component={Root} options={{ headerShown: false }}/>
+      </Stack.Navigator>
       </NavigationContainer>
   );
 }

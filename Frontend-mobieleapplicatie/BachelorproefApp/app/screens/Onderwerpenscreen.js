@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Button, Text, View } from 'react-native';
 import { Card, CardTitle, CardContent, CardAction } from 'react-native-material-cards';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
@@ -16,9 +16,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
   
           const getOnderwerpen = async () => {
             const accessToken = await AsyncStorage.getItem('accesToken');
-            console.log(accessToken)
               try {
-                  const response = await axios.get('http://192.168.1.16:8080/onderwerpen', {
+                  const response = await axios.get('https://Bachelorproef-backend.herokuapp.com/onderwerpen', {
                       withCredentials: true,
                       headers: {
                         'Authorization' : "Bearer " + accessToken
@@ -31,7 +30,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
               }
               let array = [];
               try{
-                const response = await axios.get('http://192.168.1.16:8080/auth/favorieten', {
+                const response = await axios.get('https://Bachelorproef-backend.herokuapp.com/auth/favorieten', {
                     withCredentials: true,
                     headers: {
                         'Authorization' : "Bearer " + accessToken
@@ -61,7 +60,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
             const accessToken = await AsyncStorage.getItem('accesToken');
             let array = [];
             try{
-                const response = await axios.get("http://192.168.1.16:8080/auth/favorieten", {
+                const response = await axios.get("https://Bachelorproef-backend.herokuapp.com/auth/favorieten", {
                     withCredentials: true,
                     headers: {
                         'Authorization' : "Bearer " + accessToken
@@ -86,7 +85,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
             console.log(found);
             if (found) {
                 try {
-                    axios.delete("http://192.168.1.16:8080/auth/deletefavoriet/" + id,
+                    axios.delete("https://Bachelorproef-backend.herokuapp.com/auth/deletefavoriet/" + id,
                     {
                         withCredentials: true,
                         headers: { 'Content-Type': 'application/json',
@@ -99,12 +98,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
             }
             else{
                 try {
-                    axios.post("http://192.168.1.16:8080/auth/addfavoriet/" + id,
-                        {
-                            withCredentials: true,
-                            headers: { 'Content-Type': 'application/json',
-                            'Authorization' : "Bearer " + accessToken}
-                        });
+                    axios.post("https://Bachelorproef-backend.herokuapp.com/auth/addfavoriet/" + id, {
+                    withCredentials: true,
+                    headers: {
+                        'Authorization' : "Bearer " + accessToken
+                      }
+                });
                     setVeranderd(true)
                 } catch (err) {
                     console.error(err);

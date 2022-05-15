@@ -52,7 +52,7 @@ class AddOnderwerp extends React.Component {
     console.log(onderwerpData);
 
     try {
-        const response = axios.post("http://192.168.0.172:8080/addonderwerp/" + id,
+        const response = axios.post("https://Bachelorproef-backend.herokuapp.com/addonderwerp/" + id,
             JSON.stringify(onderwerpData),
             {
                 headers: { 'Content-Type': 'application/json' }

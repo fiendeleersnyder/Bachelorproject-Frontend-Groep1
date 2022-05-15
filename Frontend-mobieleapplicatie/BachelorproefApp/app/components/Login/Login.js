@@ -8,17 +8,15 @@ import {View,Text,StyleSheet,TextInput,TouchableOpacity,Image } from 'react-nati
    function Login ({route, navigation}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    var logingelukt = false;
 
-    const onLogin = async () => {
+    const onLogin = async (navigation) => {
       if (!email.trim() || !password.trim()) {
         alert("Name or Email is invalid");
         return;
       }
       try {
-        const response = await axios.post('http://192.168.1.16:8080/login', 
-
-        //const response = await axios.post('http://10.110.176.65:8080/login', 
-
+        const response = await axios.post('https://Bachelorproef-backend.herokuapp.com/login', 
         qs.stringify({ username:email, password:password })
           ,{
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -31,7 +29,8 @@ import {View,Text,StyleSheet,TextInput,TouchableOpacity,Image } from 'react-nati
           'accesToken',
           accessToken
         );
-        navigation.navigate('Home');
+        navigation.navigate('Root')
+        logingelukt = true
       } catch (err) {
         if (err.response) {
             const error = err.response.data;
@@ -42,6 +41,7 @@ import {View,Text,StyleSheet,TextInput,TouchableOpacity,Image } from 'react-nati
             console.log('Error', err.message);
         }
     }
+    return logingelukt;
     };
   
     return (
@@ -71,7 +71,7 @@ import {View,Text,StyleSheet,TextInput,TouchableOpacity,Image } from 'react-nati
         </View>
         <TouchableOpacity 
           style={styles.loginBtn}
-          onPress={() => onLogin()}>
+          onPress={() => onLogin(navigation) }>
              <Text style={styles.loginText}>LOGIN</Text>
         </TouchableOpacity>
       </View>

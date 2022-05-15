@@ -22,7 +22,7 @@ function Indienenscreen() {
       const getOnderwerpen = async () => {
          const accessToken = await AsyncStorage.getItem('accesToken');
           try {
-              const response = await axios.get("http://192.168.0.164:8080/auth/favorieten", {
+              const response = await axios.get("https://Bachelorproef-backend.herokuapp.com/auth/favorieten", {
                withCredentials: true,
                headers: {
                  'Authorization' : "Bearer " + accessToken
@@ -35,7 +35,7 @@ function Indienenscreen() {
           }
 
           try {
-            const response = await axios.get("http://192.168.0.164:8080/auth/selection", {
+            const response = await axios.get("https://Bachelorproef-backend.herokuapp.com/auth/selection", {
                withCredentials: true,
                headers: {
                  'Authorization' : "Bearer " + accessToken
@@ -90,7 +90,7 @@ function Indienenscreen() {
    })
 
    try {
-       axios.post("http://192.168.0.164:8080/auth/addselection/" + id1 + "/" + id2 + "/" + id3,
+       axios.post("https://Bachelorproef-backend.herokuapp.com/auth/addselection/" + id1 + "/" + id2 + "/" + id3,
            {
             withCredentials: true,
             headers: {

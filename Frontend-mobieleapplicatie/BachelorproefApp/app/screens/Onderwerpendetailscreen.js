@@ -36,7 +36,7 @@ const OnderwerpDetail = ({route, navigation}) => {
         const accessToken = await AsyncStorage.getItem('accesToken');
         let array = [];
         try{
-            const response = await axios.get("http://192.168.0.164:8080/auth/favorieten", {
+            const response = await axios.get("https://Bachelorproef-backend.herokuapp.com/auth/favorieten", {
                 withCredentials: true,
                 headers: {
                     'Authorization' : "Bearer " + accessToken
@@ -62,7 +62,7 @@ const OnderwerpDetail = ({route, navigation}) => {
         console.log(found);
         if (found) {
             try {
-                axios.delete("http://192.168.0.164:8080/auth/deletefavoriet/" + id,
+                axios.delete("https://Bachelorproef-backend.herokuapp.com/auth/deletefavoriet/" + id,
                 {
                     withCredentials: true,
                     headers: { 'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ const OnderwerpDetail = ({route, navigation}) => {
         }
         else{
             try {
-                 axios.post("http://192.168.0.164:8080/auth/addfavoriet/" + id,
+                 axios.post("https://Bachelorproef-backend.herokuapp.com/auth/addfavoriet/" + id,
                     {
                         withCredentials: true,
                         headers: { 'Content-Type': 'application/json',
