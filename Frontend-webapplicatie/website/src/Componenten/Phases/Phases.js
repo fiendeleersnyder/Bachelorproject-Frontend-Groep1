@@ -166,7 +166,7 @@ const Phases = () => {
         <div className={classes.container}>
             <div className={classes.element}>
             <h2>Update phases</h2>
-                <h3>Decide start date from every phase</h3>
+                <h3>Decide start date for every phase</h3>
             <h4>Subjects phase: <DatePicker
                 selected={selectedStartDateP1}
                 onChange={date => veranderStartP1(date)}
