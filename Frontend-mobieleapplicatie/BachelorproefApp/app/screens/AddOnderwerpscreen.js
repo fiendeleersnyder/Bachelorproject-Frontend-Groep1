@@ -180,10 +180,11 @@ class AddOnderwerp extends React.Component {
               <Picker.Item label="IW KV Brugge" value="IW KV Brugge" />
               <Picker.Item label="IW CH Diepenbeek" value="IW CH Diepenbeek" />
               </Picker>
+
         <Text style={styles.formLabel}> Promotor-Co-promotor-Contact person id</Text>
           <View> 
             <TextInput 
-              placeholder="Enter supervisor-co-supervisor-contact person id"
+              placeholder="Enter promoter-co-promoter-contact person id"
               onChangeText={(text)=>{this.setState({contactpersoon:text})}}
               style={styles.inputStyle}
               />

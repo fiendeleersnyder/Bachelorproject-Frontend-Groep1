@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { ScrollView } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
    const OnderwerpLijst = ({route, navigation}) => {
       const [onderwerpen, setOnderwerpen] = useState();
@@ -112,16 +113,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
         }
 
    return (
-    <ScrollView contentContainerStyle={styles.view}>
-        <Text style={styles.text}>Subjects Screen</Text>
-
+    <SafeAreaView style={styles.view}>
+    <ScrollView style={styles.scrollView}>
         {onderwerpen?.length
             ? 
                 onderwerpen.map((onderwerp, i) =>
                 {
                     if(!onderwerp.hideObject)
                         return(
-                            <Card key={i}>
+                            <Card key={i} style={styles.kaart}>
                                 <CardTitle
                                     title={onderwerp.name}
                                     subtitle={onderwerp.doelgroep}>
@@ -163,21 +163,29 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
       </View>
 
     </ScrollView>
+    </SafeAreaView>
    );
  }
 
  const styles = StyleSheet.create({
-     view: {
+    view: {
         flex: 1, 
         alignItems: 'center', 
         justifyContent: 'center',
         backgroundColor: '#fff',
      },
+     scrollView:{
+        flex: 1,
+        backgroundColor: '#fff', 
+     },
      text: {
         fontSize:16,
         fontWeight:'normal',
-        marginLeft:10,
-        marginRight:10,
+     },
+     kaart: {
+        width:'90%',
+        paddingBottom:10,
+        paddingLeft:10,
      },
  })
 
