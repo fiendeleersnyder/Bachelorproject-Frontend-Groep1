@@ -16,7 +16,7 @@ import {View,Text,StyleSheet,SafeAreaView,TextInput,TouchableOpacity,Image,Butto
       }
       try {
 
-        const response = await axios.post('http://192.168.0.164:8080/login', 
+        const response = await axios.post('http://192.168.1.16:8080/login', 
 
         //const response = await axios.post('http://10.110.176.65:8080/login', 
 

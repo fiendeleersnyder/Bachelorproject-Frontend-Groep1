@@ -26,6 +26,7 @@ function OnderwerpUitbreiden(id){
   
           const getOnderwerpen = async () => {
             const accessToken = await AsyncStorage.getItem('accesToken');
+            console.log(accessToken)
               try {
                   const response = await axios.get('http://192.168.0.164:8080/onderwerpen', {
                       withCredentials: true,

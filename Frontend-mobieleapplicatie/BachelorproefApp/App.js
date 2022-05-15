@@ -14,9 +14,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export default function App() {
-  const accessToken = await AsyncStorage.getItem('accesToken');
 
   function Uitloggen(){
+    AsyncStorage.removeItem('accesToken');
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>uitlogknop werkt joepie!
@@ -26,11 +26,15 @@ export default function App() {
   }
 
   const Tab = createBottomTabNavigator();
+  var accessToken = null;
+  accessToken = AsyncStorage.getItem('accesToken');
 
     return (
       // <AppContainer />
-      accessToken === undefined ? (
-      <Login/>
+      accessToken === null ? (
+        <NavigationContainer>
+          <Login/>
+        </NavigationContainer>
       ) : (
       <NavigationContainer>
         <Tab.Navigator 
@@ -58,7 +62,6 @@ export default function App() {
               tabBarInactiveTintColor: 'gray',
           })}
         >
-          <Tab.Screen name="Login" component={Login} />
           <Tab.Screen name="Home" component={Homescreen} />
           <Tab.Screen name="Subjects" component={Onderwerpenscreen} />
           <Tab.Screen name="Add Subject" component={AddOnderwerpscreen} />
