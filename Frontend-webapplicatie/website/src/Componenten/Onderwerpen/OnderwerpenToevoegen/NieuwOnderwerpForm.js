@@ -213,7 +213,7 @@ function NieuwOnderwerpForm() {
                     </select>
                 </div>
                 <div className={classes.control}>
-                    <label1 htmlFor='contactpersoon'>Promotor</label1>
+                    <label1 htmlFor='contactpersoon'>Promotor *</label1>
                     <select required id='promotor' ref={promotorInputRef} >
                         <option>---</option>
                         {promotoren?.map((promotor, i) =>
