@@ -18,7 +18,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
             const accessToken = await AsyncStorage.getItem('accesToken');
             console.log(accessToken)
               try {
-                  const response = await axios.get('http://192.168.0.164:8080/onderwerpen', {
+                  const response = await axios.get('http://192.168.1.16:8080/onderwerpen', {
                       withCredentials: true,
                       headers: {
                         'Authorization' : "Bearer " + accessToken
@@ -31,7 +31,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
               }
               let array = [];
               try{
-                const response = await axios.get('http://192.168.0.164:8080/auth/favorieten', {
+                const response = await axios.get('http://192.168.1.16:8080/auth/favorieten', {
                     withCredentials: true,
                     headers: {
                         'Authorization' : "Bearer " + accessToken
@@ -61,7 +61,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
             const accessToken = await AsyncStorage.getItem('accesToken');
             let array = [];
             try{
-                const response = await axios.get("http://192.168.0.164:8080/auth/favorieten", {
+                const response = await axios.get("http://192.168.1.16:8080/auth/favorieten", {
                     withCredentials: true,
                     headers: {
                         'Authorization' : "Bearer " + accessToken
@@ -86,7 +86,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
             console.log(found);
             if (found) {
                 try {
-                    axios.delete("http://192.168.0.164:8080/auth/deletefavoriet/" + id,
+                    axios.delete("http://192.168.1.16:8080/auth/deletefavoriet/" + id,
                     {
                         withCredentials: true,
                         headers: { 'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
             }
             else{
                 try {
-                    axios.post("http://192.168.0.164:8080/auth/addfavoriet/" + id,
+                    axios.post("http://192.168.1.16:8080/auth/addfavoriet/" + id,
                         {
                             withCredentials: true,
                             headers: { 'Content-Type': 'application/json',

@@ -5,7 +5,7 @@ import {View,Text,StyleSheet,TextInput,TouchableOpacity,Image } from 'react-nati
   import axios from 'axios';
   import AsyncStorage from '@react-native-async-storage/async-storage';
   
-  export const Login = () => {
+  export const Login = ({route, navigation}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -32,23 +32,7 @@ import {View,Text,StyleSheet,TextInput,TouchableOpacity,Image } from 'react-nati
           'accesToken',
           accessToken
         );
-        console.log(await AsyncStorage.getItem('accesToken'));
-        //setAuth(accessToken);
-        //setUser('');
-        //setPwd('');
-        // authContext.setAuthState({
-        //   accessToken,
-        //   //refreshToken,
-        //   authenticated: true,
-        // });
-  
-        // await Keychain.setGenericPassword(
-        //   'token',
-        //   JSON.stringify({
-        //     accessToken,
-        //     //refreshToken,
-        //   }),
-        // );
+        navigation.navigate('Home');
       } catch (err) {
         if (err.response) {
             const error = err.response.data;
