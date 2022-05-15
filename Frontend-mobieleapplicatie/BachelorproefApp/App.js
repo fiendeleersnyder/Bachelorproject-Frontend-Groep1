@@ -1,6 +1,5 @@
 import React from "react";
 import {Text, View,} from 'react-native';
-import Inlogscreen from './app/screens/Inlogscreen';
 import Homescreen from './app/screens/Homescreen';
 import Indienenscreen from './app/screens/Indienenscreen';
 import Onderwerpenscreen from './app/screens/Onderwerpenscreen';

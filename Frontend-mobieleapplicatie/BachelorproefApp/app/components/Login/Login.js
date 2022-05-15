@@ -1,4 +1,4 @@
-import {View,Text,StyleSheet,SafeAreaView,TextInput,TouchableOpacity,Image,Button,Alert,} from 'react-native';
+import {View,Text,StyleSheet,TextInput,TouchableOpacity,Image } from 'react-native';
   import React, {useState} from 'react';
   import * as Keychain from 'react-native-keychain';
   import qs from 'qs';

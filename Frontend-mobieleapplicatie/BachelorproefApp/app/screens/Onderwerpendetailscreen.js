@@ -8,7 +8,7 @@ import * as React from 'react';
 
 
 const OnderwerpDetail = ({route, navigation}) => {
-    const { itemId, otherParam } = route.params;
+    const otherParam = route.params;
     const [onderwerp, setOnderwerp] = useState();
     const [favorieten_id, setFavorieten_id] = useState([]);
     const [veranderd, setVeranderd] = useState();
