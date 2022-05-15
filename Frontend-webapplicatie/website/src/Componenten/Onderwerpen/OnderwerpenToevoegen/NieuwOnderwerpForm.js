@@ -22,7 +22,6 @@ function NieuwOnderwerpForm() {
     const location = useLocation();
     const [promotoren, setPromotoren] = useState([]);
     const [bedrijven, setBedrijven] = useState([]);
-    var array = [];
 
     useEffect(() => {
         let isMounted = true;
@@ -75,6 +74,7 @@ function NieuwOnderwerpForm() {
         const enteredDescription = descriptionInputRef.current.value;
         const enteredTrefwoord = trefwoordInputRef.current.value;
         var idPromotor;
+        var idBedrijf;
 
         if (enteredDoelgroep === "---" || enteredPromotor === "---" || enteredAantal === "---" || enteredKern1 === "---"){
             alert("Something went wrong, please try again. Make sure to fill in every field marked with a star.")
@@ -102,30 +102,66 @@ function NieuwOnderwerpForm() {
 
         var arraytrefwoorden = [enteredTrefwoord]
 
-        const onderwerpData = {
-            name: enteredTitle,
-            doelgroep: enteredDoelgroep,
-            // begeleiding: enteredBegeleiding,
-            email:enteredEmail,
-            phone: enteredTelefoon,
-            capacity:enteredAantal,
-            disciplines: arraydisciplines,
-            trefwoorden:arraytrefwoorden,
-            description: enteredDescription
-        };
+        if (enteredBegeleiding === "---"){
+            const onderwerpData = {
+                name: enteredTitle,
+                doelgroep: enteredDoelgroep,
+                email:enteredEmail,
+                phone: enteredTelefoon,
+                capacity:enteredAantal,
+                disciplines: arraydisciplines,
+                trefwoorden:arraytrefwoorden,
+                description: enteredDescription
+            };
 
-        console.log(onderwerpData);
+            console.log(onderwerpData);
 
-        try {
-            const response = axiosPrivate.post("/addonderwerp/" + idPromotor,
-                JSON.stringify(onderwerpData),
-                {
-                    headers: { 'Content-Type': 'application/json' }
-                });
-        }catch (err) {
-            console.error(err);
-            navigate('/login', { state: {from: location}, replace: true})
+            try {
+                const response = axiosPrivate.post("/addonderwerp/" + idPromotor,
+                    JSON.stringify(onderwerpData),
+                    {
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+            }catch (err) {
+                console.error(err);
+                navigate('/login', { state: {from: location}, replace: true})
+            }
+
         }
+
+        else {
+            const onderwerpData = {
+                name: enteredTitle,
+                doelgroep: enteredDoelgroep,
+                email:enteredEmail,
+                phone: enteredTelefoon,
+                capacity:enteredAantal,
+                disciplines: arraydisciplines,
+                trefwoorden:arraytrefwoorden,
+                description: enteredDescription,
+            };
+
+            console.log(onderwerpData);
+
+            bedrijven.map((bedrijf, i) => {
+                if(enteredBegeleiding === bedrijf.name)
+                    return(
+                        idBedrijf = bedrijf.id
+                    )
+            })
+
+            try {
+                const response = axiosPrivate.post("/addonderwerpmetbedrijf/" + idPromotor + "/" + idBedrijf,
+                    JSON.stringify(onderwerpData),
+                    {
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+            }catch (err) {
+                console.error(err);
+                navigate('/login', { state: {from: location}, replace: true})
+            }
+        }
+
     }
 
     return (
@@ -168,11 +204,11 @@ function NieuwOnderwerpForm() {
                     </select>
                 </div>
                 <div className={classes.control}>
-                    <label htmlFor='begeleiding'>Extern partner-Research group *</label>
+                    <label htmlFor='begeleiding'>Extern partner-Research group</label>
                     <select type='text' id='begeleiding' ref={begeleidingInputRef}>
                         <option>---</option>
                         {bedrijven?.map((bedrijf, i) =>
-                            <option key={i}>{ bedrijf.firstname + " " + bedrijf.name}</option>
+                            <option key={i}>{bedrijf.name}</option>
                         )}
                     </select>
                 </div>
