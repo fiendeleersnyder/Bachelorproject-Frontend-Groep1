@@ -1,5 +1,5 @@
 import classes from './Layout.module.css';
-import MenubalkStudent from "../MenubalkStudent";
+import MenubalkStudent from "../Menubalken/MenubalkStudent";
 import {Outlet} from "react-router-dom"
 
 function LayoutStudent(props){

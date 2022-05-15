@@ -1,5 +1,5 @@
 import {useNavigate, Link} from 'react-router-dom';
-import useLogout from '../Hooks/useLogout'
+import useLogout from '../../Hooks/useLogout'
 
 function MenubalkAdmin(){
     const logout = useLogout();

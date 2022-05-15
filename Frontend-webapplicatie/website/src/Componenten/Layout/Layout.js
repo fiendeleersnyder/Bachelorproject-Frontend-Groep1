@@ -1,6 +1,6 @@
 import classes from './Layout.module.css';
 import {Outlet} from "react-router-dom"
-import MenubalkStudent from '../MenubalkStudent'
+import MenubalkStudent from '../Menubalken/MenubalkStudent'
 
 const Layout = () => {
     return(

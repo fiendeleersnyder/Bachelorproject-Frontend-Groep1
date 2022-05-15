@@ -1,5 +1,5 @@
 import classes from './Layout.module.css';
-import MenubalkBedrijf from "../MenubalkBedrijf";
+import MenubalkBedrijf from "../Menubalken/MenubalkBedrijf";
 import {Outlet} from "react-router-dom"
 
 function LayoutBedrijf(props){

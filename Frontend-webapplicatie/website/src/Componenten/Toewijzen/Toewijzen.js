@@ -42,6 +42,7 @@ const Toewijzen = () => {
                 console.log(response.data);
                 arrayOnderwerpen = response.data;
                 setOnderwerpen(response.data)
+                setVeranderd(false);
             } catch (err) {
                 console.error(err);
                 navigate('/login', { state: {from: location}, replace: true})
@@ -100,15 +101,14 @@ const Toewijzen = () => {
                                                         return(
                                                         <TableRow key={j}>
                                                             <TableCell>{gebruiker.firstname + " " + gebruiker.name}</TableCell>
-                                                            <TableCell></TableCell>
-                                                            {/*<TableCell>{gebruiker.selection?.map((onderwerpid, j) => {
-                                                                if (onderwerpid === onderwerp.id)
-                                                                    return (
-                                                                        j + 1
-                                                                    );
-                                                            }
-                                                            )}</TableCell>*/}
-                                                            <TableCell>{gebruiker.id === onderwerp.boosted ?
+                                                            <TableCell>{gebruiker.selection?.map((onderwerpid, j) => {
+                                                                    if (onderwerpid === onderwerp.id)
+                                                                        return (
+                                                                            j + 1
+                                                                        );
+                                                                }
+                                                            )}</TableCell>
+                                                            <TableCell>{onderwerp.boosted.includes(gebruiker.id) ?
                                                                 <p>Yes</p> : <p>No</p>}</TableCell>
                                                             <TableCell><IconButton
                                                             onClick={() => studentToewijzen(onderwerp.id, gebruiker.id)}
@@ -142,6 +142,15 @@ const Toewijzen = () => {
                                             {onderwerp.disciplines.isEmpty ? (
                                                 <p> Disciplines: {onderwerp.disciplines}</p>) : <p></p>
                                             }
+                                            {onderwerp.capacity === 1 ?
+                                                <p>Student: {onderwerp.toegewezen?.map((student, i) =>
+                                                    student.firstname + " " + student.name
+                                                )} </p>
+                                                : <p>Students: {onderwerp.toegewezen?.map((student, i) =>
+                                                    student.firstname + " " + student.name
+                                                )} </p>
+                                            }
+
                                         </div>
                                     </Card>
                                 )

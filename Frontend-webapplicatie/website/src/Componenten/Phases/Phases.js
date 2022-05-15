@@ -223,31 +223,31 @@ const Phases = () => {
                 {currentPhases.map((date, i) => {
                     if(i===0)
                         return(
-                            <h4>Subjects phase:
+                            <h4 key={i}>Subjects phase:
                                 <p>{date}</p>
                             </h4>
                         )
                     else if(i===1)
                         return (
-                            <h4>Choice phase:
+                            <h4 key={i}>Choice phase:
                                 <p>{date}</p>
                             </h4>
                         )
                     else if(i===2)
                         return (
-                            <h4>Boost phase:
+                            <h4 key={i}>Boost phase:
                                 <p>{date}</p>
                             </h4>
                         )
                     else if (i===3)
                         return (
-                            <h4>Assign phase:
+                            <h4 key={i}>Assign phase:
                                 <p>{date}</p>
                             </h4>
                         )
                     else if (i===4)
                         return (
-                            <h4>Rest phase:
+                            <h4 key={i}>Rest phase:
                                 <p>{date}</p>
                             </h4>
                         )

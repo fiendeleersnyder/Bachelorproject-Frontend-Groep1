@@ -1,5 +1,5 @@
 import classes from './Layout.module.css';
-import MenubalkAdmin from "../MenubalkAdmin";
+import MenubalkAdmin from "../Menubalken/MenubalkAdmin";
 import {Outlet} from "react-router-dom"
 
 function LayoutAdmin(props){

@@ -21,13 +21,13 @@ function NieuwOnderwerpForm() {
     const navigate = useNavigate();
     const location = useLocation();
     const [promotoren, setPromotoren] = useState([]);
-    var array = [];
+    const [bedrijven, setBedrijven] = useState([]);
 
     useEffect(() => {
         let isMounted = true;
         const controller = new AbortController();
 
-        const getPromotoren = async () => {
+        const getPromotorenEnBedrijven = async () => {
             try {
                 const response = await axiosPrivate.get("/auth/promotoren", {
                     signal: controller.signal
@@ -38,9 +38,19 @@ function NieuwOnderwerpForm() {
                 console.error(err);
                 navigate('/login', { state: {from: location}, replace: true})
             }
+            try {
+                const response = await axiosPrivate.get("/auth/bedrijven", {
+                    signal: controller.signal
+                });
+                console.log(response.data);
+                isMounted && setBedrijven(bedrijven => response.data);
+            } catch (err) {
+                console.error(err);
+                navigate('/login', { state: {from: location}, replace: true})
+            }
         }
 
-        getPromotoren();
+        getPromotorenEnBedrijven();
 
         return () => {
             isMounted = false;
@@ -64,45 +74,94 @@ function NieuwOnderwerpForm() {
         const enteredDescription = descriptionInputRef.current.value;
         const enteredTrefwoord = trefwoordInputRef.current.value;
         var idPromotor;
+        var idBedrijf;
 
         if (enteredDoelgroep === "---" || enteredPromotor === "---" || enteredAantal === "---" || enteredKern1 === "---"){
             alert("Something went wrong, please try again. Make sure to fill in every field marked with a star.")
             return;}
 
         promotoren.map((promotor, i) => {
-            if(enteredPromotor === promotor.name)
+            if(enteredPromotor === promotor.firstname + " " + promotor.name)
                 return(
                     idPromotor = promotor.id
                 )
         })
 
-        const onderwerpData = {
-            title: enteredTitle,
-            doelgroep: enteredDoelgroep,
-            begeleiding: enteredBegeleiding,
-            promotor: idPromotor,
-            email:enteredEmail,
-            telefoon: enteredTelefoon,
-            aantalpersonen:enteredAantal,
-            kermerkwoord1:enteredKern1,
-            kermerkwoord2:enteredKern2,
-            kermerkwoord3:enteredKern3,
-            trefwoorden:enteredTrefwoord,
-            description: enteredDescription
-        };
+        var arraydisciplines = []
+        if (enteredKern2 === "---" && enteredKern3 === "---")
 
-        console.log(onderwerpData);
+            arraydisciplines = [enteredKern1]
 
-        try {
-            const response = axiosPrivate.post("/addonderwerp/" + id,
-                JSON.stringify(onderwerpData),
-                {
-                    headers: { 'Content-Type': 'application/json' }
-                });
-        }catch (err) {
-            console.error(err);
-            navigate('/login', { state: {from: location}, replace: true})
+        else if (enteredKern3 === "---")
+
+            arraydisciplines = [enteredKern1, enteredKern2]
+
+        else if(enteredKern2!== "---" && enteredKern3 !== "---")
+
+            arraydisciplines = [enteredKern1, enteredKern2, enteredKern3]
+
+        var arraytrefwoorden = [enteredTrefwoord]
+
+        if (enteredBegeleiding === "---"){
+            const onderwerpData = {
+                name: enteredTitle,
+                doelgroep: enteredDoelgroep,
+                email:enteredEmail,
+                phone: enteredTelefoon,
+                capacity:enteredAantal,
+                disciplines: arraydisciplines,
+                trefwoorden:arraytrefwoorden,
+                description: enteredDescription
+            };
+
+            console.log(onderwerpData);
+
+            try {
+                const response = axiosPrivate.post("/addonderwerp/" + idPromotor,
+                    JSON.stringify(onderwerpData),
+                    {
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+            }catch (err) {
+                console.error(err);
+                navigate('/login', { state: {from: location}, replace: true})
+            }
+
         }
+
+        else {
+            const onderwerpData = {
+                name: enteredTitle,
+                doelgroep: enteredDoelgroep,
+                email:enteredEmail,
+                phone: enteredTelefoon,
+                capacity:enteredAantal,
+                disciplines: arraydisciplines,
+                trefwoorden:arraytrefwoorden,
+                description: enteredDescription,
+            };
+
+            console.log(onderwerpData);
+
+            bedrijven.map((bedrijf, i) => {
+                if(enteredBegeleiding === bedrijf.name)
+                    return(
+                        idBedrijf = bedrijf.id
+                    )
+            })
+
+            try {
+                const response = axiosPrivate.post("/addonderwerpmetbedrijf/" + idPromotor + "/" + idBedrijf,
+                    JSON.stringify(onderwerpData),
+                    {
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+            }catch (err) {
+                console.error(err);
+                navigate('/login', { state: {from: location}, replace: true})
+            }
+        }
+
     }
 
     return (
@@ -145,15 +204,20 @@ function NieuwOnderwerpForm() {
                     </select>
                 </div>
                 <div className={classes.control}>
-                    <label htmlFor='begeleiding'>Extern partner-Research group *</label>
-                    <input type='text' required id='begeleiding' ref={begeleidingInputRef}/>
+                    <label htmlFor='begeleiding'>Extern partner-Research group</label>
+                    <select type='text' id='begeleiding' ref={begeleidingInputRef}>
+                        <option>---</option>
+                        {bedrijven?.map((bedrijf, i) =>
+                            <option key={i}>{bedrijf.name}</option>
+                        )}
+                    </select>
                 </div>
                 <div className={classes.control}>
                     <label1 htmlFor='contactpersoon'>Promotor</label1>
                     <select required id='promotor' ref={promotorInputRef} >
                         <option>---</option>
-                        {promotoren?.map((onderwerp, i) =>
-                            <option key={i}>{ onderwerp.firstname + " " + onderwerp.name}</option>
+                        {promotoren?.map((promotor, i) =>
+                            <option key={i}>{ promotor.firstname + " " + promotor.name}</option>
                         )}
                     </select>
                 </div>

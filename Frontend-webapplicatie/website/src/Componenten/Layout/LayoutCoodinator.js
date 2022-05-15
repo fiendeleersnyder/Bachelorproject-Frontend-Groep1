@@ -1,5 +1,5 @@
 import classes from './Layout.module.css';
-import MenubalkCoordinator from "../MenubalkCoordinator";
+import MenubalkCoordinator from "../Menubalken/MenubalkCoordinator";
 import {Outlet} from "react-router-dom"
 
 function LayoutCoordinator(props){

@@ -1,4 +1,4 @@
-import Toewijzen from "../Componenten/Toewijzen/Toewijzing";
+import Toewijzen from "../../Componenten/Toewijzen/ToewijzingPromotor";
 function Toewijslijst() {
 
     return (
