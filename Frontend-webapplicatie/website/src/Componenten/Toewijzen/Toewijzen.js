@@ -5,6 +5,7 @@ import classes from './Toewijzen.module.css';
 import Card from "../ui/Card";
 import IconButton from "@mui/material/IconButton";
 import CheckIcon from "@mui/icons-material/Check";
+import CloseIcon from '@mui/icons-material/Close';
 import GroupsIcon from '@mui/icons-material/Groups';
 import * as React from 'react';
 import Table from '@mui/material/Table';
@@ -67,6 +68,18 @@ const Toewijzen = () => {
             navigate('/login', { state: {from: location}, replace: true})
         }
     }
+
+    const studentOnttoewijzen = async (oid, sid) => {
+        try {
+            const response = await axiosPrivate.post('/auth/onttoewijzen/' + oid + "/" + sid);
+            console.log(response.data);
+            setVeranderd(true)
+        } catch (err) {
+            console.error(err);
+            navigate('/login', { state: {from: location}, replace: true})
+        }
+    }
+
     return(
         <ul>
             <h1>Subjects yet to be assigned</h1>
@@ -84,6 +97,7 @@ const Toewijzen = () => {
                                             <p> <GroupsIcon /> : {onderwerp.capacity}</p>
                                         </div>
                                     </Card>
+                                    {onderwerp.selection.length ?
                                     <TableContainer>
                                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
                                             <TableHead>
@@ -116,12 +130,11 @@ const Toewijzen = () => {
                                                             </TableRow>
                                                         )
                                                     }
-                                                ):<p>No students</p>}
+                                                ):null}
                                             </TableBody>
                                         </Table>
-                                    </TableContainer>
+                                    </TableContainer> :<p>No students that have chosen this subject</p>}
                                 </div>
-
                             )
                     })
                 ) : <p>No subjects to assign</p>
@@ -131,8 +144,9 @@ const Toewijzen = () => {
                 ? (
                     onderwerpen.map((onderwerp, i) =>
                         {
-                            if (onderwerp.toegewezen?.length === onderwerp.capacity)
+                            if (onderwerp.toegewezen?.length !== 0)
                                 return(
+                                    <div className={classes.container} key={i}>
                                     <Card key={i}>
                                         <div className={classes.content}>
                                             <h3>{onderwerp.name}</h3>
@@ -142,17 +156,41 @@ const Toewijzen = () => {
                                             {onderwerp.disciplines.isEmpty ? (
                                                 <p> Disciplines: {onderwerp.disciplines}</p>) : <p></p>
                                             }
-                                            {onderwerp.capacity === 1 ?
-                                                <p>Student: {onderwerp.toegewezen?.map((student, i) =>
-                                                    student.firstname + " " + student.name
-                                                )} </p>
-                                                : <p>Students: {onderwerp.toegewezen?.map((student, i) =>
-                                                    student.firstname + " " + student.name
-                                                )} </p>
-                                            }
-
                                         </div>
                                     </Card>
+                            <TableContainer>
+                                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>Student</TableCell>
+                                            <TableCell>Place</TableCell>
+                                            <TableCell>Boosted</TableCell>
+                                            <TableCell></TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {onderwerp.toegewezen.length ?
+                                            onderwerp.toegewezen?.map((gebruiker, j) =>
+                                                <TableRow key={j}>
+                                                    <TableCell>{gebruiker.firstname + " " + gebruiker.name}</TableCell>
+                                                    <TableCell>{gebruiker.selection?.map((onderwerpid, j) => {
+                                                        if (onderwerpid === onderwerp.id)
+                                                            return (
+                                                                j + 1
+                                                            );
+                                                    }
+                                                    )}</TableCell>
+                                                    <TableCell>{onderwerp.boosted.includes(gebruiker.id) ?
+                                                        <p>Yes</p> : <p>No</p>}</TableCell>
+                                                    <TableCell><IconButton
+                                                        onClick={() => studentOnttoewijzen(onderwerp.id, gebruiker.id)}
+                                                        className={classes.knopje}><CloseIcon/></IconButton></TableCell>
+                                                </TableRow>
+                                            ):<p>No students have chosen this subject</p>}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                                    </div>
                                 )
                         }
                     )

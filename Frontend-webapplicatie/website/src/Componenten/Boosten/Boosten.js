@@ -97,6 +97,7 @@ const Toewijzen = () => {
                                         <p> <GroupsIcon /> : {onderwerp.capacity}</p>
                                     </div>
                                 </Card>
+                                {onderwerp.selection.length ?
                                 <TableContainer>
                                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                                         <TableHead>
@@ -132,10 +133,10 @@ const Toewijzen = () => {
                                                                 :null
                                                         }</TableCell>
                                                     </TableRow>
-                                                ):<p>No students</p>}
+                                                ):null}
                                         </TableBody>
                                     </Table>
-                                </TableContainer>
+                                </TableContainer> : <p>No students have chosen this subject</p>}
                             </div>
 
                         )
