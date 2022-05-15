@@ -5,7 +5,7 @@ import {View,Text,StyleSheet,TextInput,TouchableOpacity,Image } from 'react-nati
   import axios from 'axios';
   import AsyncStorage from '@react-native-async-storage/async-storage';
   
-  export const Login = ({route, navigation}) => {
+   function Login ({route, navigation}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -15,7 +15,6 @@ import {View,Text,StyleSheet,TextInput,TouchableOpacity,Image } from 'react-nati
         return;
       }
       try {
-
         const response = await axios.post('http://192.168.1.16:8080/login', 
 
         //const response = await axios.post('http://10.110.176.65:8080/login', 

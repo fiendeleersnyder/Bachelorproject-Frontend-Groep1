@@ -12,11 +12,11 @@ import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-export default function App({route, navigation}) {
+export default function App() {
 
-  function Uitloggen(navigate){
+  function Uitloggen({route ,navigation}){
     AsyncStorage.removeItem('accesToken');
-    navigate("Login")
+    navigation.navigate('Login')
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>uitlogknop werkt joepie!
@@ -35,10 +35,10 @@ export default function App({route, navigation}) {
   console.log(accessToken)
 
     return (
-      // <AppContainer />
       <NavigationContainer>
       {accessToken === null ? (
-          <Login/>
+          //<Login/>
+          navigation.navigate('Login')
       ) : (
         <Tab.Navigator 
             screenOptions={({ route }) => ({
@@ -65,11 +65,12 @@ export default function App({route, navigation}) {
               tabBarInactiveTintColor: 'gray',
           })}
         >
+          <Tab.Screen name="Login" component={Login} options={{tabBarButton: (props) => null}}></Tab.Screen>
           <Tab.Screen name="Home" component={Homescreen} />
           <Tab.Screen name="Subjects" component={Onderwerpenscreen} />
           <Tab.Screen name="Add Subject" component={AddOnderwerpscreen} />
           <Tab.Screen name="Submit" component={Indienenscreen} />
-          <Tab.Screen name="Logout" component={Uitloggen(navigation.navigate)} />
+          <Tab.Screen name="Logout" component={Uitloggen} />
           <Tab.Screen name="Subject Details" component={Onderwerpendetailscreen} options={{tabBarButton: (props) => null}}></Tab.Screen>
         </Tab.Navigator>
       )}
