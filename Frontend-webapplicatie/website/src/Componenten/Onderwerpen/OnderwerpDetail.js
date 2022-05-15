@@ -50,7 +50,7 @@ return (
             {onderwerp?.bedrijf !== null ?
                 bedrijven?.map((bedrijf, i) =>
                     bedrijf.id == onderwerp?.bedrijf ?
-                        <li key={i}> Bedrijf: {bedrijf.name}</li> : null
+                        <li key={i}> Company: {bedrijf.name}</li> : null
                 ) : null
             }
             <li>E-mail: {onderwerp?.email}</li>
