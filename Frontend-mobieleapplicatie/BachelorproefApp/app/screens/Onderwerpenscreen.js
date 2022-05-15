@@ -140,7 +140,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
                                         color="#ff084a" 
                                         title="Add to favorites!"/>
                                     <Button
-                                        onPress={() => {navigation.navigate('Subject Details',{otherParam: onderwerp,})}}
+                                        onPress={() => {navigation.navigate('Subject Details',{otherParam: onderwerp})}}
                                         title="More info"
                                         color="#00407A"
                                     />
