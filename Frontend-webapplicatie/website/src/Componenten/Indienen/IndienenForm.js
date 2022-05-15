@@ -61,7 +61,7 @@ function IndienenForm() {
         const enteredVoorkeur3 = voorkeur3InputRef.current.value;
 
         if (enteredVoorkeur1 === "---" || enteredVoorkeur2 === "---" || enteredVoorkeur3 === "---"){
-            alert("At least one of the subject isn't correctly submit, try again.")
+            alert("At least one of the subjects wasn't correctly selected, try again.")
             return;}
 
         if (enteredVoorkeur1 === enteredVoorkeur2 || enteredVoorkeur1 === enteredVoorkeur3 || enteredVoorkeur3 === enteredVoorkeur2){
@@ -104,12 +104,12 @@ function IndienenForm() {
     return (
         <div>
             <div><p className={classes.card}>Student, <br/>
-                select 3 topics. You must select at least 1 topic to submit.
-                Put the topic with your highest preference in place 1.
-                Put your second and third preference in place 2 and 3, respectively.
-                Here you can make a selection from the subjects that you have placed
-                in your favourites, so be sure to put the subjects you wish to select
-                in your favourites. Submit your selection the latest on 30 April
+                Select 3 topics. You must select at least 1 topic to submit.
+                Put the topic with your highest preference at place 1.
+                Put your second and third preference at places 2 and 3, respectively.
+                Here you can make a selection from the subjects that you have added
+                to your favourites, so be sure to put the subjects you wish to select
+                in your favourites. Submit your selection by 30 April
                 2022 23:55. A selection that is submitted before this date can always
                 be changed until this date.</p>
             </div>

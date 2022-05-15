@@ -41,7 +41,7 @@ const ToewijzingStudent = () => {
                 <p>Name: {onderwerp.name}</p>
                 <p>Promoter: {onderwerp.promotor}</p>
                 </div>
-            : <p>No subject yet assigned </p>}
+            : <p>No subject assigned yet</p>}
         </div>
     );
 };
