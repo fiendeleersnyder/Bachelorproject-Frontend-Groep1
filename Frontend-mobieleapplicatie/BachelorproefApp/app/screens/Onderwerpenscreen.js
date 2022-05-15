@@ -98,12 +98,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
             }
             else{
                 try {
-                    axios.post("https://Bachelorproef-backend.herokuapp.com/auth/addfavoriet/" + id, {
-                    withCredentials: true,
-                    headers: {
-                        'Authorization' : "Bearer " + accessToken
-                      }
-                });
+                    axios.post("https://Bachelorproef-backend.herokuapp.com/auth/addfavoriet/" + id,
+                    {
+                        withCredentials: true,
+                        headers: { 'Content-Type': 'application/json',
+                        'Authorization' : "Bearer " + accessToken}
+                    });
                     setVeranderd(true)
                 } catch (err) {
                     console.error(err);

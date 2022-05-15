@@ -21,35 +21,46 @@ class AddOnderwerp extends React.Component {
       omschrijving:'',
       kernwoord1:'',
       kernwoord2:'',
-      kerwoord3:'',
+      kernwoord3:'',
       trefwoorden:'',
     };
   };
 
   submit(id){
-    console.warn(this.state);
+    
     var idPromotor;
 
-    if (this.state.title === "" || this.state.begeleiding === "" || this.state.contactpersoon === "" || this.state.email === "" || this.state.omschrijving === ""){
+    if (this.state.title === "" || this.state.contactpersoon === "" || this.state.email === "" || this.state.omschrijving === ""){
         alert("Something went wrong, please try again. Make sure to fill in every field marked with a star.")
         return;}
 
+        var arraydisciplines = []
+        if (this.state.kernwoord2 === "---" && this.state.kernwoord3 === "---")
+
+            arraydisciplines = [this.state.kernwoord1]
+
+        else if (this.state.kernwoord3 === "---")
+
+            arraydisciplines = [this.state.kernwoord1, this.state.kernwoord2]
+
+        else if(this.state.kernwoord2!== "---" && this.state.kernwoord3 !== "---")
+
+            arraydisciplines = [this.state.kernwoord1, this.state.kernwoord2, this.state.kernwoord3]
+
+        var arraytrefwoorden = [this.state.trefwoorden]
+
     const onderwerpData = {
-        title: this.state.title,
-        doelgroep: this.state.doelgroep,
-        begeleiding: this.state.begeleiding,
-        promotor:idPromotor,
-        email:this.state.email,
-        telefoonnummer: this.state.telefoonnummer,
-        aantalpersonen:this.state.aantalpersonen,
-        kermerkwoord1:this.state.kernwoord1,
-        kermerkwoord2:this.state.kernwoord2,
-        kermerkwoord3:this.state.kerwoord3,
-        trefwoorden:this.state.trefwoorden,
-        description: this.state.omschrijving
+      name: this.state.title,
+      doelgroep: this.state.doelgroep,
+      email: this.state.email,
+      phone:  this.state.telefoonnummer,
+      capacity:  this.state.aantalpersonen,
+      disciplines:  this.state.arraydisciplines,
+      trefwoorden:  this.state.arraytrefwoorden,
+      description:  this.state.omschrijving
     };
 
-    console.log(onderwerpData);
+    console.warn(this.state);
 
     try {
         const response = axios.post("https://Bachelorproef-backend.herokuapp.com/addonderwerp/" + id,
@@ -169,14 +180,6 @@ class AddOnderwerp extends React.Component {
               <Picker.Item label="IW KV Brugge" value="IW KV Brugge" />
               <Picker.Item label="IW CH Diepenbeek" value="IW CH Diepenbeek" />
               </Picker>
-        <Text style={styles.formLabel}> Extern partner-Research group</Text>
-          <View> 
-            <TextInput 
-              placeholder="Enter extern partner-research group"
-              onChangeText={(text)=>{this.setState({begeleiding:text})}}
-              style={styles.inputStyle}
-              />
-          </View>
         <Text style={styles.formLabel}> Promotor-Co-promotor-Contact person id</Text>
           <View> 
             <TextInput 
@@ -223,6 +226,7 @@ class AddOnderwerp extends React.Component {
           <Picker
             style={styles.pickerStyle}
             onValueChange={currentCurrency => {this.setState({kernwoord1:currentCurrency})}}>
+            <Picker.Item label="default" value="---" />
             <Picker.Item label="Analog Electronics and Design" value="Analog Electronics and Design" />
             <Picker.Item label="Digital Electronics and Design" value="Digital Electronics and Design" />
             <Picker.Item label="Software Development" value="Software Development" />
@@ -271,6 +275,7 @@ class AddOnderwerp extends React.Component {
           <Picker
             style={styles.pickerStyle}
             onValueChange={currentCurrency => {this.setState({kernwoord2:currentCurrency})}}>
+            <Picker.Item label="default" value="---" />
             <Picker.Item label="Analog Electronics and Design" value="Analog Electronics and Design" />
             <Picker.Item label="Digital Electronics and Design" value="Digital Electronics and Design" />
             <Picker.Item label="Software Development" value="Software Development" />
@@ -319,6 +324,7 @@ class AddOnderwerp extends React.Component {
           <Picker
             style={styles.pickerStyle}
             onValueChange={currentCurrency => {this.setState({kernwoord3:currentCurrency})}}>
+            <Picker.Item label="default" value="---" />
             <Picker.Item label="Analog Electronics and Design" value="Analog Electronics and Design" />
             <Picker.Item label="Digital Electronics and Design" value="Digital Electronics and Design" />
             <Picker.Item label="Software Development" value="Software Development" />
