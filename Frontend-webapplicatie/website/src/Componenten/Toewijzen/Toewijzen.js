@@ -108,7 +108,7 @@ const Toewijzen = () => {
                                                                         );
                                                                 }
                                                             )}</TableCell>
-                                                            <TableCell>{gebruiker.id === onderwerp.boosted ?
+                                                            <TableCell>{onderwerp.boosted.includes(gebruiker.id) ?
                                                                 <p>Yes</p> : <p>No</p>}</TableCell>
                                                             <TableCell><IconButton
                                                             onClick={() => studentToewijzen(onderwerp.id, gebruiker.id)}
