@@ -34,12 +34,6 @@ class AddOnderwerp extends React.Component {
         alert("Something went wrong, please try again. Make sure to fill in every field marked with a star.")
         return;}
 
-    // promotoren.map((promotor, i) => {
-    //   if(enteredPromotor === promotor.name)
-    //       return(
-    //           idPromotor = promotor.id
-    //       )
-    // })
     const onderwerpData = {
         title: this.state.title,
         doelgroep: this.state.doelgroep,

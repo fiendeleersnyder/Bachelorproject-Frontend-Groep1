@@ -1,25 +1,15 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { Card, CardTitle, CardContent, CardAction, CardButton } from 'react-native-material-cards';
+import { Card, CardTitle, CardContent, CardAction } from 'react-native-material-cards';
 import axios from 'axios';
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { IconButton } from 'react-native-paper';
-import { PropTypes } from 'react';
-import { useNavigation, useRoute } from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-function OnderwerpUitbreiden(id){
-    let nummer =id;
-   <Text>nummer</Text>
-}
-
-   const OnderwerpLijst = () => {
+   const OnderwerpLijst = ({route, navigation}) => {
       const [onderwerpen, setOnderwerpen] = useState();
       const [favorieten_id, setFavorieten_id] = useState([]);
       const [veranderd, setVeranderd] = useState();
-      const navigate = useNavigation();
-      const location = useRoute();
   
       useEffect(() => {
           const controller = new AbortController();
@@ -37,7 +27,6 @@ function OnderwerpUitbreiden(id){
                     setOnderwerpen(response.data);
               } catch (err) {
                   console.error(err);
-                  //navigate('/login', { state: {from: location}, replace: true})
               }
               let array = [];
               try{
@@ -52,7 +41,6 @@ function OnderwerpUitbreiden(id){
                   setVeranderd(false)
               } catch (err) {
                   console.error(err);
-                  //navigate('/login', { state: {from: location}, replace: true})
               }
               let idarray = [];
               array?.map((onderwerp, i) =>
@@ -82,7 +70,6 @@ function OnderwerpUitbreiden(id){
                     console.log(array);
             } catch (err) {
                 console.error(err);
-                //navigate('/login', { state: {from: location}, replace: true})
             }
             setFavorieten_id([])
             let idarray = [];
@@ -107,7 +94,6 @@ function OnderwerpUitbreiden(id){
                     setVeranderd(true)
                 } catch (err) {
                     console.error(err);
-                    //navigate('/login', { state: {from: location}, replace: true})
                 }
             }
             else{
@@ -121,7 +107,6 @@ function OnderwerpUitbreiden(id){
                     setVeranderd(true)
                 } catch (err) {
                     console.error(err);
-                    //navigate('/login', { state: {from: location}, replace: true})
                 }
                 }
         }
@@ -150,9 +135,12 @@ function OnderwerpUitbreiden(id){
                                 <CardAction 
                                     separator={true} 
                                     inColumn={false}>
-                                    <IconButton onClick={()=>favoriet(onderwerp.id)}>{favorieten_id.includes(onderwerp.id) ? <Ionicons name="heart-sharp" size={24} color="#ff084a" /> : <Ionicons name="heart-outline" size={24} color="#00407A" />}</IconButton>
-                                    <CardButton
-                                        onPress={() => {OnderwerpUitbreiden(onderwerp.id)}}
+                                    <Button 
+                                        onPress={()=>favoriet(onderwerp.id)}
+                                        color="#ff084a" 
+                                        title="Add to favorites!"/>
+                                    <Button
+                                        onPress={() => {navigation.navigate('Subject Details',{otherParam: onderwerp,})}}
                                         title="More info"
                                         color="#00407A"
                                     />

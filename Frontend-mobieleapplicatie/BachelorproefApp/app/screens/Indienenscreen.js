@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions, Text, Alert, Button, Platform, TouchableOpacity, View, Image, SafeAreaView, ScrollView} from 'react-native';
+import { StyleSheet, Text,  Button,  View, ScrollView} from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import {useEffect, useRef, useState} from 'react';
 import axios from 'axios';
