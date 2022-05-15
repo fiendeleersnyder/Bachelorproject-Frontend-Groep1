@@ -26,11 +26,11 @@ const ChangePassword = () => {
         const enteredConfirmWachtwoord = confirmWachtwoord.current.value;
 
         if (enteredNieuwWachtwoord !== enteredConfirmWachtwoord){
-            alert("The new password is not the same as the confirmed password, try again please.")
+            alert("The new password does not match the confirmation, try again please.")
             return;}
 
         if (enteredOudWachtwoord === enteredNieuwWachtwoord){
-            alert("You can't change your new password in the old one.")
+            alert("Your new password cannot be the same as the previous.")
             return;}
 
         try {

@@ -156,7 +156,7 @@ const Toewijzen = () => {
                                 )
                         }
                     )
-                ) : <p>No subjects yet assigned</p>
+                ) : <p>No subjects assigned yet</p>
             }
         </ul>
     )
