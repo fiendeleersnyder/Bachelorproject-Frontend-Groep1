@@ -177,10 +177,10 @@ class AddOnderwerp extends React.Component {
               style={styles.inputStyle}
               />
           </View>
-        <Text style={styles.formLabel}> Promotor-Co-promotor-Contact person id</Text>
+        <Text style={styles.formLabel}> Promoter-Co-promoter-Contact person id</Text>
           <View> 
             <TextInput 
-              placeholder="Enter supervisor-co-supervisor-contact person id"
+              placeholder="Enter promoter-co-promoter-contact person id"
               onChangeText={(text)=>{this.setState({contactpersoon:text})}}
               style={styles.inputStyle}
               />
