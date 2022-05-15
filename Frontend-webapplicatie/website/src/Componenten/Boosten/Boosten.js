@@ -82,11 +82,11 @@ const Toewijzen = () => {
 
     return(
         <ul>
-            <h1>Your subjects</h1>
+            <h1>Your subjects without boosted students</h1>
             {onderwerpen?.length
                 ? (
                     onderwerpen?.map((onderwerp, i) =>
-                    {if(onderwerp.toegewezen?.length !== onderwerp.capacity && !onderwerp.hideObject)
+                    {if(onderwerp.boosted.length !== onderwerp.capacity && !onderwerp.hideObject)
                         return(
                             <div className={classes.container} key={i}>
                                 <Card>
@@ -119,13 +119,73 @@ const Toewijzen = () => {
                                                                    );
                                                            }
                                                            )}</TableCell>
-                                                        <TableCell>{gebruiker.id === onderwerp.boosted ?
+                                                        <TableCell>{onderwerp.boosted?.includes(gebruiker.id) ?
                                                             <p>Yes</p> : <p>No</p>}</TableCell>
-                                                        <TableCell>{onderwerp.boosted === null ?
+                                                        <TableCell>{!onderwerp.boosted?.includes(gebruiker.id) ?
                                                             <IconButton
                                                                 onClick={() => studentBoosten(onderwerp.id, gebruiker.id)}
                                                                 className={classes.knopje}><CheckIcon/></IconButton>
-                                                            :gebruiker.id === onderwerp.boosted ?
+                                                            : onderwerp.boosted?.includes(gebruiker.id) ?
+                                                                <IconButton
+                                                                    onClick={() => studentOntboosten(onderwerp.id, gebruiker.id)}
+                                                                    className={classes.knopje}><CloseIcon/></IconButton>
+                                                                :null
+                                                        }</TableCell>
+                                                    </TableRow>
+                                                ):<p>No students</p>}
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
+                            </div>
+
+                        )
+                    })
+                ) : <p>No subjects to boost</p>
+            }
+            <h1>Your subjects with boosted students</h1>
+            {onderwerpen?.length
+                ? (
+                    onderwerpen?.map((onderwerp, i) =>
+                    {if(onderwerp?.boosted?.length === onderwerp.capacity && !onderwerp.hideObject)
+                        return(
+                            <div className={classes.container} key={i}>
+                                <Card>
+                                    <div className={classes.content}>
+                                        <h3>{onderwerp.name}</h3>
+                                        <p>Target group: {onderwerp.doelgroep}</p>
+                                        <p> Promoter: {onderwerp.promotor}</p>
+                                        <p> <GroupsIcon /> : {onderwerp.capacity}</p>
+                                    </div>
+                                </Card>
+                                <TableContainer>
+                                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell>Student</TableCell>
+                                                <TableCell>Place</TableCell>
+                                                <TableCell>Boosted</TableCell>
+                                                <TableCell></TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {onderwerp.selection.length ?
+                                                onderwerp.selection?.map((gebruiker, j) =>
+                                                    <TableRow key={j}>
+                                                        <TableCell>{gebruiker.firstname + " " + gebruiker.name}</TableCell>
+                                                        <TableCell>{gebruiker.selection?.map((onderwerpid, j) => {
+                                                                if (onderwerpid === onderwerp.id)
+                                                                    return (
+                                                                        j + 1
+                                                                    );
+                                                            }
+                                                        )}</TableCell>
+                                                        <TableCell>{onderwerp.boosted?.includes(gebruiker.id) ?
+                                                            <p>Yes</p> : <p>No</p>}</TableCell>
+                                                        <TableCell>{!onderwerp.boosted?.includes(gebruiker.id) ?
+                                                            <IconButton
+                                                                onClick={() => studentBoosten(onderwerp.id, gebruiker.id)}
+                                                                className={classes.knopje}><CheckIcon/></IconButton>
+                                                            : onderwerp.boosted?.includes(gebruiker.id) ?
                                                                 <IconButton
                                                                     onClick={() => studentOntboosten(onderwerp.id, gebruiker.id)}
                                                                     className={classes.knopje}><CloseIcon/></IconButton>
