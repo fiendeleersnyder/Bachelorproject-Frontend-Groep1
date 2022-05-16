@@ -91,6 +91,7 @@ function IndienenForm() {
 
         try {
             axiosPrivate.post("/auth/addselection/" + id1 + "/" + id2 + "/" + id3,
+                null,
                 {
                     headers: { 'Content-Type': 'application/json'}
                 });
