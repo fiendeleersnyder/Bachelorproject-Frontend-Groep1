@@ -8,6 +8,10 @@ import AccountPromotor from '../../Pages/accountpages/accountpromotor'
 import AddOnderwerp from '../../Pages/onderwerpentoevoegen/addonderwerp';
 import AddOnderwerpBedrijf from '../../Pages/onderwerpentoevoegen/addonderwerpbedrijf'
 import HomePagina from '../../Pages/home';
+import HomePaginaAdmin from '../../Pages/homeAdmin';
+import HomePaginaBedrijf from '../../Pages/homeBedrijf';
+import HomePaginaCoordinator from '../../Pages/homeCoordinator';
+import HomePaginaPromotor from '../../Pages/homePromotor';
 import Indienen from '../../Pages/indienen';
 import OnderwerpenLijst from '../../Pages/onderwerpen';
 import OnderwerpenLijstMetVerwijderen from '../../Pages/onderwerpenmetverwijderen'
@@ -95,7 +99,7 @@ function App() {
                 <Route element={<PersistLogin/>}>
                     {/* protected routes */}
                     <Route path="/admin/" element={<RequireAuth AllowedRoles={[ROLES["1"]]}/>}>
-                        <Route path='/admin/' element={<HomePagina/>}/>
+                        <Route path='/admin/' element={<HomePaginaAdmin/>}/>
                         <Route path='/admin/onderwerpen' element={<OnderwerpenLijstMetVerwijderen/>}/>
                         <Route path='/admin/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
                         <Route path='/admin/addonderwerp' element={<AddOnderwerp/>}/>
@@ -121,7 +125,7 @@ function App() {
                 <Route element={<PersistLogin/>}>
                     {/* protected routes */}
                     <Route path="/coordinator/" element={<RequireAuth AllowedRoles={[ROLES["3"]]}/>}>
-                        <Route path='/coordinator/' element={<HomePagina/>}/>
+                        <Route path='/coordinator/' element={<HomePaginaCoordinator/>}/>
                         <Route path='/coordinator/onderwerpen' element={<OnderwerpenLijstMetVerwijderen />}/>
                         <Route path='/coordinator/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
                         <Route path='/coordinator/addonderwerp' element={<AddOnderwerp/>}/>
@@ -134,7 +138,7 @@ function App() {
                 <Route element={<PersistLogin/>}>
                     {/* protected routes */}
                     <Route path="/bedrijf/" element={<RequireAuth AllowedRoles={[ROLES["4"]]}/>}>
-                        <Route path='/bedrijf/' element={<HomePagina/>}/>
+                        <Route path='/bedrijf/' element={<HomePaginaBedrijf/>}/>
                         <Route path='/bedrijf/onderwerpen' element={<OnderwerpenLijstBedrijf />}/>
                         <Route path='/bedrijf/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
                         <Route path='/bedrijf/addonderwerp' element={<AddOnderwerpBedrijf/>}/>
@@ -147,7 +151,7 @@ function App() {
                 <Route element={<PersistLogin/>}>
                     {/* protected routes */}
                     <Route path="/promotor/" element={<RequireAuth AllowedRoles={[ROLES["5"]]}/>}>
-                        <Route path='/promotor/' element={<HomePagina/>}/>
+                        <Route path='/promotor/' element={<HomePaginaPromotor/>}/>
                         <Route path='/promotor/onderwerpen' element={<OnderwerpenLijstPromotor />}/>
                         <Route path='/promotor/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
                         <Route path='/promotor/addonderwerp' element={<AddOnderwerp/>}/>
@@ -168,7 +172,7 @@ function App() {
                         <Route element={<PersistLogin/>}>
                             {/* protected routes */}
                             <Route path="/admin/" element={<RequireAuth AllowedRoles={[ROLES["1"]]}/>}>
-                                <Route path='/admin/' element={<HomePagina/>}/>
+                                <Route path='/admin/' element={<HomePaginaAdmin/>}/>
                                 <Route path='/admin/onderwerpen' element={<OnderwerpenLijstMetVerwijderen/>}/>
                                 <Route path='/admin/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
                                 <Route path='/admin/addonderwerp' element={<AddOnderwerp/>}/>
@@ -196,7 +200,7 @@ function App() {
                         <Route element={<PersistLogin/>}>
                             {/* protected routes */}
                             <Route path="/coordinator/" element={<RequireAuth AllowedRoles={[ROLES["3"]]}/>}>
-                                <Route path='/coordinator/' element={<HomePagina/>}/>
+                                <Route path='/coordinator/' element={<HomePaginaCoordinator/>}/>
                                 <Route path='/coordinator/onderwerpen' element={<OnderwerpenLijstMetVerwijderen />}/>
                                 <Route path='/coordinator/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
                                 <Route path='/coordinator/account' element={<AccountCoordinator/>}/>
@@ -208,7 +212,7 @@ function App() {
                         <Route element={<PersistLogin/>}>
                             {/* protected routes */}
                             <Route path="/bedrijf/" element={<RequireAuth AllowedRoles={[ROLES["4"]]}/>}>
-                                <Route path='/bedrijf/' element={<HomePagina/>}/>
+                                <Route path='/bedrijf/' element={<HomePaginaBedrijf/>}/>
                                 <Route path='/bedrijf/onderwerpen' element={<OnderwerpenLijstBedrijf />}/>
                                 <Route path='/bedrijf/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
                                 <Route path='/bedrijf/account' element={<AccountBedrijf/>}/>
@@ -220,7 +224,7 @@ function App() {
                         <Route element={<PersistLogin/>}>
                             {/* protected routes */}
                             <Route path="/promotor/" element={<RequireAuth AllowedRoles={[ROLES["5"]]}/>}>
-                                <Route path='/promotor/' element={<HomePagina/>}/>
+                                <Route path='/promotor/' element={<HomePaginaPromotor/>}/>
                                 <Route path='/promotor/onderwerpen' element={<OnderwerpenLijstPromotor />}/>
                                 <Route path='/promotor/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
                                 <Route path='/promotor/account' element={<AccountPromotor/>}/>
@@ -240,7 +244,7 @@ function App() {
                             <Route element={<PersistLogin/>}>
                                 {/* protected routes */}
                                 <Route path="/admin/" element={<RequireAuth AllowedRoles={[ROLES["1"]]}/>}>
-                                    <Route path='/admin/' element={<HomePagina/>}/>
+                                    <Route path='/admin/' element={<HomePaginaAdmin/>}/>
                                     <Route path='/admin/onderwerpen' element={<OnderwerpenLijstMetVerwijderen/>}/>
                                     <Route path='/admin/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
                                     <Route path='/admin/addonderwerp' element={<AddOnderwerp/>}/>
@@ -267,7 +271,7 @@ function App() {
                             <Route element={<PersistLogin/>}>
                                 {/* protected routes */}
                                 <Route path="/coordinator/" element={<RequireAuth AllowedRoles={[ROLES["3"]]}/>}>
-                                    <Route path='/coordinator/' element={<HomePagina/>}/>
+                                    <Route path='/coordinator/' element={<HomePaginaCoordinator/>}/>
                                     <Route path='/coordinator/onderwerpen' element={<OnderwerpenLijstMetVerwijderen />}/>
                                     <Route path='/coordinator/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
                                     <Route path='/coordinator/account' element={<AccountCoordinator/>}/>
@@ -279,7 +283,7 @@ function App() {
                             <Route element={<PersistLogin/>}>
                                 {/* protected routes */}
                                 <Route path="/bedrijf/" element={<RequireAuth AllowedRoles={[ROLES["4"]]}/>}>
-                                    <Route path='/bedrijf/' element={<HomePagina/>}/>
+                                    <Route path='/bedrijf/' element={<HomePaginaBedrijf/>}/>
                                     <Route path='/bedrijf/onderwerpen' element={<OnderwerpenLijstBedrijf />}/>
                                     <Route path='/bedrijf/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
                                     <Route path='/bedrijf/account' element={<AccountBedrijf/>}/>
@@ -291,7 +295,7 @@ function App() {
                             <Route element={<PersistLogin/>}>
                                 {/* protected routes */}
                                 <Route path="/promotor/" element={<RequireAuth AllowedRoles={[ROLES["5"]]}/>}>
-                                    <Route path='/promotor/' element={<HomePagina/>}/>
+                                    <Route path='/promotor/' element={<HomePaginaPromotor/>}/>
                                     <Route path='/promotor/onderwerpen' element={<OnderwerpenLijstPromotor />}/>
                                     <Route path='/promotor/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
                                     <Route path='/promotor/boosten' element={<Boosten/>}/>
@@ -312,7 +316,7 @@ function App() {
                                 <Route element={<PersistLogin/>}>
                                     {/* protected routes */}
                                     <Route path="/admin/" element={<RequireAuth AllowedRoles={[ROLES["1"]]}/>}>
-                                        <Route path='/admin/' element={<HomePagina/>}/>
+                                        <Route path='/admin/' element={<HomePaginaAdmin/>}/>
                                         <Route path='/admin/onderwerpen' element={<OnderwerpenLijstMetVerwijderen/>}/>
                                         <Route path='/admin/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
                                         <Route path='/admin/addonderwerp' element={<AddOnderwerp/>}/>
@@ -340,7 +344,7 @@ function App() {
                                 <Route element={<PersistLogin/>}>
                                     {/* protected routes */}
                                     <Route path="/coordinator/" element={<RequireAuth AllowedRoles={[ROLES["3"]]}/>}>
-                                        <Route path='/coordinator/' element={<HomePagina/>}/>
+                                        <Route path='/coordinator/' element={<HomePaginaCoordinator/>}/>
                                         <Route path='/coordinator/onderwerpen' element={<OnderwerpenLijstMetVerwijderen />}/>
                                         <Route path='/coordinator/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
                                         <Route path='/coordinator/toewijzen' element={<Toewijzen />}/>
@@ -353,7 +357,7 @@ function App() {
                                 <Route element={<PersistLogin/>}>
                                     {/* protected routes */}
                                     <Route path="/bedrijf/" element={<RequireAuth AllowedRoles={[ROLES["4"]]}/>}>
-                                        <Route path='/bedrijf/' element={<HomePagina/>}/>
+                                        <Route path='/bedrijf/' element={<HomePaginaBedrijf/>}/>
                                         <Route path='/bedrijf/onderwerpen' element={<OnderwerpenLijstBedrijf />}/>
                                         <Route path='/bedrijf/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
                                         <Route path='/bedrijf/toewijzing' element={<ToewijzingBedrijf/>}/>
@@ -366,7 +370,7 @@ function App() {
                                 <Route element={<PersistLogin/>}>
                                     {/* protected routes */}
                                     <Route path="/promotor/" element={<RequireAuth AllowedRoles={[ROLES["5"]]}/>}>
-                                        <Route path='/promotor/' element={<HomePagina/>}/>
+                                        <Route path='/promotor/' element={<HomePaginaPromotor/>}/>
                                         <Route path='/promotor/onderwerpen' element={<OnderwerpenLijstPromotor />}/>
                                         <Route path='/promotor/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
                                         <Route path='/promotor/toewijzing' element={<ToewijzingPromotor />}/>
@@ -387,7 +391,7 @@ function App() {
                                     <Route element={<PersistLogin/>}>
                                         {/* protected routes */}
                                         <Route path="/admin/" element={<RequireAuth AllowedRoles={[ROLES["1"]]}/>}>
-                                            <Route path='/admin/' element={<HomePagina/>}/>
+                                            <Route path='/admin/' element={<HomePaginaAdmin/>}/>
                                             <Route path='/admin/onderwerpen' element={<OnderwerpenLijstMetVerwijderen/>}/>
                                             <Route path='/admin/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
                                             <Route path='/admin/addonderwerp' element={<AddOnderwerp/>}/>
@@ -412,7 +416,7 @@ function App() {
                                     <Route element={<PersistLogin/>}>
                                         {/* protected routes */}
                                         <Route path="/coordinator/" element={<RequireAuth AllowedRoles={[ROLES["3"]]}/>}>
-                                            <Route path='/coordinator/' element={<HomePagina/>}/>
+                                            <Route path='/coordinator/' element={<HomePaginaCoordinator/>}/>
                                             <Route path='/coordinator/account' element={<AccountCoordinator/>}/>
                                             <Route path='/coordinator/account/changepassword' element={<ChangePassword/>}/>
                                         </Route>
@@ -422,7 +426,7 @@ function App() {
                                     <Route element={<PersistLogin/>}>
                                         {/* protected routes */}
                                         <Route path="/bedrijf/" element={<RequireAuth AllowedRoles={[ROLES["4"]]}/>}>
-                                            <Route path='/bedrijf/' element={<HomePagina/>}/>
+                                            <Route path='/bedrijf/' element={<HomePaginaBedrijf/>}/>
                                             <Route path='/bedrijf/account' element={<AccountBedrijf/>}/>
                                             <Route path='/bedrijf/account/changepassword' element={<ChangePassword/>}/>
                                         </Route>
@@ -432,7 +436,7 @@ function App() {
                                     <Route element={<PersistLogin/>}>
                                         {/* protected routes */}
                                         <Route path="/promotor/" element={<RequireAuth AllowedRoles={[ROLES["5"]]}/>}>
-                                            <Route path='/promotor/' element={<HomePagina/>}/>
+                                            <Route path='/promotor/' element={<HomePaginaPromotor/>}/>
                                             <Route path='/promotor/account' element={<AccountPromotor/>}/>
                                             <Route path='/promotor/account/changepassword' element={<ChangePassword/>}/>
                                         </Route>
@@ -449,7 +453,7 @@ function App() {
                                     <Route element={<PersistLogin/>}>
                                         {/* protected routes */}
                                         <Route path="/admin/" element={<RequireAuth AllowedRoles={[ROLES["1"]]}/>}>
-                                            <Route path='/admin/' element={<HomePagina/>}/>
+                                            <Route path='/admin/' element={<HomePaginaAdmin/>}/>
                                             <Route path='/admin/onderwerpen' element={<OnderwerpenLijstMetVerwijderen/>}/>
                                             <Route path='/admin/onderwerpen/:id' exact element = {<OnderwerpDetail />}/>
                                             <Route path='/admin/addonderwerp' element={<AddOnderwerp/>}/>
