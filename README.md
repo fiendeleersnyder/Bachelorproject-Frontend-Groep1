@@ -1,5 +1,7 @@
 # Bachelorproject-Frontend-Groep1
-In deze repository kunt u de code van de frontend vinden gemaakt voor bachelorproef KULeuven Technologiecampus Gent 2021-2022. De opdracht bestond uit het ontwikkelen van een webapplicatie en mobiele applicatie die dienen als nieuwe masterproeftool.
+In deze repository kunt u de code van de frontend vinden gemaakt voor bachelorproef KULeuven Technologiecampus Gent 2021-2022. De opdracht bestond uit het ontwikkelen van een webapplicatie en mobiele applicatie die dienen als nieuwe masterproeftool. 
+
+In beide applicaties kan de database URL worden aangepast, indien u de backend lokaal wilt hosten.
 
 Contributers van deze repository zijn Robin Tourlamain, Fien De Leersnyder en Emmy Valckenier.
 
