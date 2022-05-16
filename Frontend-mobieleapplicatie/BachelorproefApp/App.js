@@ -60,7 +60,7 @@ export default function App({route ,navigation}) {
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>uitlogknop werkt joepie!
         nu nog effectief uitloggen</Text>
-      </View>
+      </View> 
     );
   }
 

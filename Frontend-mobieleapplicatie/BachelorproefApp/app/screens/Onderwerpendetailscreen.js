@@ -8,7 +8,7 @@ import * as React from 'react';
 
 
 const OnderwerpDetail = ({route, navigation}) => {
-    const otherParam = route.params;
+    const { itemId, otherParam } = route.params;
     const [onderwerp, setOnderwerp] = useState();
     const [favorieten_id, setFavorieten_id] = useState([]);
     const [veranderd, setVeranderd] = useState();
@@ -89,7 +89,7 @@ const OnderwerpDetail = ({route, navigation}) => {
     }
     
     return (
-    <SafeAreaView style={styles.view}>
+<SafeAreaView style={styles.view}>
         <ScrollView style={styles.scrollView}>
             <Card style={styles.kaart}>
                 <CardTitle title={otherParam.name} subtitle={"          "}  />
@@ -121,7 +121,7 @@ const OnderwerpDetail = ({route, navigation}) => {
                         color="#00407A"
                     />
                 </CardAction>
-            </Card>
+                </Card>
         </ScrollView>
     </SafeAreaView>
 );
