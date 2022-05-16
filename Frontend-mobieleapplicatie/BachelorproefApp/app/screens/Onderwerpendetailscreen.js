@@ -98,17 +98,27 @@ const OnderwerpDetail = ({route, navigation}) => {
                 <CardContent text={otherParam.doelgroep}></CardContent>
                 <CardContent text={otherParam.promotor}></CardContent>
                 <CardContent text={otherParam.email}></CardContent>
-                {otherParam.phone.isEmpty ? (
+                {otherParam.phone !== "" ? (
                     <CardContent> Telefoonnummer: {otherParam.phone}</CardContent>) : <CardContent></CardContent>
                 }
                 <CardContent><Text><Ionicons name="people" size={24} color="#00407A" />  {otherParam.capacity}</Text></CardContent>
                 <CardContent text={otherParam.description}></CardContent>
-                {otherParam.disciplines.isEmpty ? (
-                    <CardContent> Disciplines: {otherParam.disciplines}</CardContent>) : <CardContent></CardContent>
+                {otherParam.disciplines?.length !== 0 ? (
+                    <CardContent> Disciplines: <Text> {otherParam.disciplines} </Text> </CardContent>) : <CardContent></CardContent>
                 }
-                {otherParam.trefwoorden.isEmpty ? (
-                    <CardContent> Trefwoorden: {otherParam.trefwoorden}</CardContent>) : <CardContent></CardContent>
+                <Text>
+                {"\n"}
+                {"\n"}
+                {"\n"}
+                </Text>
+                {otherParam.trefwoorden?.length !== 0 ? (
+                    <CardContent> Trefwoorden: <Text>{otherParam.trefwoorden}</Text></CardContent>) : <CardContent></CardContent>
                 }
+                <Text>
+                {"\n"}
+                {"\n"}
+                {"\n"}
+                </Text>
                 <CardAction 
                     separator={true} 
                     inColumn={false}>

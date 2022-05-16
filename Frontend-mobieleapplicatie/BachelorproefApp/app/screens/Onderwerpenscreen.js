@@ -1,17 +1,19 @@
-import { StyleSheet, Button, Text, View } from 'react-native';
+import { StyleSheet, Button, Text, View, TouchableHighlight, Alert } from 'react-native';
 import { Card, CardTitle, CardContent, CardAction } from 'react-native-material-cards';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView  } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+
 
    const OnderwerpLijst = ({route, navigation}) => {
       const [onderwerpen, setOnderwerpen] = useState();
       const [favorieten_id, setFavorieten_id] = useState([]);
       const [veranderd, setVeranderd] = useState();
-  
+      
       useEffect(() => {
           const controller = new AbortController();
   
@@ -112,7 +114,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
                 }
                 }
         }
-
+      
    return (
     <SafeAreaView style={styles.view}>
     <ScrollView style={styles.scrollView}>

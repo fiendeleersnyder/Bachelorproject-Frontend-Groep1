@@ -58,12 +58,12 @@ function Indienenscreen() {
       }
   }, [veranderd])
 
-  const submitHandler = () => {
+  const submitHandler = async () => {
 
    const enteredVoorkeur1 = voorkeur1InputRef.current.value;
    const enteredVoorkeur2 = voorkeur2InputRef.current.value;
    const enteredVoorkeur3 = voorkeur3InputRef.current.value;
-   const accessToken =  AsyncStorage.getItem('accesToken');
+   const accessToken = await AsyncStorage.getItem('accesToken');
 
    if (enteredVoorkeur1 === "---" || enteredVoorkeur2 === "---" || enteredVoorkeur3 === "---"){
        alert("At least one of the subject isn't correctly submit, try again.")
@@ -92,12 +92,11 @@ function Indienenscreen() {
    try {
        axios.post("https://Bachelorproef-backend.herokuapp.com/auth/addselection/" + id1 + "/" + id2 + "/" + id3,
        null,
-           {
-            withCredentials: true,
-            headers: {
-                'Authorization' : "Bearer " + accessToken
-              }
-           });
+      {
+          withCredentials: true,
+          headers: { 'Content-Type': 'application/json',
+          'Authorization' : "Bearer " + accessToken}
+      });
        setVeranderd(true);
    } catch (err) {
        console.error(err);
