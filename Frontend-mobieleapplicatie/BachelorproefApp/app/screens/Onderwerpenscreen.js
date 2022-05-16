@@ -124,10 +124,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
                             <Card key={i} style={styles.kaart}>
                                 <CardTitle
                                     title={onderwerp.name}
-                                    subtitle={onderwerp.doelgroep}>
+                                    subtitle={"          "} >
                                 </CardTitle>
+                                <Text>
+                                {" \n"}</Text>
                                 <CardContent text={onderwerp.promotor}></CardContent>
-                                <CardContent><Ionicons name="people" size={24} color="#00407A" />{onderwerp.capacity}</CardContent>
+                                <CardContent><Text><Ionicons name="people" size={24} color="#00407A" />  {onderwerp.capacity}</Text></CardContent>
                                 {onderwerp.disciplines.isEmpty ? (
                                     <CardContent> Disciplines: {onderwerp.disciplines}</CardContent>) : <CardContent></CardContent>
                                 }
@@ -140,7 +142,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
                                         color="#ff084a" 
                                         title="Add to favorites!"/>
                                     <Button
-                                        onPress={() => {navigation.navigate('Subject Details',{otherParam: onderwerp})}}
+                                        onPress={() => {navigation.navigate('Subject Details',{itemId:onderwerp.id, otherParam: onderwerp,});}}
                                         title="More info"
                                         color="#00407A"
                                     />
