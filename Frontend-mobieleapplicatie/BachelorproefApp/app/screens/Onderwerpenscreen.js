@@ -1,4 +1,4 @@
-import { StyleSheet, Button, Text, View, TouchableHighlight, Alert } from 'react-native';
+import { StyleSheet, Button, Text, View  } from 'react-native';
 import { Card, CardTitle, CardContent, CardAction } from 'react-native-material-cards';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
