@@ -76,11 +76,12 @@ const OnderwerpDetail = ({route, navigation}) => {
         else{
             try {
                  axios.post("https://Bachelorproef-backend.herokuapp.com/auth/addfavoriet/" + id,
+                 null,
                     {
                         withCredentials: true,
                         headers: { 'Content-Type': 'application/json',
                         'Authorization' : "Bearer " + accessToken}
-                    });    //.then(response=>console.log(response))
+                    });
                 setVeranderd(true)
             } catch (err) {
                 console.error(err);

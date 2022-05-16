@@ -91,6 +91,7 @@ function Indienenscreen() {
 
    try {
        axios.post("https://Bachelorproef-backend.herokuapp.com/auth/addselection/" + id1 + "/" + id2 + "/" + id3,
+       null,
            {
             withCredentials: true,
             headers: {

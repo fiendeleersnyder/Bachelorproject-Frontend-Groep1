@@ -100,6 +100,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
             else{
                 try {
                     axios.post("https://Bachelorproef-backend.herokuapp.com/auth/addfavoriet/" + id,
+                    null,
                     {
                         withCredentials: true,
                         headers: { 'Content-Type': 'application/json',

@@ -80,8 +80,6 @@ class AddOnderwerp extends React.Component {
       container: {
         flex: 1,
         backgroundColor: '#fff',
-        //paddingTop: Platform.OS === "android" ? 20 :0,
-        //paddingBottom: Platform.OS === "android" ? 20 :0,
       },
       view:{
         marginLeft:10,
@@ -227,7 +225,7 @@ class AddOnderwerp extends React.Component {
           <Picker
             style={styles.pickerStyle}
             onValueChange={currentCurrency => {this.setState({kernwoord1:currentCurrency})}}>
-            <Picker.Item label="default" value="---" />
+            <Picker.Item label="---" value="---" />
             <Picker.Item label="Analog Electronics and Design" value="Analog Electronics and Design" />
             <Picker.Item label="Digital Electronics and Design" value="Digital Electronics and Design" />
             <Picker.Item label="Software Development" value="Software Development" />
@@ -276,7 +274,7 @@ class AddOnderwerp extends React.Component {
           <Picker
             style={styles.pickerStyle}
             onValueChange={currentCurrency => {this.setState({kernwoord2:currentCurrency})}}>
-            <Picker.Item label="default" value="---" />
+            <Picker.Item label="---" value="---" />
             <Picker.Item label="Analog Electronics and Design" value="Analog Electronics and Design" />
             <Picker.Item label="Digital Electronics and Design" value="Digital Electronics and Design" />
             <Picker.Item label="Software Development" value="Software Development" />
@@ -325,7 +323,7 @@ class AddOnderwerp extends React.Component {
           <Picker
             style={styles.pickerStyle}
             onValueChange={currentCurrency => {this.setState({kernwoord3:currentCurrency})}}>
-            <Picker.Item label="default" value="---" />
+            <Picker.Item label="---" value="---" />
             <Picker.Item label="Analog Electronics and Design" value="Analog Electronics and Design" />
             <Picker.Item label="Digital Electronics and Design" value="Digital Electronics and Design" />
             <Picker.Item label="Software Development" value="Software Development" />
