@@ -13,7 +13,7 @@ Wenst u dit project te gebruiken, dient u eerst de bijhorende backend te runnen.
 *****Frontend-mobieleapplicatie*****
 
 Hier vindt u de code voor een mobiele app horende bij de door ons ontworpen webapplicatie. Deze app is enkel ontworpen voor gebruik door studenten. 
-De studenten kunnen de reeds goedgekeurde onderwerpen bekijken, zelf een onderwerp kiezen en hun keuze tussen de onderwerpen indienen.
+De studenten kunnen een onderwerp toevoegen, de reeds goedgekeurde onderwerpen bekijken, zelf een onderwerp kiezen en hun keuze tussen de onderwerpen indienen.
 Wenst u dit project te gebruiken, dient u eerst de bijhorende backend te runnen. Ook dient u de gebruikte packages te installeren via het commando *npm install* uit te voeren in de terminal van uw project.
 U kan dit project opstarten via een simulator, in de webbrowser of via de Expo-app die u kan downloaden op uw gsm.
 
